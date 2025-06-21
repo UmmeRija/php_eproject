@@ -83,7 +83,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-NJW4QH8K');
     </script>
     <!-- End Google Tag Manager -->
-    <title>Become a Partner</title>
+    <title>Contact Us</title>
 </head>
 
 <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">

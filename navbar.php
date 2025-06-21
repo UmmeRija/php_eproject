@@ -99,11 +99,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <ul class="slide-menu">
 
                                 <li><a class="slide-menu-item page-scroll" href="index.php">HOME</a>
-                                    <li><a class="slide-menu-item page-scroll" href="service.php">OUR SERVICEs</a></li>
+                                    <li><a class="slide-menu-item page-scroll" href="service.php">OUR SERVICES</a></li>
 
-                                    <li><a class="slide-menu-item page-scroll" href="aboutus.php">ABout us</a></li>
+                                    <li><a class="slide-menu-item page-scroll" href="aboutus.php">ABOUT US</a></li>
+
+                                     <li><a class="slide-menu-item page-scroll" href="login.php">LOGIN</a></li>
     
-                                    <li><a class="slide-menu-item page-scroll" href="contact.php">Contact Us</a></li>
+                                    <li><a class="slide-menu-item page-scroll" href="contact.php">CONTACT US</a></li>
                             </ul>
                         </nav>
                         <!-- mainmenu end -->
@@ -113,7 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <div class="logo">
                             <!-- Brand -->
                             <a class="navbar-brand page-scroll" href="index.php">
-                                <img src="img/logo.png" alt="">
+                                <img src="img/logo1.png" alt="" style="height: 5%; width:18%;">
                             </a>
                         </div>
                     </div>

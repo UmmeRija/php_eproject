@@ -148,6 +148,7 @@
                                     <option value="">Select Gender*</option>
                                     <option value="1">Female</option>
                                     <option value="2">Male</option>
+                                    <option value="2">Others/Undefined</option>
                                   
                               </select>
                                     </div>
@@ -267,14 +268,14 @@
                         <div class="about-content">
                             <div class="about-headline">
 
-                                <h3 class="text-light">Our Salons</h3>
+                                <h3 class="text-light">Discover Your Look</h3>
+                                 <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
 
                             </div>
                             <p class="text-light">
-                                Since 1992, Affinity Salon has been a leading force in the Indian beauty industry, constantly redefining the standards of excellence. With expertly trained stylists and state-of-the-art treatments, Affinity Salon offers a luxurious experience from the
-                                moment you walk in. Our beautifully designed salons provide a calming oasis where you can relax and indulge in premium beauty services.</p>
-                            <a href="find-us.php" class="btn1">
-                               Find a Salon Near You
+                               Looking for some inspiration? Whether you're aiming for a bold new look or enhancing your everyday style, our professionals are here to create something tailored just for you.</p>
+                            <a href="service.php" class="btn1">
+                              Meet our Stylists
                             </a>
 
 
@@ -293,44 +294,7 @@
 
 
 
-                <div class="row g-0">
-                    <div class="col-md-6 rdnone">
-                        <div class="about-images">
-                            <div class="about-top-image">
-                                <img class="ab-image" src="img/img3.jpg" alt="">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 bg1 px-5 text-center d-flex align-items-center">
-                        <div class="about-content">
-                            <div class="about-headline">
-
-                                <h3 class="text-dark">Discover Your Look</h3>
-                                <span class="side-head top-head">Hair / Beauty / Grooming</span>
-                            </div>
-                            <p class="text-dark">
-                                Looking for some inspiration? Whether you're aiming for a bold new look or enhancing your everyday style, our professionals are here to create something tailored just for you.
-                            </p>
-                            <a href="#appointment" class="btn1">
-                               book appointment
-                            </a>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 rdblock">
-                        <div class="about-images">
-                            <div class="about-top-image">
-                                <img class="ab-image" src="img/img3.jpg" alt="">
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+             
 
 
                 <div class="row g-0" style="display: none;">
@@ -364,50 +328,6 @@
 
 
                 </div>
-
-
-
-
-
-
-                <div class="row g-0">
-
-                    <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
-                        <div class="about-content">
-                            <div class="about-headline">
-
-                                <h3 class="text-light">Get Trained at Affinity Academy.</h3>
-
-                            </div>
-                            <p class="text-light">
-                                At Affinity, we believe that great styling begins with great education. Our salons are powered by world-class training programs that keep our stylists at the cutting edge of industry trends and techniques.
-                            </p>
-                            <a href="academy.php" class="btn1">
-                               Learn More
-                            </a>
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="about-images">
-                            <div class="about-top-image">
-                                <img class="ab-image" src="img/img5.jpg" alt="">
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-                </div>
-
-
             </div>
         </div>
     </section>
