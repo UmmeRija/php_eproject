@@ -76,6 +76,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
 <!-- End Google Tag Manager --><title>Our Services</title>
+ <style>
+    /* --- New Service Banner Styling (to match About Us layout from screenshot) --- */
+
+.service-banner-text-band {
+    background-color: #000; /* Dark background as seen in your screenshot */
+    padding: 40px 0; /* Adjust padding top/bottom to control height of the black band */
+    text-align: center; /* Centers the text inside this band */
+}
+
+.service-page-title {
+    font-family: 'Bellefair', serif; /* Assuming this is the elegant font used for "ABOUT US" */
+    font-size: 3rem; /* Adjust this font size to perfectly match "ABOUT US" in your screenshot */
+    font-weight: normal; /* The "ABOUT US" in the screenshot doesn't look bold */
+    color: #fff; /* White text color */
+    margin: 0; /* Remove default top/bottom margins from the heading */
+    line-height: 1; /* Adjust line height for tighter spacing if needed */
+}
+
+/* If you added the optional paragraph back in the HTML, style it here */
+.service-banner-text-band p {
+    font-size: 1.1rem; /* Adjust paragraph font size */
+    color: #fff;
+    margin-top: 15px; /* Space between title and paragraph */
+}
+
+.service-banner-image {
+    width: 100%; /* Makes the image span the full width */
+    height: auto; /* Maintains the image's aspect ratio */
+    display: block; /* Important to remove any extra space below the image */
+    /* If you want the image to fill a specific height and crop, you can uncomment and adjust these: */
+    /* height: 500px; */
+    /* object-fit: cover; */
+}
+
+/* --- Responsive Adjustments for the new banner --- */
+@media (max-width: 992px) {
+    .service-page-title {
+        font-size: 2.5rem; /* Smaller font for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .service-banner-text-band {
+        padding: 30px 0; /* Reduce padding on smaller screens */
+    }
+    .service-page-title {
+        font-size: 2rem; /* Even smaller font for tablet/mobile */
+    }
+}
+
+@media (max-width: 576px) {
+    .service-banner-text-band {
+        padding: 25px 0;
+    }
+    .service-page-title {
+        font-size: 1.7rem; /* Smallest font for extra small mobile screens */
+    }
+}
+ </style>
 </head>
 	<body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
         
@@ -85,39 +144,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 include "navbar.php";
 ?>
 		           <!-- Start Slider Area -->
-           <section class="innerbanner">
-               <div class="swiper">
-                    <div class="swiper-wrapper">
-                     <div class="swiper-slide">
-                         <img src="img/inner-banner.jpg" class="img-fluid innerimg" alt="">
-                        <div class="container h-100">
-                            <div class="d-flex h-100 text-center align-items-center">
-                                <div class="col-sm-8 mx-auto">
-                                    
-                                    <div class="mx-auto text-white">
-                                <div class="herotext">
-                                    <div class="headtext bigheading clry text-uppercase">Our Services</div>
-                                   
-                                    <p class="mt1">
-                                       We offer a wide range of unisex beauty services designed to cater to every grooming need. Whether you're looking for a new haircut, bridal makeup, or advanced skincare, Affinity has you covered.
-                                   </p>
-                               </div>
-                              </div>
-                                </div>
-                                
-
-                            </div>
-                        </div>
-                        
-                      </div>
-                        
-                     
-
-                    </div>
-
-                       
-                    </div>
-           </section>
+     <section class="service-banner-section">
+    <div class="service-banner-text-band">
+        <div class="container">
+            <h1 class="service-page-title text-uppercase text-white">Our Services</h1>
+            </div>
+    </div>
+    <img src="img/servicebg.jpg" class="img-fluid service-banner-image" alt="Our Services Banner">
+</section>
 		
 		<!-- End Slider Area -->
                 <section class="pt50">
@@ -172,42 +206,7 @@ include "navbar.php";
                     </div>
                 </section>        
                 
-                <section class="">
-        <div class="about-area py-5">
-            <div class="container-fluid">
-                
-                
-                
-                <div class="row g-0">
-		<div class="col-md-6">
-                        <div class="about-images">
-                            <div class="about-top-image">
-                                <img class="ab-image" src="img/servive-img.jpg" alt="">
-                                    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
-                        <div class="about-content">
-                            <div class="about-headline">
-                                
-                                <h3 class="text-light text-uppercase">Appointment</h3>
-                                
-                            </div>
-                            <p class="text-light">
-                               Finding your perfect stylist is essential. Book an appointment at Afinity Salon to discuss your beauty needs with one of our experts.
-                               
-                            </p>
-                                <a href="find-salon.html" class="btn2">
-                                  Salon Finder
-                                </a>
-                            
-                        </div>
-					</div>
-                    
-                    
-                </div>
-                
+          
                 
                 
                 
@@ -304,160 +303,7 @@ include "navbar.php";
                         </div>
                     </div>
                 </section>
-                
-                
-                <section class="">
-        <div class="about-area py-5">
-            <div class="container-fluid">
-                
-                
-                
-                <div class="row g-0">
-		<div class="col-md-6">
-                        <div class="about-images">
-                            <div class="about-top-image">
-                                <img class="ab-image" src="img/servive-img1.jpg" alt="">
-                                    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
-                        <div class="about-content">
-                            <div class="about-headline">
-                                
-                                <h3 class="text-light text-uppercase">colour</h3>
-                                
-                            </div>
-                            <p class="text-light">
-                               At Afinity Salon, our color experts are dedicated to achieving your dream hair color. We'll carefully assess your skin tone, eye color, and hair texture to create a personalized color that complements your unique features.
-                               
-                            </p>
-                             <!--<a href="#" class="btn2">
-                                  Explore Our Packages
-                                </a>
-                            
-                            <a href="#" class="btn2">
-                                 Allergy Testing
-                                </a>
-                            -->
-                            
-                        </div>
-					</div>
-                    
-                    
-                </div>
-                
-                
-                
-            </div>
-        </div>
-       </section>
-                
-          
-               <!--form-->  
-              <section class="testibg py-5">
-                  <div class="container-fluid">
-                      <div class="row g-0">
-                          <div class="col-sm-8 mx-auto">
-                              <div class="form py-3" id="appointment">
-                  <div class="container-fluid">
-                      <form action="https://www.affinity.salon/submit_appointment.php" method="post">
-                      <div class="row d-flex align-items-center">
-                          
-                          <div class="col-sm-12 mb-3">
-                              <div class="headtext clry">Make an appointment Now</div>
-                          </div>
-                          
-                              
-                             
-                                 
-                              <div class="width-auto-100 mt-2 mb-2">
-                                <label><i class="fa-regular fa-user   "></i> Name</label>
-                                <input type="text" placeholder="Enter Name " required name="name" class="form-control" id="">
-                             </div>
-                          <div class="width-auto-100 mt-2 mb-2">
-                              <label><i class="fa-regular fa-user   "></i> Email</label>
-                              <input type="email" placeholder="Enter Email "  name="email" class="form-control" id="">
-                          </div>
-                          <div class="width-auto-100 mt-2 mb-2">
-                              <label><i class="fa-regular fa-user   "></i> Phone</label>
-                              <input placeholder="Enter Phone " required name="phone" class="form-control" minlength="10" maxlength="14" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                          </div>
-                          <div class="width-auto-100  mt-2 mb-2">
-                              <label><i class="fa-solid fa-list"></i> Gender</label>
-                              <select class="selctbox" name="gender" tabindex="6"  data-validation="required" required="" data-validation-error-msg="Please select a gender" id="genderSelect" >
-                                    <option value="">Select Gender*</option>
-                                    <option value="1">Female</option>
-                                    <option value="2">Male</option>
-                                  
-                              </select>
-                          </div>
-                         <div class="width-auto-100 mt-2 mb-2">
-                              <label><i class="fa-regular fa-calendar"></i> Date</label>
-                              <input type="text" placeholder="Select Date" required name="date" class="form-control" id="datepicker">
-                          </div>
-                                      <div class="width-auto-100 mt-2 mb-2">
-                              <label><i class="fa-regular fa-clock"></i> Time</label>
-                              <select class="selctbox"  name="time">
-                                  <option>Select Time</option>
-                                  <option>10:00 AM</option>
-                                  <option>11:00 AM</option>
-                                  <option>12:00 PM</option>
-                                  <option>01:00 PM</option>
-                                  <option>02:00 PM</option>
-                                  <option>03:00 PM</option>
-                              </select>
-                             
-                          </div>
-                                      <div class="width-auto-100 mt-2 mb-2">
-                              <label><i class="fa-regular fa-handshake"></i> BRANCH</label>
-                              <select class="selctbox"  name="branch">
-                                   <option>Select Branch</option>
-                                  <option>Green Park</option>
-                                  <option>Greater kailash II</option>
-                                  <option>New Friends Colony</option>
-                                  <option>Shivalik Road</option>
-                                  <option>Bengali Market</option>
-                                  <option>Gurugram</option>
-
-                                  
-                              </select>
-                          </div>
-                                      <div class="width-auto-100  mt-2 mb-2">
-                              <label><i class="fa-solid fa-list"></i> Service</label>
-                              
-                              
-                                <!-- Service Selection -->
-                                <select name="service" class="selctbox" id="serviceSelect" disabled required>
-                                    <option value="">Select Service</option>
-                                </select>
-                                  </div>
-                          
-                          
-                          
-                                  
-                             
-                              
-                         <div class="width-auto-100  mt-3 mb-2 text-center ">
-                             
-                              <input value="Book appointment" type="submit" class="sumbitbtn w-50">
-                          </div>
-                             
-                             
-                      </div>
-                          </form>
-                  </div>
-              </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </section>
-              
-              
-              
-              <!--//form-->   
-  
+           
    <?php
 include "footer.php";
 ?>

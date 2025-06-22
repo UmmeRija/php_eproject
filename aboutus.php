@@ -100,7 +100,7 @@ include "navbar.php";
                <div class="swiper">
                     <div class="swiper-wrapper">
                      <div class="swiper-slide">
-                         <img src="img/inner-banner.jpg" class="img-fluid innerimg" alt="">
+                         <img src="img/servicebg.jpg" class="img-fluid innerimg" alt="">
                         
                       </div>
                         
@@ -187,11 +187,11 @@ include "navbar.php";
                         
                         
                         <p class="">
-                            <span class="clro"> Mr. Vinit Dua,</span> Chairman of Affinity Salon, is a visionary entrepreneur who has transformed the salon into a luxury brand. His expertise across various industries, including construction, interiors, and high-end hospitality, has contributed to the salon's success. Since 2018, he has introduced innovative strategies, ensuring that Affinity remains a leader in grooming services.
+                            <span class="clro"> Ms. Ghazal,</span> Chairman of Affinity Salon, is a visionary entrepreneur who has transformed the salon into a luxury brand. Her expertise across various industries, including construction, interiors, and high-end hospitality, has contributed to the salon's success. Since 2018, she has introduced innovative strategies, ensuring that Affinity remains a leader in grooming services.
                         </p>
                     </div>
                     <div class="col-sm-3">
-                        <img class ="" src="img/vinit-dua.jpg"/>
+                        <img class ="" src="img/founder1.jpg"/>
                     </div>
                     
                 </div>
@@ -210,11 +210,11 @@ include "navbar.php";
                         
                         
                         <p class="">
-                            <span class="clro"> Mr. Siddha Dua,</span> CEO, brings a fresh perspective to Affinity. With experience as a project manager in the U.S., he focuses on expanding the brand and implementing technological advancements to enhance operational efficiency. His goal is to make Affinity a globally recognized name in luxury grooming.
+                            <span class="clro"> Ms. Aisha Dua,</span> CEO, brings a fresh perspective to Affinity. With experience as a project manager in the U.S., she focuses on expanding the brand and implementing technological advancements to enhance operational efficiency. Her goal is to make Affinity a globally recognized name in luxury grooming.
                         </p>
                     </div>
                     <div class="col-sm-3">
-                        <img class ="" src="img/siddha-dua.jpg"/>
+                        <img class ="" src="img/founder2.jpg"/>
                     </div>
                     
                 </div>
@@ -229,17 +229,7 @@ include "navbar.php";
             <img class ="" src="img/galery.png"/>
         </sction>
         
-         
-        
-        
-        
-        
-                 
-       
-        
-        
-        
-     
+
    <?php
 include "footer.php";
 ?>

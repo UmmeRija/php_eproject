@@ -492,7 +492,7 @@ if ($is_logged_in) {
                 <div class="col-sm-6 col-md-4 mt-5">
                     <div class="row">
                         <div class="col-10">
-                            <img src="img/team1.png" class="img-fluid">
+                            <img src="img/founder1.jpg" class="img-fluid">
                         </div>
                         <div class="col-2 position-relative d-flex justify-content-center">
                             <div class="socialbox" style="">
@@ -507,7 +507,7 @@ if ($is_logged_in) {
                         </div>
                         <div class="col-12">
                             <div class="namebox">
-                                Vinit Dua
+                                Ghazal
                                 <span>Chairman</span>
                             </div>
                         </div>
@@ -516,7 +516,7 @@ if ($is_logged_in) {
                 <div class="col-sm-6 col-md-4 mt-5">
                     <div class="row">
                         <div class="col-10">
-                            <img src="img/team2.png" class="img-fluid">
+                            <img src="img/founder2.jpg" class="img-fluid">
                         </div>
                         <div class="col-2 position-relative d-flex justify-content-center">
                             <div class="socialbox" style="">
@@ -531,7 +531,7 @@ if ($is_logged_in) {
                         </div>
                         <div class="col-12">
                             <div class="namebox">
-                                Siddhant Dua
+                                Aisha Dua
                                 <span>CEO</span>
                             </div>
                         </div>

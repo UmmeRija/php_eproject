@@ -183,6 +183,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
       <div class="bottom-links">
         New here? <a href="register.php">Create an Account</a>
       </div>
+       <div class="bottom-links">
+       <a href="index.php">←  Go back to homepage</a>
+       </div>
     </div>
   </div>
 

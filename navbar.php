@@ -103,9 +103,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
                                     <li><a class="slide-menu-item page-scroll" href="aboutus.php">ABOUT US</a></li>
 
-                                     <li><a class="slide-menu-item page-scroll" href="login.php">LOGIN</a></li>
+                                     
     
                                     <li><a class="slide-menu-item page-scroll" href="contact.php">CONTACT US</a></li>
+
+                                    <li><a class="slide-menu-item page-scroll" href="login.php">LOGIN</a></li>
                             </ul>
                         </nav>
                         <!-- mainmenu end -->
