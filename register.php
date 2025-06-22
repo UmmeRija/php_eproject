@@ -1,3 +1,16 @@
+<?php
+include "connection.php";
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        $sql = "INSERT INTO register(`name`, `email`, `passwords`) VALUES('{$name}','{$email}','{$password}')";
+        $query = mysqli_query($con, $sql);
+        header("location: http://localhost/elegance/login.php");
+}
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -197,18 +210,18 @@ input[type="password"] {
         <div class="register-card">
             <h1 class="title">CREATE ACCOUNT</h1>
             <p class="subtitle">Join the Affinity experience.</p>
-            <form>
+            <form method="post">
                 <label for="name">Full Name</label>
-                <input type="text" id="name" required placeholder="Your Name" />
+                <input type="text" name="name" required placeholder="Your Name" />
 
                 <label for="email">Email</label>
-                <input type="email" id="email" required placeholder="abc@example.com" />
+                <input type="email" name="email" required placeholder="abc@example.com" />
 
                 <label for="password">Password</label>
-                <input type="password" id="password" required placeholder="Enter your password" />
+                <input type="password" name="password" required placeholder="Enter your password" />
 
                 <label for="confirm">Confirm Password</label>
-                <input type="password" id="confirm" required placeholder="Repeat your password" />
+                <input type="password" name="confirm" required placeholder="Repeat your password" />
 
                 <button type="submit">REGISTER</button>
             </form>

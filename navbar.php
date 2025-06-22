@@ -121,9 +121,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                     <!-- logo end -->
 
-                    <div class="col-4 text-end">
-                        <a class="slide-btn hide-btn" href="index.php#appointment">Book Appointment</a>
-                    </div>
+<div class="col-4 text-end d-flex justify-content-end align-items-center gap-3">
+  <a class="slide-btn hide-btn" href="index.php#appointment">Book Appointment</a>
+  <a href="#" class="slide-btn hide-btn" style="padding: 5px 15px; font-size: 13px;" onclick="document.getElementById('logout-form').submit();">Logout</a>
+
+  <form id="logout-form" action="logout.php" method="post" style="display: none;"></form>
+</div>
+
 
                 </div>
             </div>

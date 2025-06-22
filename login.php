@@ -1,3 +1,35 @@
+<?php
+session_start();
+include "connection.php"; 
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  if(isset($_POST['email']) && isset($_POST['password'])){ 
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM register WHERE email = '$email'";
+    $query = mysqli_query($con, $sql);
+
+    if(mysqli_num_rows($query)){
+      while($row = mysqli_fetch_assoc($query)){
+        if(password_verify($password, $row['passwords'])){ 
+          $_SESSION['id'] = $row['id'];
+          $_SESSION['name'] = $row['name'];
+          header('location:http://localhost/elegance/index.php');
+          exit(); 
+        } else {
+          echo "Invalid username and password"; 
+        }
+      }
+    } else {
+        echo "Invalid username and password"; 
+    }
+  } else {
+      echo "Please enter both email and password."; 
+  }
+}
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -8,10 +40,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- favicon -->
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <!-- all css here -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
@@ -68,7 +98,7 @@
       color: #e2b97f;
       margin-bottom: 10px;
       text-transform: uppercase;
-      
+
     }
 
     form {
@@ -84,8 +114,8 @@
     }
 
     input[type="text"],
-input[type="email"],
-input[type="password"] {
+    input[type="email"],
+    input[type="password"] {
       padding: 12px;
       margin-bottom: 20px;
       background-color: #2b2b2b;
@@ -142,15 +172,14 @@ input[type="password"] {
   <div class="login-container">
     <div class="login-card">
       <h1 class="title">WELCOME BACK</h1>
-      <form>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required placeholder="abc@example.com" />
-        
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required placeholder="Enter your password" />
+      <form method="POST" action=""> <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="abc@example.com" />
 
-        <button type="submit">LOG IN</button>
-      </form>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required placeholder="Enter your password" />
+
+    <button type="submit">LOG IN</button>
+</form>
       <div class="bottom-links">
         New here? <a href="register.php">Create an Account</a>
       </div>

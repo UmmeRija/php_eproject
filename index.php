@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 
 <html class="no-js" lang="en">
@@ -86,6 +89,42 @@
     <!-- End Google Tag Manager -->
 
     <title>Affinity Salon</title>
+    <style>
+        <style>
+  /* ... your existing styles ... */
+
+  .welcome-user-heading {
+    font-family: 'Bellefair', serif; /* Use the elegant font from your design */
+    color: #fff; /* White color for the text */
+    font-size: 3.5em; /* Adjust size to match the prominence in your image */
+    font-weight: normal; /* Bellefair is already decorative, usually normal weight */
+    letter-spacing: 2px; /* A little spacing for elegance */
+    margin-top: 60px; /* Add top spacing to push it down from elements above */
+    margin-bottom: 40px; /* Add bottom spacing to separate from elements below */
+    text-transform: uppercase; /* Optional: if you want it all caps like some other headings */
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 991px) { /* For tablets and smaller */
+    .welcome-user-heading {
+      font-size: 2.8em;
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media (max-width: 767px) { /* For mobile devices */
+    .welcome-user-heading {
+      font-size: 2em;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+  }
+
+  /* ... rest of your styles ... */
+</style>
+    </style>
 </head>
 
 <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
@@ -120,6 +159,7 @@
                 <div class="col-sm-8 mx-auto">
                     <div class="form py-3" id="appointment">
                         <div class="container-fluid">
+                          <h1 class="welcome-user-heading text-center">Welcome, <?php echo $_SESSION['name'];?>!</h1>
                             <form action="booking.php" method="post">
                                 <div class="row d-flex align-items-center">
 
