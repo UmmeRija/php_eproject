@@ -2,8 +2,6 @@
 <html class="no-js" lang="en">
 
 <head>
-
-
     <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,28 +13,111 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <!-- all css here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Original local Bootstrap (if you're still using an older version locally, keep this) -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
-
-
-
+    <!-- Bootstrap 5.0.2 CDN (Preferred for modern features) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-
+    <!-- Bootstrap Icons (still included, might be used elsewhere on the page) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-
+    <!-- Your Custom CSS files -->
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/meanmenu.min.css">
-
-
     <link rel="stylesheet" href="css/slidemenu.css">
-
     <link rel="stylesheet" href="css/style.css">
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Inline Custom Styles to complement Bootstrap and match original aesthetic -->
+    <style>
+        /* This section contains custom styles to match your template's look
+           without conflicting with Bootstrap's grid or form structure. */
+
+        /* General form container styling - similar to your 'formbox' concept */
+        .custom-form-card {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        /* Styling for the input/textarea itself */
+        .form-control.custom-input-field {
+            border-radius: 8px; /* Rounded corners on all sides now */
+            padding: 0.65rem 1rem; /* Consistent padding */
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif; /* Apply Inter font */
+            color: #333; /* Darker text color */
+            border: 1px solid #dee2e6; /* Standard Bootstrap border color */
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
+            line-height: 1.5; /* Ensure consistent line height */
+        }
+
+        /* Focus state for form controls */
+        .form-control.custom-input-field:focus {
+            background-color: #fff; /* Explicitly keep background white on focus */
+            color: #333; /* Explicitly keep text dark on focus */
+            border-color: #a96b48; /* Highlight border on focus */
+            box-shadow: 0 0 0 0.25rem rgba(169, 107, 72, 0.25); /* Bootstrap-like focus glow */
+            outline: 0; /* Remove default browser outline */
+        }
+
+        /* Submit Button Styling */
+        .custom-submit-button {
+            background-color: #7d4d3a; /* Brown color from your image */
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .custom-submit-button:hover {
+            background-color: #a96b48; /* Lighter brown on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .custom-submit-button:active {
+            transform: translateY(0); /* Press effect */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Adjust placeholder color */
+        .form-control.custom-input-field::placeholder {
+            color: #888;
+        }
+
+        /* General body font and color if not already set by style.css */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+        /* Ensure specific elements from your contactbox have correct colors */
+        .contactbox .mainicon p {
+            color: #333; /* Or whatever dark color is appropriate for readability */
+        }
+
+        /* Re-apply Bellefair font to specific headings */
+        .gettouch h3 {
+            font-family: 'Bellefair', serif;
+        }
+    </style>
+
     <script type="application/ld+json">
         {
             "@context": "https://schema.org/",
@@ -88,10 +169,8 @@
 
 <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
 
+    <?php include "navbar.php"; ?>
 
-   <?php
-include "navbar.php";
-?>
     <!-- Start Slider Area -->
     <section class="innerbanner">
         <div class="swiper">
@@ -101,38 +180,23 @@ include "navbar.php";
                     <div class="container h-100">
                         <div class="d-flex h-100 text-center align-items-center">
                             <div class="col-sm-8 mx-auto">
-
                                 <div class="mx-auto text-white">
                                     <div class="herotext">
                                         <div class="headtext bigheading clry text-uppercase">Contact Us</div>
-
                                         <p class="mt1">
                                             Need to make a reservation or have any queries? Reach out to us today!
                                         </p>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
-
                 </div>
-
-
-
             </div>
-
-
         </div>
     </section>
 
-
-
-
-
-
-
+    <!-- Contact Info Section -->
     <section class="ptb50 contactbox">
         <div class="container-fluid">
             <div class="row">
@@ -142,35 +206,20 @@ include "navbar.php";
                             <img src="img/touch.png" class="img-fluid" alt="">
                         </div>
                         <div class="col-md-5">
-                            <!--<span class="clry text-uppercase">Get in Touch!</span>-->
-
-                            <h3 class="mt-2">
-                                Contact Us
-                            </h3>
-                            <!--  <p>
-                                          We are always looking to expand our network of trusted partners. By joining us, you'll have the opportunity to showcase your products in our salons and reach a diverse clientele.
-                                     </p>
-                                     
-                                     <p>
-                                         Contact us today to discuss partnership opportunities and how we can work together to enhance the beauty experience for our clients!
-                                     </p>
-                                     -->
+                            <h3 class="mt-2">Contact Us</h3>
                             <div class="mainicon mt-4">
                                 <div class="iconbox">
                                     <i class="bi bi-house-door"></i>
                                 </div>
                                 <div>
-
                                     <p class="mb-0">64, Block-B, Sushant Lok Phase 1, Sector-43, Gurugram, Haryana-122022</p>
                                 </div>
-
                             </div>
                             <div class="mainicon">
                                 <div class="iconbox">
                                     <i class="bi bi-envelope"></i>
                                 </div>
                                 <div>
-
                                     <p class="mb-0">support@affinity.salon</p>
                                 </div>
                             </div>
@@ -179,69 +228,64 @@ include "navbar.php";
                                     <i class="bi bi-telephone"></i>
                                 </div>
                                 <div>
-
                                     <p class="mb-0">9899178000</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Get In Touch Form Section -->
     <section class="ptb50 gettouch text-center">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-9 mx-auto">
-                    <h3 class="mt-2">
-                        Get in touch
-                    </h3>
-                    <p>Please fill out the form below, and our team will get back <br>to you as soon as possible.
-                    </p>
+                    <h3 class="mt-2">Get in touch</h3>
+                    <p>Please fill out the form below, and our team will get back <br>to you as soon as possible.</p>
 
                     <div class="row">
                         <div class="col-md-7 mx-auto">
-                            <form action="partner_query.php" method="post">
-                                <input type="hidden" name="date" value="2025-06-21">
-                                <input type="hidden" name="source" value="contact">
-                                <div class="formbox">
-                                    <div class="inbox">
-                                        <div class="inputicon">
-                                            <i class="bi bi-person"></i>
-                                        </div>
-                                        <input type="text" class="w-100" name="name" placeholder="Name" pattern="[A-Za-z\s]+" title="Enter your Name!" required>
+                            <div class="custom-form-card"> <!-- Styled card-like container for the form -->
+                                <!-- The 'alert_message' div remains for displaying feedback to the user -->
+                                <div id="alert_message" class="alert alert-danger" role="alert" style="display:none; margin-bottom: 15px;"></div>
+                                
+                                <form action="savecontact.php" method="post" id="frm" onsubmit="return validateFrme();">
+                                    <input type="hidden" name="date" value="2025-06-21">
+                                    <input type="hidden" name="source" value="contact">
+
+                                    <!-- Name Field -->
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control custom-input-field" id="cname" name="name" placeholder="Name" pattern="[A-Za-z\s]+" title="Enter your Name!" required>
+                                    </div>
+                                    <div id="nameErr" class="text-danger text-start"></div> <!-- Error message display -->
+
+                                    <!-- Email Field -->
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control custom-input-field" id="cemail" name="email" placeholder="Email" required>
+                                    </div>
+                                    <div id="emailErr" class="text-danger text-start"></div> 
+
+
+                                    <!-- Phone Field -->
+                                    <div class="mb-3">
+                                        <input type="tel" minlength="10" maxlength="13" class="form-control custom-input-field" id="phone" name="phone" placeholder="Phone" pattern="[0-9]{10,13}" title="Enter a valid phone number!" required>
+                                    </div>
+                                    <div id="phoneErr" class="text-danger text-start"></div> <!-- Error message display -->
+
+                                    <!-- Message Field -->
+                                    <div class="mb-3">
+                                        <textarea class="form-control custom-input-field" placeholder="Leave us a Message" name="message" rows="3" maxlength="500" required></textarea>
                                     </div>
 
-                                    <div class="inbox">
-                                        <div class="inputicon">
-                                            <i class="bi bi-envelope"></i>
-                                        </div>
-                                        <input type="email" class="w-100" name="email" placeholder="Email" required>
+                                    <!-- Submit Button -->
+                                    <div>
+                                        <button type="submit" class="custom-submit-button" id="btn_apppointment">Submit</button>
                                     </div>
-
-                                    <div class="inbox">
-                                        <div class="inputicon">
-                                            <i class="bi bi-telephone"></i>
-                                        </div>
-                                        <input type="tel" minlength="10" maxlength="13" class="w-100" name="phone" placeholder="Phone" pattern="\d{10,13}" title="Enter a valid phone number!" required>
-                                    </div>
-
-                                    <div class="inbox">
-                                        <div class="inputicon" style="align-items: start; top: 5px">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </div>
-                                        <textarea placeholder="Leave us a Message" name="message" rows="3" maxlength="500" required></textarea>
-                                    </div>
-
-                                    <div class="inbox">
-                                        <button type="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
-
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -249,57 +293,43 @@ include "navbar.php";
         </div>
     </section>
 
-<?php
-include "footer.php";
-?>
+    <?php include "footer.php"; ?>
 
     <!-- all js here -->
-
-    <!-- jquery latest version -->
+    <!-- jquery latest version (moved to bottom for better page load performance) -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Bootstrap 5.0.2 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".banner", {
             slidesPerView: 1,
             spaceBetween: 0,
-            //loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
-
             autoplay: {
                 delay: 5000,
-                // disableOnInteraction: false,
             },
-
-            /* pagination: {
-               el: ".swiper-pagination",
-               clickable: true,
-             },*/
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
         });
 
-
-        var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
-
-        mySwiper1 = new Swiper('.h__partners-swiper1', {
-            //grabCursor: false,
-            loop: true,
-
-            slidesPerView: 'auto',
-
-            shortSwipes: true,
-            longSwipes: true,
-            allowTouchMove: true,
-            autoplay: {
-                delay: 1,
-            },
-            freeMode: true,
-            speed: 5000,
-        });
+        var mySwiper1 = document.querySelector('.h__partners-swiper1');
+        if (mySwiper1) {
+            mySwiper1 = new Swiper('.h__partners-swiper1', {
+                loop: true,
+                slidesPerView: 'auto',
+                shortSwipes: true,
+                longSwipes: true,
+                allowTouchMove: true,
+                autoplay: {
+                    delay: 1,
+                },
+                freeMode: true,
+                speed: 5000,
+            });
+        }
     </script>
 
     <script>
@@ -307,22 +337,13 @@ include "footer.php";
             slidesPerView: 1,
             spaceBetween: 30,
             loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
-
             autoplay: {
                 delay: 5000,
-                // disableOnInteraction: false,
             },
-
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
             },
-            /* navigation: {
-               nextEl: ".swiper-button-next",
-               prevEl: ".swiper-button-prev",
-             },*/
         });
 
         $(".hide-btn").click(function() {
@@ -331,35 +352,32 @@ include "footer.php";
         });
         $(".show-btn").click(function() {
             $("#slide-nav").css("display", "block");
-
-
         });
     </script>
 
-
+    <!-- Original JS files -->
     <script src="js/jquery.meanmenu.js"></script>
     <script src="js/iscroll.js"></script>
     <script src="js/slidemenu.js"></script>
     <script src="js/main.js"></script>
 
+    <!-- jQuery UI for Datepicker -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Font Awesome Kit -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script>
         jQuery(document).ready(function() {
             jQuery('#datepicker').datepicker({
                 dateFormat: 'dd-mm-yy',
-
                 startDate: '+1d',
-
                 minDate: 0
             });
         });
     </script>
 
-
+    <!-- Service Selection Logic (This part of the JS is NOT connected to the contact form) -->
     <script>
-        // Define the service options for each gender
         const ladiesServices = [{
             label: "Hair Styling",
             options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
@@ -403,22 +421,23 @@ include "footer.php";
             options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
         }];
 
-        // Function to populate the service dropdown based on selected gender
         function updateServices() {
-            const gender = document.getElementById("genderSelect").value;
-            const serviceSelect = document.getElementById("serviceSelect");
+            const genderSelectElement = document.getElementById("genderSelect");
+            const serviceSelectElement = document.getElementById("serviceSelect");
 
-            // Clear previous options
+            if (!genderSelectElement || !serviceSelectElement) {
+                return;
+            }
+
+            const gender = genderSelectElement.value;
+            const serviceSelect = serviceSelectElement;
+
             serviceSelect.innerHTML = '<option value="">Select Service</option>';
 
-            // Enable the service dropdown only if a gender is selected
             if (gender) {
                 serviceSelect.disabled = false;
-
-                // Determine the appropriate services based on gender
                 const services = gender === "1" ? ladiesServices : gentsServices;
 
-                // Populate the service options
                 services.forEach(group => {
                     const optgroup = document.createElement("optgroup");
                     optgroup.label = group.label;
@@ -429,141 +448,176 @@ include "footer.php";
                         option.textContent = service;
                         optgroup.appendChild(option);
                     });
-
                     serviceSelect.appendChild(optgroup);
                 });
             } else {
                 serviceSelect.disabled = true;
             }
         }
-
-        // Event listener for gender selection change
-        document.getElementById("genderSelect").addEventListener("change", updateServices);
+        const genderSelectElement = document.getElementById("genderSelect");
+        if (genderSelectElement) {
+            genderSelectElement.addEventListener("change", updateServices);
+        }
     </script>
 
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
-
-
-    <!--form validation -->
-
-
-
-
+    <!-- Form Validation Script -->
     <script type="text/javascript">
         function validateEmail(email) {
-            // a very simple email validation checking. 
-            // you can add more complex email checking if it helps 
             if (email.length <= 0) {
                 return true;
             }
-            var splitted = email.match("^(.+)@(.+)$");
+            var splitted = email.match(/^(.+)@(.+)$/);
             if (splitted == null) return false;
-            if (splitted[1] != null) {
-                var regexp_user = /^\"?[\w-_\.]*\"?$/;
-                if (splitted[1].match(regexp_user) == null) return false;
+
+            var regexp_user = /^\"?[\w-_\.]*\"?$/;
+            var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
+
+            if (splitted[1] && splitted[1].match(regexp_user) == null) return false;
+            if (splitted[2] && splitted[2].match(regexp_domain) == null) {
+                var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
+                if (splitted[2].match(regexp_ip) == null) return false;
             }
-            if (splitted[2] != null) {
-                var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
-                if (splitted[2].match(regexp_domain) == null) {
-                    var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
-                    if (splitted[2].match(regexp_ip) == null) return false;
-                } // if
-                return true;
-            }
-            return false;
+            return true;
         }
 
         function isInteger(s) {
-            var i;
-            for (i = 0; i < s.length; i++) {
+            for (var i = 0; i < s.length; i++) {
                 var c = s.charAt(i);
                 if (((c < "0") || (c > "9"))) return false;
             }
-            // All characters are numbers.
             return true;
         }
 
         function validateFrme() {
-            // Clear all error messages
+            // Clear all previous error messages and hide the alert_message div
             document.getElementById('nameErr').innerHTML = "";
-            document.getElementById('genderErr').innerHTML = "";
             document.getElementById('phoneErr').innerHTML = "";
-            document.getElementById('serviceErr').innerHTML = "";
+            document.getElementById('emailErr').innerHTML = "";
+            $('#alert_message').hide().html('');
 
-            // Validate fields
+            // Get elements
             var nameElement = document.getElementById('cname');
-            var name = nameElement ? nameElement.value : '';
+            var emailElement = document.getElementById('cemail');
+            var phoneElement = document.getElementById('phone');
+            var submitButton = $('#btn_apppointment');
 
+            // --- Client-side Validation ---
+
+            // Validate Name
+            var name = nameElement ? nameElement.value : '';
             if (!name.trim()) {
                 document.getElementById('nameErr').innerHTML = "Please Enter Name";
                 if (nameElement) nameElement.focus();
+                submitButton.show(); // Show button on validation failure
+                console.log("Button visible: Client-side Name validation failed");
                 return false;
             }
 
-            var genderElement = document.getElementById('gender');
-            var gender = genderElement ? genderElement.value : '';
-
-            if (!gender.trim()) {
-                document.getElementById('genderErr').innerHTML = "Please Select Gender";
-                if (genderElement) genderElement.focus();
+            // Validate Email
+            var email = emailElement ? emailElement.value : '';
+            if (!email.trim()) {
+                document.getElementById('emailErr').innerHTML = "Please Enter Email";
+                if (emailElement) emailElement.focus();
+                submitButton.show(); // Show button on validation failure
+                console.log("Button visible: Client-side Email empty");
+                return false;
+            }
+            if (!validateEmail(email)) {
+                document.getElementById('emailErr').innerHTML = "Please Enter a valid Email address!";
+                if (emailElement) emailElement.focus();
+                submitButton.show(); // Show button on validation failure
+                console.log("Button visible: Client-side Email format invalid");
                 return false;
             }
 
-            var phoneElement = document.getElementById('phone');
+            // Validate Phone
             var phone = phoneElement ? phoneElement.value : '';
-
             if (!phone.trim()) {
                 document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
                 if (phoneElement) phoneElement.focus();
+                submitButton.show(); // Show button on validation failure
+                console.log("Button visible: Client-side Phone empty");
                 return false;
             }
-
             if (isNaN(phone)) {
                 document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
                 if (phoneElement) phoneElement.focus();
+                submitButton.show(); // Show button on validation failure
+                console.log("Button visible: Client-side Phone not numeric");
                 return false;
             }
 
-            var serviceElement = document.getElementById('service');
-            var service = serviceElement ? serviceElement.value : '';
-
-            if (!service.trim()) {
-                document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
-                if (serviceElement) serviceElement.focus();
-                return false;
-            }
-
+            // --- AJAX Submission ---
             var form = $("#frm");
-            $('#btn_apppointment').hide();
-            // $('#processing').show();
+            if (form.length === 0) {
+                console.error("Form with ID 'frm' not found for AJAX submission. Skipping AJAX.");
+                $('#alert_message').html("Form not found. Please refresh the page.").show();
+                submitButton.show(); // Ensure button is shown if form is missing
+                console.log("Button visible: Form ID missing");
+                return false;
+            }
+
+            // Hide button and possibly show a loading indicator
+            submitButton.hide();
+            console.log("Button hidden: Submitting form...");
+            // $('#processing').show(); // Uncomment if you have a processing spinner
+
+            // Failsafe timeout to show button if AJAX takes too long or gets stuck
+            const failsafeTimeout = setTimeout(() => {
+                if (submitButton.is(':hidden')) {
+                    submitButton.show();
+                    console.warn("Button forcibly shown by failsafe timeout.");
+                    $('#alert_message').html("Submission taking longer than expected. Please wait or try again.").show();
+                }
+            }, 5000); // 5 seconds. Adjust as needed.
+
             $.ajax({
                 type: "POST",
-                url: 'process.php',
+                url: 'savecontact.php', // Ensure this path is correct
                 data: form.serialize(),
                 success: function(response) {
-                    if (response == 1) {
-                        window.location = "thanks.php";
-                    } else {
+                    clearTimeout(failsafeTimeout); // Clear failsafe if AJAX succeeded
+                    console.log("AJAX Success Response (Raw): '" + response + "'"); // LOG THE RAW RESPONSE
 
-                        $('#alert_message').html(response);
-                        // $('#processing').hide();
-                        $('#btn_apppointment').show();
-                        $('#frm')[0].reset();
+                    // Check if response contains '1' anywhere, or if it's "success"
+                    if (response.trim().includes('1')) { // Changed to .includes('1') for more robustness
+                        console.log("AJAX Success: Server indicated success. Redirecting...");
+                        window.location = "savecontact.php"; // Redirect immediately on confirmed success
+                    } else {
+                        // Server returned an error message or non-'1' response
+                        console.log("AJAX Success but server did not return '1'. Displaying response.");
+                        $('#alert_message').html(response).show();
+                        submitButton.show(); // Show button for server-side error message
+                        console.log("Button visible: Server returned non-'1' response.");
+                        $('#frm')[0].reset(); // Reset form on server-side error, as per your original logic
                         window.setTimeout(function() {
-                            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                                $(this).remove();
+                            $("#alert_message").fadeTo(500, 0).slideUp(500, function() {
+                                $(this).html('').hide();
                             });
                         }, 4000);
                     }
-
+                },
+                error: function(xhr, status, error) {
+                    clearTimeout(failsafeTimeout); // Clear failsafe if AJAX errored
+                    // AJAX request failed (e.g., 404, 500, network issue)
+                    console.error("AJAX Error: ", status, error, "Response Text:", xhr.responseText); // Log full responseText
+                    let errorMessage = "An error occurred during submission. Please try again.";
+                    if (xhr.status) {
+                        errorMessage += ` (Status: ${xhr.status} - ${xhr.statusText})`;
+                    }
+                    if (xhr.responseText && xhr.status !== 404) {
+                        errorMessage += `<br>Server Debug: <pre>${xhr.responseText.substring(0, 500)}</pre>`; // Show more of the responseText
+                    }
+                    $('#alert_message').html(errorMessage).show();
+                    submitButton.show(); // Show button for AJAX error
+                    console.log("Button visible: AJAX request error.");
                 }
             });
-            return true;
+            return false; // Prevent default form submission as AJAX is used
         }
     </script>
 </body>

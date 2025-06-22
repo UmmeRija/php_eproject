@@ -120,15 +120,12 @@
                 <div class="col-sm-8 mx-auto">
                     <div class="form py-3" id="appointment">
                         <div class="container-fluid">
-                            <form action="./submit_appointment.php" method="post">
+                            <form action="booking.php" method="post">
                                 <div class="row d-flex align-items-center">
 
                                     <div class="col-sm-12 mb-3">
                                         <div class="headtext clry">Make an appointment Now</div>
                                     </div>
-
-
-
 
                                     <div class="width-auto-100 mt-2 mb-2">
                                         <label><i class="fa-regular fa-user   "></i> Name</label>
