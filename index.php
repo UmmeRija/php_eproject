@@ -99,7 +99,7 @@ if ($is_logged_in) {
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NJW4QH8K');
     </script>
-    <title>Affinity Salon</title>
+    <title>Elegance Salon</title>
     <style>
         .welcome-user-heading {
             font-family: 'Bellefair', serif;
@@ -164,6 +164,42 @@ if ($is_logged_in) {
             background-color: #d1a86e;
             border-color: #d1a86e;
         }
+        .table-responsive .btn-edit,
+.table-responsive .btn-delete {
+    padding: 4px 8px; /* Adjust padding for button size */
+    border: none;
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 13px; /* Adjust font size */
+    font-weight: 500; /* Medium font weight */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase; /* Match your other buttons if they are uppercase */
+    margin: 0 5px; /* Add some space between buttons */
+    display: inline-flex; /* Allows text and icons to align well if you add icons later */
+    align-items: center;
+    justify-content: center;
+}
+        .table-responsive .btn-delete {
+    background-color: #5a3d31; 
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive .btn-delete:hover {
+    background-color: #3b281f; 
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.table-responsive .btn-delete:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+thead{
+color: #d1a86e;
+}
+
     </style>
 </head>
 
@@ -283,6 +319,8 @@ if ($is_logged_in) {
                                     <th>Time</th>
                                     <th>Branch</th>
                                     <th>Service</th>
+                                   <th>Options</th>
+    </tr>
                                 </tr>
                             </thead>
                             <tbody>
@@ -296,6 +334,12 @@ if ($is_logged_in) {
                                         <td><?php echo htmlspecialchars($row['times']); ?></td>
                                         <td><?php echo htmlspecialchars($row['branch']); ?></td>
                                         <td><?php echo htmlspecialchars($row['service']); ?></td>
+                                        <td>
+
+    <button class="btn btn-sm btn-delete" onclick= window.location.href="edit.php">Edit Appointment</button>
+    <button class="btn btn-sm btn-delete" onclick= window.location.href="delete.php">Cancel</button>
+
+    </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
