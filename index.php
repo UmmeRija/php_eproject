@@ -1,13 +1,40 @@
 <?php
+include "connection.php"; // Make sure connection.php sets up $con
 session_start();
+
+// Enable error reporting for debugging - REMOVE IN PRODUCTION
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+$is_logged_in = isset($_SESSION['id']);
+$num_rows = 0; // Initialize for no appointments by default
+$query = null; // Initialize query result
+
+// Fetch appointments only if the user is logged in
+if ($is_logged_in) {
+    // IMPORTANT: Make sure 'user_id' in your 'appointment' table
+    // corresponds to 'id' in your 'users' table and $_SESSION['id']
+    $id = mysqli_real_escape_string($con, $_SESSION['id']);
+    $sql = "SELECT * FROM appointment WHERE id = '$id'";
+    $query = mysqli_query($con, $sql);
+
+    // Check if the query itself failed (e.g., table doesn't exist, bad connection)
+    if (!$query) {
+        // If query failed, display an error message and stop execution
+        echo "<!doctype html><html><head><title>Error</title><link rel='stylesheet' href='css/bootstrap.min.css'><style>body{background-color:#000;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;font-family:'Bellefair',serif;} .error-message{text-align:center;padding:20px;border:1px solid #e2b97f;border-radius:8px;} h1{color:#e2b97f;}</style></head><body><div class='error-message'><h1>Database Error!</h1><p>Failed to retrieve appointments. Please try again later or contact support.</p><p>Technical details: " . mysqli_error($con) . "</p></div></body></html>";
+        exit(); // Stop script execution here
+    }
+
+    // Get the number of rows only if the query was successful
+    $num_rows = mysqli_num_rows($query);
+}
+// If not logged in, $query remains null and $num_rows remains 0,
+// which is correct for displaying the "login to view" message.
 ?>
 <!doctype html>
-
 <html class="no-js" lang="en">
 
 <head>
-
-
     <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,31 +42,18 @@ session_start();
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <!-- all css here -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
-
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/meanmenu.min.css">
-
-
     <link rel="stylesheet" href="css/slidemenu.css">
-
     <link rel="stylesheet" href="css/style.css">
-    <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
     <script type="application/ld+json">
         {
@@ -69,7 +83,6 @@ session_start();
             ]
         }
     </script>
-    <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -86,176 +99,225 @@ session_start();
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NJW4QH8K');
     </script>
-    <!-- End Google Tag Manager -->
-
     <title>Affinity Salon</title>
     <style>
-        <style>
-  /* ... your existing styles ... */
+        .welcome-user-heading {
+            font-family: 'Bellefair', serif;
+            color: #fff;
+            font-size: 3.5em;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
 
-  .welcome-user-heading {
-    font-family: 'Bellefair', serif; /* Use the elegant font from your design */
-    color: #fff; /* White color for the text */
-    font-size: 3.5em; /* Adjust size to match the prominence in your image */
-    font-weight: normal; /* Bellefair is already decorative, usually normal weight */
-    letter-spacing: 2px; /* A little spacing for elegance */
-    margin-top: 60px; /* Add top spacing to push it down from elements above */
-    margin-bottom: 40px; /* Add bottom spacing to separate from elements below */
-    text-transform: uppercase; /* Optional: if you want it all caps like some other headings */
-  }
+        @media (max-width: 991px) {
+            .welcome-user-heading {
+                font-size: 2.8em;
+                margin-top: 40px;
+                margin-bottom: 30px;
+            }
+        }
 
-  /* Responsive adjustments for smaller screens */
-  @media (max-width: 991px) { /* For tablets and smaller */
-    .welcome-user-heading {
-      font-size: 2.8em;
-      margin-top: 40px;
-      margin-bottom: 30px;
-    }
-  }
+        @media (max-width: 767px) {
+            .welcome-user-heading {
+                font-size: 2em;
+                margin-top: 30px;
+                margin-bottom: 20px;
+                letter-spacing: 1px;
+            }
+        }
 
-  @media (max-width: 767px) { /* For mobile devices */
-    .welcome-user-heading {
-      font-size: 2em;
-      margin-top: 30px;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    }
-  }
+        /* NEW STYLES FOR LOGIN PROMPT BOX */
+        .login-prompt-box {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            margin-top: 20px;
+            padding: 40px;
+            text-align: center;
+        }
 
-  /* ... rest of your styles ... */
-</style>
+        .login-prompt-box h2 {
+            color: #e2b97f;
+            font-family: 'Bellefair', serif;
+            margin-bottom: 20px;
+        }
+
+        .login-prompt-box p {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .login-prompt-box .btn-warning {
+            background-color: #e2b97f;
+            border-color: #e2b97f;
+            color: #000;
+            padding: 12px 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .login-prompt-box .btn-warning:hover {
+            background-color: #d1a86e;
+            border-color: #d1a86e;
+        }
     </style>
 </head>
 
 <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
 
-
-  <?php
-  include "navbar.php";
-  ?>
-    <!-- Start Slider Area -->
+    <?php include "navbar.php"; ?>
     <div class="swiper banner">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <img src="img/banner.jpg" alt="">
-
             </div>
-
-            <!--<div class="swiper-slide">
-                        <img src="img/banner.jpg" alt="">
-                        
-                      </div>-->
-
         </div>
-
-        <!--<div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>-->
     </div>
-    <!-- End Slider Area -->
-    <!--form-->
+
     <section class="testibg py-5">
         <div class="container-fluid">
             <div class="row g-0">
                 <div class="col-sm-8 mx-auto">
                     <div class="form py-3" id="appointment">
-                        <div class="container-fluid">
-                          <h1 class="welcome-user-heading text-center">Welcome, <?php echo $_SESSION['name'];?>!</h1>
-                            <form action="booking.php" method="post">
-                                <div class="row d-flex align-items-center">
+                        <h1 class="welcome-user-heading text-center">Welcome, <?php echo $is_logged_in ? htmlspecialchars($_SESSION['name']) : 'Guest'; ?>!</h1>
 
-                                    <div class="col-sm-12 mb-3">
-                                        <div class="headtext clry">Make an appointment Now</div>
+                        <?php if ($is_logged_in) { ?>
+                            <div class="container-fluid">
+                                <form action="booking.php" method="post">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-sm-12 mb-3">
+                                            <div class="headtext clry">Make an appointment Now</div>
+                                        </div>
+
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-regular fa-user "></i> Name</label>
+                                            <input type="text" placeholder="Enter Name " required name="name" class="form-control" id="">
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-regular fa-user "></i> Email</label>
+                                            <input type="email" placeholder="Enter Email " name="email" class="form-control" id="">
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-regular fa-user "></i> Phone</label>
+                                            <input placeholder="Enter Phone " required name="phone" class="form-control" minlength="10" maxlength="14" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-solid fa-list"></i> Gender</label>
+                                            <select class="selctbox" name="gender" tabindex="6" data-validation="required" required="" data-validation-error-msg="Please select a gender" id="genderSelect">
+                                                <option value="">Select Gender*</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Others/Undefined">Others/Undefined</option>
+                                            </select>
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-regular fa-calendar"></i> Date</label>
+                                            <input type="text" placeholder="Select Date" required name="date" class="form-control" id="datepicker">
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-regular fa-clock"></i> Time</label>
+                                            <select class="selctbox" name="time">
+                                                <option>Select Time</option>
+                                                <option>10:00 AM</option>
+                                                <option>11:00 AM</option>
+                                                <option>12:00 PM</option>
+                                                <option>01:00 PM</option>
+                                                <option>02:00 PM</option>
+                                                <option>03:00 PM</option>
+                                            </select>
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-regular fa-handshake"></i> BRANCH</label>
+                                            <select class="selctbox" name="branch">
+                                                <option>Select Branch</option>
+                                                <option>Green Park</option>
+                                                <option>Greater kailash II</option>
+                                                <option>New Friends Colony</option>
+                                                <option>Shivalik Road</option>
+                                                <option>Bengali Market</option>
+                                                <option>Gurugram</option>
+                                            </select>
+                                        </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-solid fa-list"></i> Service</label>
+                                            <select name="service" class="selctbox" id="serviceSelect" disabled required>
+                                                <option value="">Select Service</option>
+                                            </select>
+                                        </div>
+                                        <div class="width-auto-100 mt-3 mb-2 text-center ">
+                                            <input value="Book appointment" type="submit" class="sumbitbtn w-50">
+                                        </div>
                                     </div>
-
-                                    <div class="width-auto-100 mt-2 mb-2">
-                                        <label><i class="fa-regular fa-user   "></i> Name</label>
-                                        <input type="text" placeholder="Enter Name " required name="name" class="form-control" id="">
-                                    </div>
-                                    <div class="width-auto-100 mt-2 mb-2">
-                                        <label><i class="fa-regular fa-user   "></i> Email</label>
-                                        <input type="email" placeholder="Enter Email " name="email" class="form-control" id="">
-                                    </div>
-                                    <div class="width-auto-100 mt-2 mb-2">
-                                        <label><i class="fa-regular fa-user   "></i> Phone</label>
-                                        <input placeholder="Enter Phone " required name="phone" class="form-control" minlength="10" maxlength="14" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
-                                    </div>
-                                    <div class="width-auto-100  mt-2 mb-2">
-                                        <label><i class="fa-solid fa-list"></i> Gender</label>
-                                        <select class="selctbox" name="gender" tabindex="6" data-validation="required" required="" data-validation-error-msg="Please select a gender" id="genderSelect">
-                                    <option value="">Select Gender*</option>
-                                    <option value="1">Female</option>
-                                    <option value="2">Male</option>
-                                    <option value="2">Others/Undefined</option>
-                                  
-                              </select>
-                                    </div>
-                                    <div class="width-auto-100 mt-2 mb-2">
-                                        <label><i class="fa-regular fa-calendar"></i> Date</label>
-                                        <input type="text" placeholder="Select Date" required name="date" class="form-control" id="datepicker">
-                                    </div>
-                                    <div class="width-auto-100 mt-2 mb-2">
-                                        <label><i class="fa-regular fa-clock"></i> Time</label>
-                                        <select class="selctbox" name="time">
-                                  <option>Select Time</option>
-                                  <option>10:00 AM</option>
-                                  <option>11:00 AM</option>
-                                  <option>12:00 PM</option>
-                                  <option>01:00 PM</option>
-                                  <option>02:00 PM</option>
-                                  <option>03:00 PM</option>
-                              </select>
-
-                                    </div>
-                                    <div class="width-auto-100 mt-2 mb-2">
-                                        <label><i class="fa-regular fa-handshake"></i> BRANCH</label>
-                                        <select class="selctbox" name="branch">
-                                  <option>Select Branch</option>
-                                  <option>Green Park</option>
-                                  <option>Greater kailash II</option>
-                                  <option>New Friends Colony</option>
-                                  <option>Shivalik Road</option>
-                                  <option>Bengali Market</option>
-                                  <option>Gurugram</option>
-
-                                  
-                              </select>
-                                    </div>
-                                    <div class="width-auto-100  mt-2 mb-2">
-                                        <label><i class="fa-solid fa-list"></i> Service</label>
-
-
-                                        <!-- Service Selection -->
-                                        <select name="service" class="selctbox" id="serviceSelect" disabled required>
-                                    <option value="">Select Service</option>
-                                </select>
-                                    </div>
-
-
-
-
-
-
-                                    <div class="width-auto-100  mt-3 mb-2 text-center ">
-
-                                        <input value="Book appointment" type="submit" class="sumbitbtn w-50">
-                                    </div>
-
-
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        <?php } else { ?>
+                            <div class="container-fluid login-prompt-box">
+                                <h2>Login to Book an Appointment</h2>
+                                <p>To schedule your appointment, please log in or create an account.</p>
+                                <button type="button" class="btn btn-warning" onclick="promptLoginForBooking()">Book Appointment Now</button>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
-
-
-
-    <!--//form-->
-
-
+    <section class="appointments-table-section py-5">
+        <div class="container-fluid">
+            <?php if ($is_logged_in) { ?>
+                <?php if ($num_rows > 0) { ?>
+                    <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Your Appointments</h2>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>E-Mail</th>
+                                    <th>Phone Number</th>
+                                    <th>Gender</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Branch</th>
+                                    <th>Service</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = mysqli_fetch_assoc($query)) { ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['phone']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['gender']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['dates']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['times']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['branch']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['service']); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } else { ?>
+                    <div class="text-center alert alert-info" role="alert" style="background-color: #1a1a1a; border-color: #333; color: #fff;">
+                        <h4 class="alert-heading" style="color: #e2b97f;">No Appointments Yet!</h4>
+                        <p>It looks like you haven't booked any appointments. Use the form above to schedule one!</p>
+                        <hr>
+                        <p class="mb-0">Your booked appointments will appear here.</p>
+                    </div>
+                <?php } ?>
+            <?php } else { ?>
+                <div class="text-center login-prompt-box">
+                    <h2>View Your Appointments</h2>
+                    <p>Log in to view your past and upcoming appointments.</p>
+                    <button type="button" class="btn btn-warning" onclick="promptLoginForBooking()">Login to View Appointments</button>
+                </div>
+            <?php } ?>
+        </div>
+    </section>
     <!-- Start About Area -->
     <section class="">
         <div class="about-area py-5">
@@ -871,6 +933,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 }
             });
             return true;
+        }
+    </script>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // JavaScript function to prompt login and redirect
+        function promptLoginForBooking() {
+            // alert('Please log in to book an appointment!');
+            window.location.href = 'login.php'; // Redirect to your login page
         }
     </script>
 </body>
