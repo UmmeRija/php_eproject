@@ -14,8 +14,7 @@ $sql = "SELECT * FROM appointment WHERE user_id = '$id'";
 <!-- Mirrored from www.affinity.salon/service.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jun 2025 13:36:24 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-  
-
+ 
         <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -231,4 +230,112 @@ include "navbar.php";
         
     </div>
 </section>
+<?php
+include "footer.php";
+?>
+    <!-- all js here -->
+
+    <!-- jquery latest version -->
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".banner", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            //loop: true,
+            //mousewheel: true,
+            //effect: 'fade',
+
+            autoplay: {
+                delay: 5000,
+                // disableOnInteraction: false,
+            },
+
+            /* pagination: {
+               el: ".swiper-pagination",
+               clickable: true,
+             },*/
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+
+        var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
+
+        mySwiper1 = new Swiper('.h__partners-swiper1', {
+            //grabCursor: false,
+            loop: true,
+
+            slidesPerView: 'auto',
+
+            shortSwipes: true,
+            longSwipes: true,
+            allowTouchMove: true,
+            autoplay: {
+                delay: 1,
+            },
+            freeMode: true,
+            speed: 5000,
+        });
+    </script>
+
+    <script>
+        var swiper = new Swiper(".testi", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            //mousewheel: true,
+            //effect: 'fade',
+
+            autoplay: {
+                delay: 5000,
+                // disableOnInteraction: false,
+            },
+
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            /* navigation: {
+               nextEl: ".swiper-button-next",
+               prevEl: ".swiper-button-prev",
+             },*/
+        });
+
+        $(".hide-btn").click(function() {
+            $("#slide-nav").css("display", "none");
+            $("body").removeClass("slide-open");
+        });
+        $(".show-btn").click(function() {
+            $("#slide-nav").css("display", "block");
+
+
+        });
+    </script>
+
+
+    <script src="js/jquery.meanmenu.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/slidemenu.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+       
+    </script>
    

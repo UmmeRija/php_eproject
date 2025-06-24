@@ -599,21 +599,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.getElementById('genderErr').innerHTML = ""; // but are likely from your main booking page.
         document.getElementById('phoneErr').innerHTML = ""; // If these elements exist, they will be updated.
         document.getElementById('serviceErr').innerHTML = "";
-
-        // Validate fields
-        // Note: 'cname' and 'phone' inputs are not in this 'edit.php' form,
-        // so their validation here won't directly apply unless you add them.
-        // Assuming your 'name' and 'phone' fields are handled on the original booking.php,
-        // and only the fields present in this edit.php are validated upon update.
-        // If 'name' and 'phone' are expected to be editable, you need to add them to the form.
-
-        // var nameElement = document.getElementById('cname');
-        // var name = nameElement ? nameElement.value : '';
-        // if (!name.trim()) {
-        //     document.getElementById('nameErr').innerHTML = "Please Enter Name";
-        //     if (nameElement) nameElement.focus();
-        //     return false;
-        // }
+        
 
         var genderElement = document.querySelector('select[name="gender"]'); // Target by name as 'gender' ID isn't used
         var gender = genderElement ? genderElement.value : '';
@@ -624,20 +610,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return false;
         }
 
-        // var phoneElement = document.getElementById('phone');
-        // var phone = phoneElement ? phoneElement.value : '';
-        // if (!phone.trim()) {
-        //     document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
-        //     if (phoneElement) phoneElement.focus();
-        //     return false;
-        // }
-        // if (isNaN(phone)) {
-        //     document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
-        //     if (phoneElement) phoneElement.focus();
-        //     return false;
-        // }
-
-
         var serviceElement = document.getElementById('serviceSelect');
         var service = serviceElement ? serviceElement.value : '';
 
@@ -646,21 +618,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (serviceElement) serviceElement.focus();
             return false;
         }
-        
-        // This part of validateFrme() looks like it's designed for an AJAX submission.
-        // However, the form is set to method="POST" and action="edit.php",
-        // meaning it will do a full page reload on submit.
-        // The PHP update logic at the top will handle the submission.
-        // If you intend to use AJAX here, you would need to prevent the default form submission:
-        // e.g., using `$(form).submit(function(e) { e.preventDefault(); ... });`
-        // For now, I'm assuming the PHP handles the POST submission.
-        
-        // Removed AJAX call from here as PHP handles full page POST
-        // return true to allow the form to submit naturally
+    
         return true; 
     }
 
-    // Your existing promptLoginForBooking function
     function promptLoginForBooking() {
         window.location.href = 'login.php'; // Redirect to your login page
     }

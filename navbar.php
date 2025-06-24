@@ -100,7 +100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
                                 <li><a class="slide-menu-item page-scroll" href="index.php">HOME</a>
                                     <li><a class="slide-menu-item page-scroll" href="service.php">OUR SERVICES</a></li>
-
+  <li><a class="slide-menu-item page-scroll" href="stylists.php">OUR STYLISTS</a></li>
                                     <li><a class="slide-menu-item page-scroll" href="aboutus.php">ABOUT US</a></li>
 
                                      
