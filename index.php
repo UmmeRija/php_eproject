@@ -15,7 +15,7 @@ if ($is_logged_in) {
     // IMPORTANT: Make sure 'user_id' in your 'appointment' table
     // corresponds to 'id' in your 'users' table and $_SESSION['id']
     $id = mysqli_real_escape_string($con, $_SESSION['id']);
-    $sql = "SELECT * FROM appointment WHERE id = '$id'";
+    $sql = "SELECT * FROM appointment WHERE user_id = '$id'";
     $query = mysqli_query($con, $sql);
 
     // Check if the query itself failed (e.g., table doesn't exist, bad connection)
@@ -164,7 +164,8 @@ if ($is_logged_in) {
             background-color: #d1a86e;
             border-color: #d1a86e;
         }
-        .table-responsive .btn-edit,
+      /* Existing styles for .table-responsive .btn-edit, .table-responsive .btn-delete */
+.table-responsive .btn-edit,
 .table-responsive .btn-delete {
     padding: 4px 8px; /* Adjust padding for button size */
     border: none;
@@ -179,7 +180,9 @@ if ($is_logged_in) {
     align-items: center;
     justify-content: center;
 }
-        .table-responsive .btn-delete {
+
+/* Styles for Delete Button */
+.table-responsive .btn-delete {
     background-color: #5a3d31; 
     color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -196,6 +199,26 @@ if ($is_logged_in) {
     transform: translateY(0);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+
+/* --- ADD THESE STYLES FOR EDIT BUTTON --- */
+.table-responsive .btn-edit {
+    background-color: #e2b97f; /* Your theme's gold/brown color */
+    color: #000; /* Black text for contrast */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-responsive .btn-edit:hover {
+    background-color: #d1a968; /* Slightly darker gold on hover */
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.table-responsive .btn-edit:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+/* --- END ADDED STYLES --- */
 thead{
 color: #d1a86e;
 }
@@ -231,15 +254,15 @@ color: #d1a86e;
 
                                         <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-regular fa-user "></i> Name</label>
-                                            <input type="text" placeholder="Enter Name " required name="name" class="form-control" id="">
+                                            <input type="text" placeholder="Enter Name " required name="name" class="form-control" id="" value="<?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : ''; ?>">
                                         </div>
                                         <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-regular fa-user "></i> Email</label>
-                                            <input type="email" placeholder="Enter Email " name="email" class="form-control" id="">
+                                            <input type="email" placeholder="Enter Email " name="email" class="form-control" id="" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>">
                                         </div>
                                         <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-regular fa-user "></i> Phone</label>
-                                            <input placeholder="Enter Phone " required name="phone" class="form-control" minlength="10" maxlength="14" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                            <input placeholder="Enter Phone " required name="phone" class="form-control" minlength="10" maxlength="14" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?php echo isset($_SESSION['phone']) ? htmlspecialchars($_SESSION['phone']) : ''; ?>">
                                         </div>
                                         <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-solid fa-list"></i> Gender</label>
@@ -302,66 +325,68 @@ color: #d1a86e;
             </div>
         </div>
     </section>
-    <section class="appointments-table-section py-5">
-        <div class="container-fluid">
-            <?php if ($is_logged_in) { ?>
-                <?php if ($num_rows > 0) { ?>
-                    <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Your Appointments</h2>
-                    <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>E-Mail</th>
-                                    <th>Phone Number</th>
-                                    <th>Gender</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Branch</th>
-                                    <th>Service</th>
-                                   <th>Options</th>
-    </tr>
-                                </tr>
+  <section class="appointments-table-section py-5">
+    <div class="container-fluid">
+        <?php if ($is_logged_in) { ?>
+            <?php if ($num_rows > 0) { ?>
+                <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Your Appointments</h2>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>E-Mail</th>
+                                <th>Phone Number</th>
+                                <th>Gender</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Branch</th>
+                                <th>Service</th>
+                                <th>Options</th>
+                            </tr>
                             </thead>
-                            <tbody>
-                                <?php while ($row = mysqli_fetch_assoc($query)) { ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['email']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['phone']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['gender']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['dates']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['times']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['branch']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['service']); ?></td>
-                                        <td>
+                        <tbody>
+                            <?php while ($row = mysqli_fetch_assoc($query)) { ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['phone']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['gender']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['dates']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['times']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['branch']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['service']); ?></td>
+                                    <td>
+                                        <a href="edit.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-edit">
+                                            Edit Appointment
+                                        </a>
 
-    <button class="btn btn-sm btn-delete" onclick= window.location.href="edit.php">Edit Appointment</button>
-    <button class="btn btn-sm btn-delete" onclick= window.location.href="delete.php">Cancel</button>
-
-    </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php } else { ?>
-                    <div class="text-center alert alert-info" role="alert" style="background-color: #1a1a1a; border-color: #333; color: #fff;">
-                        <h4 class="alert-heading" style="color: #e2b97f;">No Appointments Yet!</h4>
-                        <p>It looks like you haven't booked any appointments. Use the form above to schedule one!</p>
-                        <hr>
-                        <p class="mb-0">Your booked appointments will appear here.</p>
-                    </div>
-                <?php } ?>
+                                        <a href="delete.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure you want to cancel this appointment?');">
+                                            Cancel
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php } else { ?>
-                <div class="text-center login-prompt-box">
-                    <h2>View Your Appointments</h2>
-                    <p>Log in to view your past and upcoming appointments.</p>
-                    <button type="button" class="btn btn-warning" onclick="promptLoginForBooking()">Login to View Appointments</button>
+                <div class="text-center alert alert-info" role="alert" style="background-color: #1a1a1a; border-color: #333; color: #fff;">
+                    <h4 class="alert-heading" style="color: #e2b97f;">No Appointments Yet!</h4>
+                    <p>It looks like you haven't booked any appointments. Use the form above to schedule one!</p>
+                    <hr>
+                    <p class="mb-0">Your booked appointments will appear here.</p>
                 </div>
             <?php } ?>
-        </div>
-    </section>
+        <?php } else { ?>
+            <div class="text-center login-prompt-box">
+                <h2>View Your Appointments</h2>
+                <p>Log in to view your past and upcoming appointments.</p>
+                <button type="button" class="btn btn-warning" onclick="promptLoginForBooking()">Login to View Appointments</button>
+            </div>
+        <?php } ?>
+    </div>
+</section>
     <!-- Start About Area -->
     <section class="">
         <div class="about-area py-5">
