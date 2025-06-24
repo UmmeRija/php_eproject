@@ -222,7 +222,7 @@ if ($is_logged_in) {
 thead{
 color: #d1a86e;
 }
-
+ 
     </style>
 </head>
 
@@ -301,10 +301,23 @@ color: #d1a86e;
                                                 <option>Gurugram</option>
                                             </select>
                                         </div>
-                                        <div class="width-auto-100 mt-2 mb-2">
-                                            <label><i class="fa-solid fa-list"></i> Service</label>
-                                            <select name="service" class="selctbox" id="serviceSelect" disabled required>
-                                                <option value="">Select Service</option>
+                                       <div class="width-auto-100 mt-2 mb-2">
+    <label><i class="fa-solid fa-list"></i> Service</label>
+    <select name="service" class="selctbox" id="serviceSelect" required>
+        <option value="">Select Service</option>
+        </select>
+    <span id="serviceErr" style="color: red;"></span>
+</div>
+                                         <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-solid fa-users"></i> Stylist</label>
+                                            <select class="selctbox" name="stylist">
+                                                <option>Select Stylist</option>
+                                                <option>10:00 AM</option>
+                                                <option>11:00 AM</option>
+                                                <option>12:00 PM</option>
+                                                <option>01:00 PM</option>
+                                                <option>02:00 PM</option>
+                                                <option>03:00 PM</option>
                                             </select>
                                         </div>
                                         <div class="width-auto-100 mt-3 mb-2 text-center ">
@@ -335,13 +348,13 @@ color: #d1a86e;
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>E-Mail</th>
-                                <th>Phone Number</th>
                                 <th>Gender</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Branch</th>
                                 <th>Service</th>
+                                <!-- <th>Stylist</th> -->
+                                <th>Status</th>
                                 <th>Options</th>
                             </tr>
                             </thead>
@@ -349,13 +362,13 @@ color: #d1a86e;
                             <?php while ($row = mysqli_fetch_assoc($query)) { ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['email']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['phone']); ?></td>
                                     <td><?php echo htmlspecialchars($row['gender']); ?></td>
                                     <td><?php echo htmlspecialchars($row['dates']); ?></td>
                                     <td><?php echo htmlspecialchars($row['times']); ?></td>
                                     <td><?php echo htmlspecialchars($row['branch']); ?></td>
                                     <td><?php echo htmlspecialchars($row['service']); ?></td>
+                                     <!-- <td><?php echo htmlspecialchars($row['stylist']); ?></td> -->
+                                      <td><?php echo htmlspecialchars($row['status']); ?></td>
                                     <td>
                                         <a href="edit.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-edit">
                                             Edit Appointment
@@ -691,44 +704,40 @@ color: #d1a86e;
 <?php
 include "footer.php";
 ?>
-    <!-- all js here -->
-
-    <!-- jquery latest version -->
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".banner", {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            //loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
-
-            autoplay: {
-                delay: 5000,
-                // disableOnInteraction: false,
-            },
-
-            /* pagination: {
-               el: ".swiper-pagination",
-               clickable: true,
-             },*/
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 
-        var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
+<script src="js/jquery.meanmenu.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/slidemenu.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
 
-        mySwiper1 = new Swiper('.h__partners-swiper1', {
-            //grabCursor: false,
+
+<script>
+    // Swiper Initializations (from your original code)
+    var swiper = new Swiper(".banner", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        autoplay: {
+            delay: 5000,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    // Ensure .slider is not null before creating new Swiper instance
+    var mySwiper1Element = document.querySelector('.h__partners-swiper1');
+    if (mySwiper1Element) {
+        var mySwiper1 = new Swiper('.h__partners-swiper1', {
             loop: true,
-
             slidesPerView: 'auto',
-
             shortSwipes: true,
             longSwipes: true,
             allowTouchMove: true,
@@ -738,286 +747,253 @@ include "footer.php";
             freeMode: true,
             speed: 5000,
         });
-    </script>
+    }
 
-    <script>
-        var swiper = new Swiper(".testi", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
+    var swiperTesti = new Swiper(".testi", { // Renamed variable to avoid conflict
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
 
-            autoplay: {
-                delay: 5000,
-                // disableOnInteraction: false,
-            },
-
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            /* navigation: {
-               nextEl: ".swiper-button-next",
-               prevEl: ".swiper-button-prev",
-             },*/
-        });
-
-        $(".hide-btn").click(function() {
-            $("#slide-nav").css("display", "none");
-            $("body").removeClass("slide-open");
-        });
-        $(".show-btn").click(function() {
-            $("#slide-nav").css("display", "block");
+    $(".hide-btn").click(function() {
+        $("#slide-nav").css("display", "none");
+        $("body").removeClass("slide-open");
+    });
+    $(".show-btn").click(function() {
+        $("#slide-nav").css("display", "block");
+        // You might want to add $("body").addClass("slide-open"); here if that's its purpose
+    });
 
 
-        });
-    </script>
+    // Define ALL service options (IDENTICAL to edit.php)
+    const ladiesServices = [{
+        label: "Hair Styling",
+        options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
+    }, {
+        label: "Make Up",
+        options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
+    }, {
+        label: "Hair Texture",
+        options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
+    }, {
+        label: "Hair Treatments",
+        options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
+    }, {
+        label: "Facials & Rituals",
+        options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
+    }, {
+        label: "Hand & Feet",
+        options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
+    }, {
+        label: "Nail Care",
+        options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
+    }];
 
+    const gentsServices = [{
+        label: "Hair Cut & Finish",
+        options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
+    }, {
+        label: "Hair Colour",
+        options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
+    }, {
+        label: "Hair Texture",
+        options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
+    }, {
+        label: "Hair Treatments",
+        options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
+    }, {
+        label: "Skin Care",
+        options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
+    }, {
+        label: "Beard Grooming",
+        options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
+    }];
 
-    <script src="js/jquery.meanmenu.js"></script>
-    <script src="js/iscroll.js"></script>
-    <script src="js/slidemenu.js"></script>
-    <script src="js/main.js"></script>
+  function populateAllServices(serviceSelectElementId, currentService = '') {
+    const serviceSelect = document.getElementById(serviceSelectElementId);
+    serviceSelect.innerHTML = '<option value="">Select Service</option>';
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#datepicker').datepicker({
-                dateFormat: 'dd-mm-yy',
+    const labelElement = serviceSelect.previousElementSibling;
 
-                startDate: '+1d',
+    if (labelElement && labelElement.tagName === 'LABEL') {
+        labelElement.style.color = 'black'; // Changed to black
+    }
+}
+        const allServices = [...ladiesServices, ...gentsServices]; // Combine all services
 
-                minDate: 0
+        allServices.forEach(group => {
+            const optgroup = document.createElement("optgroup");
+            optgroup.label = group.label;
+
+            group.options.forEach(service => {
+                const option = document.createElement("option");
+                option.value = service;
+                option.textContent = service;
+                if (service === currentService) { // This part is for pre-selection (used in edit.php)
+                    option.selected = true;
+                }
+                optgroup.appendChild(option);
             });
+            serviceSelect.appendChild(optgroup);
         });
-    </script>
+        serviceSelect.disabled = false; // Ensure it's always enabled
+    }
 
 
-    <script>
-        // Define the service options for each gender
-        const ladiesServices = [{
-            label: "Hair Styling",
-            options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-        }, {
-            label: "Make Up",
-            options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-        }, {
-            label: "Hair Texture",
-            options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-        }, {
-            label: "Facials & Rituals",
-            options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-        }, {
-            label: "Hand & Feet",
-            options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-        }, {
-            label: "Nail Care",
-            options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-        }];
+    // jQuery's document ready function: Initializes datepicker and populates services
+    $(function() {
+        $("#datepicker").datepicker({
+            dateFormat: "dd-mm-yy",
+            minDate: 0 // Prevents selecting past dates
+        });
 
-        const gentsServices = [{
-            label: "Hair Cut & Finish",
-            options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-        }, {
-            label: "Hair Colour",
-            options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-        }, {
-            label: "Hair Texture",
-            options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-        }, {
-            label: "Skin Care",
-            options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-        }, {
-            label: "Beard Grooming",
-            options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-        }];
-
-        // Function to populate the service dropdown based on selected gender
-        function updateServices() {
-            const gender = document.getElementById("genderSelect").value;
-            const serviceSelect = document.getElementById("serviceSelect");
-
-            // Clear previous options
-            serviceSelect.innerHTML = '<option value="">Select Service</option>';
-
-            // Enable the service dropdown only if a gender is selected
-            if (gender) {
-                serviceSelect.disabled = false;
-
-                // Determine the appropriate services based on gender
-                const services = gender === "1" ? ladiesServices : gentsServices;
-
-                // Populate the service options
-                services.forEach(group => {
-                    const optgroup = document.createElement("optgroup");
-                    optgroup.label = group.label;
-
-                    group.options.forEach(service => {
-                        const option = document.createElement("option");
-                        option.value = service;
-                        option.textContent = service;
-                        optgroup.appendChild(option);
-                    });
-
-                    serviceSelect.appendChild(optgroup);
-                });
-            } else {
-                serviceSelect.disabled = true;
-            }
-        }
-
-        // Event listener for gender selection change
-        document.getElementById("genderSelect").addEventListener("change", updateServices);
-    </script>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+        // Populate the service dropdown on page load with all services
+        populateAllServices('serviceSelect');
+    });
 
 
+    // --- Your existing form validation functions ---
 
+    function validateEmail(email) {
+        // Simplified email validation for modern browsers; your original was very complex.
+        // A simple regex check is often sufficient for basic client-side validation.
+        // For robust validation, rely on server-side checks.
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 
-    <!--form validation -->
+    function isInteger(s) {
+        var isInteger = /^[0-9]+$/;
+        return isInteger.test(s);
+    }
 
+    function validateFrme() {
+        // Clear all error messages
+        document.getElementById('nameErr').innerHTML = "";
+        document.getElementById('emailErr').innerHTML = ""; // Added email error clear
+        document.getElementById('phoneErr').innerHTML = "";
+        document.getElementById('dateErr').innerHTML = ""; // Added date error clear
+        document.getElementById('timeErr').innerHTML = ""; // Added time error clear
+        document.getElementById('serviceErr').innerHTML = "";
+        document.getElementById('msgErr').innerHTML = ""; // Added msg error clear
+        document.getElementById('genderErr').innerHTML = ""; // Keep if gender field exists
 
+        // Get form elements
+        var name = document.getElementById("name").value; // Using ID 'name' as per your HTML from previous context
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var date = document.getElementById("datepicker").value;
+        var time = document.getElementById("time").value;
+        var service = document.getElementById("serviceSelect").value; // Corrected ID
+        var msg = document.getElementById("msg").value;
+        var gender = document.getElementById("gender") ? document.getElementById("gender").value : ''; // Assuming gender might be there
 
-
-    <script type="text/javascript">
-        function validateEmail(email) {
-            // a very simple email validation checking. 
-            // you can add more complex email checking if it helps 
-            if (email.length <= 0) {
-                return true;
-            }
-            var splitted = email.match("^(.+)@(.+)$");
-            if (splitted == null) return false;
-            if (splitted[1] != null) {
-                var regexp_user = /^\"?[\w-_\.]*\"?$/;
-                if (splitted[1].match(regexp_user) == null) return false;
-            }
-            if (splitted[2] != null) {
-                var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
-                if (splitted[2].match(regexp_domain) == null) {
-                    var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
-                    if (splitted[2].match(regexp_ip) == null) return false;
-                } // if
-                return true;
-            }
+        if (name == "") {
+            document.getElementById("nameErr").innerHTML = "Name is required.";
             return false;
         }
 
-        function isInteger(s) {
-            var i;
-            for (i = 0; i < s.length; i++) {
-                var c = s.charAt(i);
-                if (((c < "0") || (c > "9"))) return false;
-            }
-            // All characters are numbers.
-            return true;
+        if (email == "") {
+            document.getElementById("emailErr").innerHTML = "Email is required.";
+            return false;
+        } else if (!validateEmail(email)) {
+            document.getElementById("emailErr").innerHTML = "Invalid email format.";
+            return false;
         }
 
-        function validateFrme() {
-            // Clear all error messages
-            document.getElementById('nameErr').innerHTML = "";
-            document.getElementById('genderErr').innerHTML = "";
-            document.getElementById('phoneErr').innerHTML = "";
-            document.getElementById('serviceErr').innerHTML = "";
+        if (phone == "") {
+            document.getElementById("phoneErr").innerHTML = "Phone is required.";
+            return false;
+        } else if (!isInteger(phone) || phone.length !== 10) { // Assuming 10-digit phone
+            document.getElementById("phoneErr").innerHTML = "Phone must be a 10-digit number.";
+            return false;
+        }
 
-            // Validate fields
-            var nameElement = document.getElementById('cname');
-            var name = nameElement ? nameElement.value : '';
+        if (date == "") {
+            document.getElementById("dateErr").innerHTML = "Date is required.";
+            return false;
+        }
 
-            if (!name.trim()) {
-                document.getElementById('nameErr').innerHTML = "Please Enter Name";
-                if (nameElement) nameElement.focus();
-                return false;
-            }
+        if (time == "") {
+            document.getElementById("timeErr").innerHTML = "Time is required.";
+            return false;
+        }
 
-            var genderElement = document.getElementById('gender');
-            var gender = genderElement ? genderElement.value : '';
+        if (service == "") {
+            document.getElementById("serviceErr").innerHTML = "Service is required.";
+            return false;
+        }
 
-            if (!gender.trim()) {
-                document.getElementById('genderErr').innerHTML = "Please Select Gender";
-                if (genderElement) genderElement.focus();
-                return false;
-            }
+        // If gender field exists and is required:
+        if (document.getElementById("gender") && gender == "") {
+             document.getElementById("genderErr").innerHTML = "Please Select Gender";
+             return false;
+        }
 
-            var phoneElement = document.getElementById('phone');
-            var phone = phoneElement ? phoneElement.value : '';
 
-            if (!phone.trim()) {
-                document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
-                if (phoneElement) phoneElement.focus();
-                return false;
-            }
+        if (msg == "") {
+            document.getElementById("msgErr").innerHTML = "Message is required.";
+            return false;
+        }
 
-            if (isNaN(phone)) {
-                document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
-                if (phoneElement) phoneElement.focus();
-                return false;
-            }
 
-            var serviceElement = document.getElementById('service');
-            var service = serviceElement ? serviceElement.value : '';
-
-            if (!service.trim()) {
-                document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
-                if (serviceElement) serviceElement.focus();
-                return false;
-            }
-
-            var form = $("#frm");
-            $('#btn_apppointment').hide();
-            // $('#processing').show();
-            $.ajax({
-                type: "POST",
-                url: 'process.php',
-                data: form.serialize(),
-                success: function(response) {
-                    if (response == 1) {
-                        window.location = "thanks.php";
-                    } else {
-
-                        $('#alert_message').html(response);
-                        // $('#processing').hide();
-                        $('#btn_apppointment').show();
-                        $('#frm')[0].reset();
-                        window.setTimeout(function() {
-                            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                                $(this).remove();
-                            });
-                        }, 4000);
-                    }
-
+        var form = $("#frm");
+        $('#btn_apppointment').hide();
+        // $('#processing').show(); // Uncomment if you have a processing indicator
+        $.ajax({
+            type: "POST",
+            url: 'process.php',
+            data: form.serialize(),
+            success: function(response) {
+                if (response == 1) {
+                    window.location = "thanks.php";
+                } else {
+                    $('#alert_message').html(response);
+                    // $('#processing').hide(); // Uncomment if you have a processing indicator
+                    $('#btn_apppointment').show();
+                    $('#frm')[0].reset();
+                    window.setTimeout(function() {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                            $(this).remove();
+                        });
+                    }, 4000);
                 }
-            });
-            return true;
-        }
-    </script>
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                $('#alert_message').html("An error occurred. Please try again.");
+                $('#btn_apppointment').show();
+            }
+        });
+        return false; // Return false to prevent default form submission
+    }
 
-    <script>
-        // JavaScript function to prompt login and redirect
-        function promptLoginForBooking() {
-            // alert('Please log in to book an appointment!');
-            window.location.href = 'login.php'; // Redirect to your login page
-        }
-    </script>
+    // JavaScript function to prompt login and redirect
+    function promptLoginForBooking() {
+        Swal.fire({
+            title: "Login Required",
+            text: "You need to be logged in to book an appointment.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Login Now"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "login.php"; // Redirect to your login page
+            }
+        });
+    }
+</script>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>
 
 </html>

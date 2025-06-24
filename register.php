@@ -4,9 +4,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   
         $name = $_POST['name'];
         $email = $_POST['email'];
+        $phone = $_POST['phone'];
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        $sql = "INSERT INTO register(`name`, `email`, `passwords`) VALUES('{$name}','{$email}','{$password}')";
+        $sql = "INSERT INTO register(`name`, `email`, `passwords`, `phone`) VALUES('{$name}','{$email}','{$password}', '{$phone}')";
         $query = mysqli_query($con, $sql);
         header("location: http://localhost/elegance/login.php");
 }
@@ -153,7 +154,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"] {
             padding: 12px;
             margin-bottom: 20px;
             background-color: #2b2b2b;
@@ -216,6 +218,9 @@ input[type="password"] {
 
                 <label for="email">Email</label>
                 <input type="email" name="email" required placeholder="abc@example.com" />
+
+                <label for="phone">Phone Number</label>
+                <input type="tel" name="phone" required placeholder="+92 1234-5678910" />
 
                 <label for="password">Password</label>
                 <input type="password" name="password" required placeholder="Enter your password" />
