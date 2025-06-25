@@ -11,36 +11,54 @@ if (!isset($_SESSION['id'])) {
 $user_session_id = mysqli_real_escape_string($con, $_SESSION['id']); // Sanitize user ID from session
 $appointment = null; // Initialize appointment variable
 
+// Function to format date from YYYY-MM-DD (database) to DD/MM/YYYY (display)
+function formatDateForDisplay($dateString) {
+    if (empty($dateString) || $dateString == '0000-00-00') {
+        return '';
+    }
+    $date = DateTime::createFromFormat('Y-m-d', $dateString);
+    if ($date) {
+        $formattedDate = $date->format('d/m/Y');
+        return $formattedDate;
+    }
+    return $dateString;
+}
+
+// Function to format date from DD/MM/YYYY (input) to YYYY-MM-DD (database)
+function formatDateForDatabase($dateString) {
+    if (empty($dateString)) {
+        return '';
+    }
+    $date = DateTime::createFromFormat('d/m/Y', $dateString);
+    if ($date) {
+        $formattedDate = $date->format('Y-m-d');
+        return $formattedDate;
+    }
+    return $dateString;
+}
+
+
 // --- START: Handle form submission (POST request) first ---
 if (isset($_POST['update_appointment'])) {
     if (isset($_POST['appointment_id']) && !empty($_POST['appointment_id'])) {
         $appointment_id = mysqli_real_escape_string($con, $_POST['appointment_id']);
-        $dates = mysqli_real_escape_string($con, $_POST['dates']);
+        
+        // DATES ARE SENT AS DD/MM/YYYY from input, SO CONVERT FOR DB
+        $dates_raw = $_POST['dates'];
+        $dates = mysqli_real_escape_string($con, formatDateForDatabase($dates_raw)); // Convert to YYYY-MM-DD for DB
+        
         $times = mysqli_real_escape_string($con, $_POST['times']);
         $gender = mysqli_real_escape_string($con, $_POST['gender']);
         $branch = mysqli_real_escape_string($con, $_POST['branch']);
         $service = mysqli_real_escape_string($con, $_POST['service']);
-        // $stylist = mysqli_real_escape_string($con, $_POST['stylist']); 
 
-        // Format date to YYYY-MM-DD for database if it's coming as DD-MM-YYYY
-        $date_obj = DateTime::createFromFormat('d-m-Y', $dates);
-        if ($date_obj) {
-            $formatted_dates = $date_obj->format('Y-m-d');
-        } else {
-            $formatted_dates = $dates; // Use as is if format is not DD-MM-YYYY or invalid
-        }
-
-
-        // Update the appointment in the database
-        // IMPORTANT: Ensure the update query also checks for user_id for security
-        $update_sql = "UPDATE appointment SET 
-                       dates = '$formatted_dates', 
-                       times = '$times', 
-                       gender = '$gender', 
-                       branch = '$branch', 
-                       service = '$service'
-                    --    stylist = '$stylist'
-                       WHERE id = '$appointment_id' AND user_id = '$user_session_id'";
+        $update_sql = "UPDATE appointment SET
+                                dates = '$dates',
+                                times = '$times',
+                                gender = '$gender',
+                                branch = '$branch',
+                                service = '$service'
+                                WHERE id = '$appointment_id' AND user_id = '$user_session_id'";
 
         if (mysqli_query($con, $update_sql)) {
             echo "<script>alert('Appointment updated successfully!');</script>";
@@ -48,7 +66,6 @@ if (isset($_POST['update_appointment'])) {
             exit();
         } else {
             echo "<script>alert('Error updating appointment: " . mysqli_error($con) . "');</script>";
-            // For debugging: echo mysqli_error($con);
         }
     } else {
         echo "<script>alert('Error: Appointment ID not provided for update.');</script>";
@@ -57,39 +74,33 @@ if (isset($_POST['update_appointment'])) {
 // --- END: Handle form submission ---
 
 // --- START: Fetch appointment data for displaying the form (GET request or after a failed POST) ---
-// This block runs if it's a GET request, or if a POST request failed and we need to re-display the form
 $appointment_id_to_fetch = null;
 
 if (isset($_GET['appointment_id']) && !empty($_GET['appointment_id'])) {
     $appointment_id_to_fetch = mysqli_real_escape_string($con, $_GET['appointment_id']);
 } elseif (isset($_POST['appointment_id']) && !empty($_POST['appointment_id'])) {
-    // If a POST request just happened and failed, use the ID from POST to re-populate the form
     $appointment_id_to_fetch = mysqli_real_escape_string($con, $_POST['appointment_id']);
 }
 
 if ($appointment_id_to_fetch) {
-    // Fetch the specific appointment's data
-    // IMPORTANT: Add security check - ensure the appointment belongs to the logged-in user
     $sql = "SELECT * FROM appointment WHERE id = '$appointment_id_to_fetch' AND user_id = '$user_session_id'";
     $result = mysqli_query($con, $sql);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $appointment = mysqli_fetch_assoc($result);
+        $appointment['dates_display'] = formatDateForDisplay($appointment['dates']);
     } else {
-        // Appointment not found or does not belong to the user
         echo "<script>alert('Appointment not found or you do not have permission to edit it.');</script>";
-        echo "<script>window.location.href='index.php';</script>"; // Redirect back to view page
+        echo "<script>window.location.href='index.php';</script>";
         exit();
     }
 } else {
-    // No appointment ID provided in the URL or POST for fetching
     echo "<script>alert('No appointment ID provided for editing.');</script>";
-    echo "<script>window.location.href='index.php';</script>"; // Redirect back to view page
+    echo "<script>window.location.href='index.php';</script>";
     exit();
 }
 // --- END: Fetch appointment data ---
 
-// If we reach here, $appointment contains the data for the valid, owned appointment
 ?>
 
 <!doctype html>
@@ -116,7 +127,7 @@ if ($appointment_id_to_fetch) {
     <link rel="stylesheet" href="css/slidemenu.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     <script type="application/ld+json">
         {
             "@context": "https://schema.org/",
@@ -173,7 +184,6 @@ if ($appointment_id_to_fetch) {
             padding: 30px;
             background-color: #1a1a1a;
             border-radius: 8px;
-            box-shadow: 0 0 15px rgba(226, 185, 127, 0.2);
         }
         .edit-form-container h2 {
             color: #e2b97f;
@@ -181,7 +191,6 @@ if ($appointment_id_to_fetch) {
             margin-bottom: 30px;
             font-family: 'Bellefair', serif;
         }
-        /* Keep these from your booking form for consistency */
         .width-auto-100 {
             width: 100%;
         }
@@ -195,11 +204,10 @@ if ($appointment_id_to_fetch) {
             color: #fff;
             font-size: 14px;
             font-family: inherit;
-            /* For dropdown arrows on dark background */
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20fill%3D%22%23dddddd%22%20d%3D%22M208.5%2089.5l-64%2064c-4.7%204.7-12.3%204.7-17%200l-64-64c-4.7-4.7-4.7-12.3%200-17s12.3-4.7%2017%200L128%20138l55.5-55.5c4.7-4.7%2012.3-4.7%2017%200s4.7%2012.3%200%2017z%22%2F%3E%3C%2Fsvg%3E'); /* Custom SVG for dropdown arrow */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cpath%20fill%3D%22%23dddddd%22%20d%3D%22M208.5%2089.5l-64%2064c-4.7%204.7-12.3%204.7-17%200l-64-64c-4.7-4.7-4.7-12.3%200-17s12.3-4.7%2017%200L128%20138l55.5-55.5c4.7-4.7%2012.3-4.7%2017%200s4.7%2012.3%200%2017z%22%2F%3E%3C%2Fsvg%3E');
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 12px;
@@ -209,7 +217,7 @@ if ($appointment_id_to_fetch) {
             border-color: #e2b97f;
             box-shadow: 0 0 5px rgba(226, 185, 127, 0.5);
         }
-        .form-control { /* Also apply to text inputs like datepicker */
+        .form-control {
             background-color: #2b2b2b;
             border: 1px solid #444;
             color: #fff;
@@ -223,17 +231,17 @@ if ($appointment_id_to_fetch) {
         label {
             color: #ddd;
             margin-bottom: 5px;
-            display: block; /* Ensures label takes full width */
+            display: block;
             font-weight: 500;
             font-size: 13px;
         }
-        label i { /* Styling for font-awesome icons in labels */
+        label i {
             margin-right: 5px;
             color: #e2b97f;
         }
         .btn-submit-edit {
-            background-color: #e2b97f;
-            color: #000;
+            background-color: #d1a968 !important;
+            color: #000 !important;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -245,8 +253,8 @@ if ($appointment_id_to_fetch) {
             color: #000;
         }
         .btn-back {
-            background-color: #5a3d31;
-            color: #fff;
+            background-color: #5a3d31 !important;
+            color: #fff !important;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -320,65 +328,70 @@ if ($appointment_id_to_fetch) {
             background-color: #d1a86e;
             border-color: #d1a86e;
         }
-      /* Existing styles for .table-responsive .btn-edit, .table-responsive .btn-delete */
-.table-responsive .btn-edit,
-.table-responsive .btn-delete {
-    padding: 4px 8px; /* Adjust padding for button size */
-    border: none;
-    border-radius: 4px; /* Slightly rounded corners */
-    font-size: 13px; /* Adjust font size */
-    font-weight: 500; /* Medium font weight */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    text-transform: uppercase; /* Match your other buttons if they are uppercase */
-    margin: 0 5px; /* Add some space between buttons */
-    display: inline-flex; /* Allows text and icons to align well if you add icons later */
-    align-items: center;
-    justify-content: center;
-}
+        /* Existing styles for .table-responsive .btn-edit, .table-responsive .btn-delete */
+        .table-responsive .btn-edit,
+        .table-responsive .btn-delete {
+            padding: 4px 8px; /* Adjust padding for button size */
+            border: none;
+            border-radius: 4px; /* Slightly rounded corners */
+            font-size: 13px; /* Adjust font size */
+            font-weight: 500; /* Medium font weight */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase; /* Match your other buttons if they are uppercase */
+            margin: 0 5px; /* Add some space between buttons */
+            display: inline-flex; /* Allows text and icons to align well if you add icons later */
+            align-items: center;
+            justify-content: center;
+        }
 
-/* Styles for Delete Button */
-.table-responsive .btn-delete {
-    background-color: #5a3d31; 
-    color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+        /* Styles for Delete Button */
+        .table-responsive .btn-delete {
+            background-color: #5a3d31;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-.table-responsive .btn-delete:hover {
-    background-color: #3b281f; 
-    color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+        .table-responsive .btn-delete:hover {
+            background-color: #3b281f;
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
 
-.table-responsive .btn-delete:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
+        .table-responsive .btn-delete:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
 
-/* --- ADD THESE STYLES FOR EDIT BUTTON --- */
-.table-responsive .btn-edit {
-    background-color: #e2b97f; /* Your theme's gold/brown color */
-    color: #000; /* Black text for contrast */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+        /* --- ADD THESE STYLES FOR EDIT BUTTON --- */
+        .table-responsive .btn-edit {
+            background-color: #e2b97f; /* Your theme's gold/brown color */
+            color: #000; /* Black text for contrast */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-.table-responsive .btn-edit:hover {
-    background-color: #d1a968; /* Slightly darker gold on hover */
-    color: #000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
+        .table-responsive .btn-edit:hover {
+            background-color: #d1a968; /* Slightly darker gold on hover */
+            color: #000;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
 
-.table-responsive .btn-edit:active {
-    transform: translateY(0);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        .table-responsive .btn-edit:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        /* --- END ADDED STYLES --- */
+        thead{
+            color: #d1a86e;
+        }
+        /* Add this to your <style> block */
+#datePicker {
+    background-color: #2b2b2b; /* Ensure it matches your select boxes */
+    color: #fff; /* Keep text white */
+    border: 1px solid #444; /* Maintain consistent border */
 }
-/* --- END ADDED STYLES --- */
-thead{
-color: #d1a86e;
-}
-
     </style>
 </head>
 
@@ -388,12 +401,12 @@ color: #d1a86e;
 <div class="edit-form-container">
     <h2 class="headtext clry">Edit Appointment</h2>
     <?php if ($appointment) { ?>
-        <form action="edit.php" method="POST">
+        <form action="edit.php" method="POST" onsubmit="return validateFrme();">
             <input type="hidden" name="appointment_id" value="<?php echo htmlspecialchars($appointment['id']); ?>">
 
             <div class="width-auto-100 mt-2 mb-2">
-                <label><i class="fa-regular fa-calendar"></i> Date</label>
-                <input type="text" placeholder="Select Date" required name="dates" class="form-control" id="datepicker" value="<?php echo htmlspecialchars($appointment['dates']); ?>">
+                <label><i class="fa-regular fa-calendar"></i> Date (DD/MM/YYYY)</label>
+                <input type="text" required name="dates" class="form-control" id="datePicker" value="<?php echo htmlspecialchars($appointment['dates_display']); ?>">
             </div>
 
             <div class="width-auto-100 mt-2 mb-2">
@@ -401,7 +414,7 @@ color: #d1a86e;
                 <select class="selctbox" name="times" required>
                     <option value="">Select Time</option>
                     <?php
-                    $times = ["10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM"];
+                    $times = ["10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
                     foreach ($times as $time_option) {
                         $selected = ($appointment['times'] == $time_option) ? 'selected' : '';
                         echo "<option value=\"$time_option\" $selected>$time_option</option>";
@@ -418,6 +431,7 @@ color: #d1a86e;
                     <option value="Male" <?php if ($appointment['gender'] == 'Male') echo 'selected'; ?>>Male</option>
                     <option value="Others/Undefined" <?php if ($appointment['gender'] == 'Others/Undefined') echo 'selected'; ?>>Others/Undefined</option>
                 </select>
+                <span id="genderErr" style="color: red; font-size: 0.9em;"></span>
             </div>
 
             <div class="width-auto-100 mt-2 mb-2">
@@ -438,24 +452,10 @@ color: #d1a86e;
                 <label><i class="fa-solid fa-list"></i> Service</label>
                 <select name="service" class="selctbox" id="serviceSelect" required>
                     <option value="">Select Service</option>
-                    </select>
+                </select>
+                <span id="serviceErr" style="color: red; font-size: 0.9em;"></span>
             </div>
 
-            <!-- <div class="width-auto-100 mt-2 mb-2">
-                <label><i class="fa-solid fa-users"></i> Stylist</label>
-                <select class="selctbox" name="stylist">
-                    <option value="">Select Stylist</option>
-                    <?php
-                    
-                    $stylists = ["Stylist A", "Stylist B", "Stylist C", "Stylist D"]; 
-                    foreach ($stylists as $stylist_option) {
-                        $selected = (isset($appointment['stylist']) && $appointment['stylist'] == $stylist_option) ? 'selected' : '';
-                        echo "<option value=\"" . htmlspecialchars($stylist_option) . "\" $selected>" . htmlspecialchars($stylist_option) . "</option>";
-                    }
-                    ?>
-                </select>
-            </div> -->
-            
             <div class="d-flex justify-content-between mt-4">
                 <button type="submit" name="update_appointment" class="btn btn-submit-edit">Update Appointment</button>
                 <a href="index.php" class="btn btn-back">Back to Appointments</a>
@@ -467,10 +467,6 @@ color: #d1a86e;
 <?php include "footer.php"; ?>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script src="js/jquery-1.12.4.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
@@ -520,12 +516,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
     }];
 
-    // New function to populate the service dropdown with ALL services
     function populateAllServices(serviceSelectElementId, currentService = '') {
         const serviceSelect = document.getElementById(serviceSelectElementId);
-        serviceSelect.innerHTML = '<option value="">Select Service</option>'; // Clear and add default option
+        serviceSelect.innerHTML = '<option value="">Select Service</option>';
 
-        // Combine both ladies and gents services
         const allServices = [...ladiesServices, ...gentsServices];
 
         allServices.forEach(group => {
@@ -537,32 +531,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 option.value = service;
                 option.textContent = service;
                 if (service === currentService) {
-                    option.selected = true; // Pre-select the current service
+                    option.selected = true;
                 }
                 optgroup.appendChild(option);
             });
             serviceSelect.appendChild(optgroup);
         });
-        serviceSelect.disabled = false; // Ensure it's always enabled
+        serviceSelect.disabled = false;
     }
 
-    $(function() {
-        $("#datepicker").datepicker({
-            dateFormat: "dd-mm-yy", // Ensure this matches your existing format
-            minDate: 0 // Prevents selecting past dates
-        });
-
-        // Get the current service from PHP for pre-selection
+    document.addEventListener('DOMContentLoaded', function() {
         const currentService = "<?php echo htmlspecialchars($appointment['service']); ?>";
-
-        // Call the function to populate the service dropdown on page load
         populateAllServices('serviceSelect', currentService);
     });
 
-    // Your existing validation functions (LEAVE THESE AS IS)
+    // Your existing validation functions
     function validateEmail(email) {
-        // a very simple email validation checking. 
-        // you can add more complex email checking if it helps 
         if (email.length <= 0) {
             return true;
         }
@@ -577,7 +561,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (splitted[2].match(regexp_domain) == null) {
                 var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
                 if (splitted[2].match(regexp_ip) == null) return false;
-            } // if
+            }
             return true;
         }
         return false;
@@ -589,19 +573,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             var c = s.charAt(i);
             if (((c < "0") || (c > "9"))) return false;
         }
-        // All characters are numbers.
         return true;
     }
 
     function validateFrme() {
-        // Clear all error messages
-        document.getElementById('nameErr').innerHTML = ""; // This ID 'cname' and 'nameErr' are not present in this file,
-        document.getElementById('genderErr').innerHTML = ""; // but are likely from your main booking page.
-        document.getElementById('phoneErr').innerHTML = ""; // If these elements exist, they will be updated.
+        document.getElementById('genderErr').innerHTML = "";
         document.getElementById('serviceErr').innerHTML = "";
-        
 
-        var genderElement = document.querySelector('select[name="gender"]'); // Target by name as 'gender' ID isn't used
+        var genderElement = document.querySelector('select[name="gender"]');
         var gender = genderElement ? genderElement.value : '';
 
         if (!gender.trim()) {
@@ -618,12 +597,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (serviceElement) serviceElement.focus();
             return false;
         }
-    
-        return true; 
+
+        // Validate date input for format DD/MM/YYYY
+        var dateInput = document.getElementById('datePicker'); 
+        if (!dateInput.value.trim()) {
+            alert("Please enter a Date.");
+            dateInput.focus();
+            return false;
+        }
+
+        const dateValue = dateInput.value.trim();
+        // Regex for DD/MM/YYYY format
+        const datePattern = /^\d{2}\/\d{2}\/\d{4}$/; 
+        if (!datePattern.test(dateValue)) {
+            alert("Please enter the Date in DD/MM/YYYY format (e.g., 25/12/2025).");
+            dateInput.focus();
+            return false;
+        }
+
+        // --- NEW DATE VALIDATION LOGIC ---
+        const [day, month, year] = dateValue.split('/').map(Number);
+        const inputDate = new Date(year, month - 1, day); // Month is 0-indexed
+
+        // Get today's date, normalized to midnight for accurate comparison
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Check for year > 2025
+        if (year > 2025) {
+            alert("The appointment year cannot be greater than 2025.");
+            dateInput.focus();
+            return false;
+        }
+
+        // Check for date less than today's date
+        // Note: This comparison works reliably when both dates are normalized to midnight.
+        if (inputDate < today) {
+            alert("The appointment date cannot be in the past. Please select today's date or a future date.");
+            dateInput.focus();
+            return false;
+        }
+        // --- END NEW DATE VALIDATION LOGIC ---
+
+        return true;
     }
 
     function promptLoginForBooking() {
-        window.location.href = 'login.php'; // Redirect to your login page
+        window.location.href = 'login.php';
     }
 </script>
 
