@@ -1,12 +1,8 @@
 <?php
 include "connection.php";
-session_start();
-$num_rows = 0;
-$query = null;
- $id = mysqli_real_escape_string($con, $_SESSION['id']);
-$sql = "SELECT * FROM appointment WHERE user_id = '$id'";
-    $query = mysqli_query($con, $sql);
- $num_rows = mysqli_num_rows($query);?>
+// $sql = "SELECT * FROM ";
+// $query = mysqli_query($con, $sql);
+// $num_rows = mysqli_num_rows($query);?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -193,7 +189,7 @@ include "navbar.php";
                     </div>
                 </div>
 
-              <section class="appointments-table-section py-5">
+              <!-- <section class="appointments-table-section py-5">
     <div class="container-fluid">
             <?php if ($num_rows > 0) { ?>
                 <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Our Stylists</h2>
@@ -229,7 +225,7 @@ include "navbar.php";
             <?php } ?>
         
     </div>
-</section>
+</section> -->
 <?php
 include "footer.php";
 ?>
