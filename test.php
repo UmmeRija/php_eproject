@@ -1,18 +1,18 @@
 <?php
-include "connection.php";
+include "connection.php"; 
 session_start();
 $is_logged_in = isset($_SESSION['id']);
-$num_rows = 0;
-$query = null;
+$num_rows = 0; 
+$query = null; 
 
 if ($is_logged_in) {
     $id = mysqli_real_escape_string($con, $_SESSION['id']);
     $sql = "SELECT * FROM appointment WHERE user_id = '$id'";
-    $query = mysqli_query($con, $sql);
-    if (!$query) {
+    $query = mysqli_query($con, $sql);    
+    if (!$query) {   
         echo "<!doctype html><html><head><title>Error</title><link rel='stylesheet' href='css/bootstrap.min.css'><style>body{background-color:#000;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;font-family:'Bellefair',serif;} .error-message{text-align:center;padding:20px;border:1px solid #e2b97f;border-radius:8px;} h1{color:#e2b97f;}</style></head><body><div class='error-message'><h1>Database Error!</h1><p>Failed to retrieve appointments. Please try again later or contact support.</p><p>Technical details: " . mysqli_error($con) . "</p></div></body></html>";
-        exit();
-    }
+        exit(); 
+    } 
     $num_rows = mysqli_num_rows($query);
 }
 ?>
@@ -146,60 +146,60 @@ if ($is_logged_in) {
             background-color: #d1a86e;
             border-color: #d1a86e;
         }
-        .table-responsive .btn-edit,
-        .table-responsive .btn-delete {
-            padding: 4px 8px;
-            border: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            text-transform: uppercase;
-            margin: 0 5px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
+.table-responsive .btn-edit,
+.table-responsive .btn-delete {
+    padding: 4px 8px; 
+    border: none;
+    border-radius: 4px; 
+    font-size: 13px;
+    font-weight: 500; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase; 
+    margin: 0 5px; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .table-responsive .btn-delete {
-            background-color: #5a3d31;
-            color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+.table-responsive .btn-delete {
+    background-color: #5a3d31; 
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        .table-responsive .btn-delete:hover {
-            background-color: #3b281f;
-            color: #fff;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
+.table-responsive .btn-delete:hover {
+    background-color: #3b281f; 
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-        .table-responsive .btn-delete:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
+.table-responsive .btn-delete:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
 
-        .table-responsive .btn-edit {
-            background-color: #e2b97f;
-            color: #000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+.table-responsive .btn-edit {
+    background-color: #e2b97f; 
+    color: #000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-        .table-responsive .btn-edit:hover {
-            background-color: #d1a968;
-            color: #000;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
+.table-responsive .btn-edit:hover {
+    background-color: #d1a968;
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-        .table-responsive .btn-edit:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        thead{
-        color: #d1a86e;
-        }
+.table-responsive .btn-edit:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+thead{
+color: #d1a86e;
+}
 
         /* FIX FOR DROPDOWN LABELS (optgroup) */
         .selctbox optgroup {
@@ -225,7 +225,7 @@ if ($is_logged_in) {
         </div>
     </div>
 
-    <section class="testibg py-5">
+     <section class="testibg py-5">
         <div class="container-fluid">
             <div class="row g-0">
                 <div class="col-sm-8 mx-auto">
@@ -389,6 +389,293 @@ if ($is_logged_in) {
         <?php } ?>
     </div>
 </section>
+    <!-- Start About Area -->
+    <section class="">
+        <div class="about-area py-5">
+            <div class="container-fluid">
+                <div class="row g-0">
+                    <div class="col-md-6 rdnone">
+                        <div class="about-images">
+                            <div class="about-top-image">
+                                <img class="ab-image" src="img/img1.jpg" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  bg1 px-5 text-center d-flex align-items-center">
+                        <div class="about-content">
+                            <div class="about-headline">
+
+                                <h3 class="text-dark">Feel Divine, Look Great</h3>
+                                <span class="side-head top-head">Luxury & Affordability Under One Roof</span>
+                            </div>
+                            <p class="text-dark"> At Elegance Salon, we believe that a makeover can transform not just how you look, but how you feel. Our team of skilled professionals is dedicated to giving you a flawless experience, where luxury and perfection come together.
+                                Feel divine with Elegance.</p>
+
+                            <a href="#appointment" class="btn1">
+                                Book appointment
+                            </a>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 rdblock">
+                        <div class="about-images">
+                            <div class="about-top-image">
+                                <img class="ab-image" src="img/img1.jpg" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row g-0">
+
+                    <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
+                        <div class="about-content">
+                            <div class="about-headline">
+
+                                <h3 class="text-light">Discover Your Look</h3>
+                                 <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
+
+                            </div>
+                            <p class="text-light">
+                               Looking for some inspiration? Whether you're aiming for a bold new look or enhancing your everyday style, our professionals are here to create something tailored just for you.</p>
+                            <a href="service.php" class="btn1">
+                              Meet our Stylists
+                            </a>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="about-images">
+                            <div class="about-top-image">
+                                <img class="ab-image" src="img/img2.jpg" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+             
+
+
+                <div class="row g-0" style="display: none;">
+
+                    <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
+                        <div class="about-content">
+                            <div class="about-headline">
+
+                                <h3 class="text-light">Shop Salon-Quality Products</h3>
+
+                            </div>
+                            <p class="text-light">
+                                At Elegance Salon, we offer a curated selection of the finest beauty products. From our signature range to trusted brands like Kérastase and Olaplex, everything you need to maintain your look is just a click away.
+                            </p>
+                            <!--<a href="#" class="btn1">
+                               Shop Now
+                            </a>
+                          -->
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="about-images">
+                            <div class="about-top-image">
+                                <img class="ab-image" src="img/img4.jpg" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="">
+        <div class="container-fluid py-5">
+            <div class="h__partners" style="width:100%; overflow: hidden;">
+                <div class="h__partners-swiper1">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo1.png" />
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo2.png" />
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo3.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo4.png" />
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo5.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo6.png" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo7.png" />
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img class="h__partners-image" src="img/mlogo8.png" />
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <sction>
+        <img class="" src="img/galery.png" />
+    </sction>
+
+    <section class="py-5 bg2 leader team">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="headtext clry">
+                        OUR LEADERS
+                    </div>
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-6 col-md-4 mt-5">
+                    <div class="row">
+                        <div class="col-10">
+                            <img src="img/founder1.jpg" class="img-fluid">
+                        </div>
+                        <div class="col-2 position-relative d-flex justify-content-center">
+                            <div class="socialbox" style="">
+                                <a href=" " target="_blank" class="d-block">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                <a href="" class="d-block mt-2" target="_blank">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="namebox">
+                                Ghazal
+                                <span>Chairman</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 mt-5">
+                    <div class="row">
+                        <div class="col-10">
+                            <img src="img/founder2.jpg" class="img-fluid">
+                        </div>
+                        <div class="col-2 position-relative d-flex justify-content-center">
+                            <div class="socialbox" style="">
+                                <a href="" class="d-block" target="_blank">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                <a href="" class="d-block mt-2" target="_blank">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="namebox">
+                                Aisha Dua
+                                <span>CEO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testibg py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="headtext clry mb-5 text-center">
+                        OUR CLIENTS SAY
+                    </div>
+                </div>
+                <div class="col-md-9 mx-auto">
+                    <div class="swiper testi">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide bg1">
+                                <div class="row g-0 py-5">
+                                    <div class="col-md-12 text-center px-3 d-flex align-items-center">
+                                        <div class="">
+                                            <div class="icon"><img src="img/testiicon.png"></div>
+                                            <p class="text-dark">
+                                                Had a wonderful day at Elegance. Looking for a clean and refreshing look and they exceeded my expectations. Also, it was a super clean process. A guy named Ayaan there guided me through all the services. Great experience! Would definitely visit again.
+
+                                            </p>
+                                            <p class="text-dark"><u>Zara Ali</u>
+                                                <br>Google Review
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-6">
+                                                <div class="imgs">
+                                                    <img src="img/t1.jpg" class="img-fluid">
+                                                </div>
+                                            </div>-->
+                                </div>
+
+                            </div>
+
+                            <div class="swiper-slide bg1">
+                                <div class="row g-0 py-5">
+                                    <div class="col-md-12  text-center px-3 d-flex align-items-center">
+                                        <div class="">
+                                            <div class="icon"><img src="img/testiicon.png"></div>
+                                            <p class="text-dark">
+                                                Ms. Ria, Hair Stylist at Elegance Elite, Saddar, Karachi is an expert and a master hair stylist. I have been searching for such expertise for a long time now. The travel from Hyderabad to Karachi to avail of Ria's services has been highly
+                                                satisfying and very much to my expectations. I would also like to commend the management and staff of the NFC Elegance Elite for their professionalism, friendly behaviour and superb service.
+                                            </p>
+                                            <p class="text-dark"><u>Sana Ahmed</u>
+                                                <br>Google Review
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-6">
+                                                <div class="imgs">
+                                                    <img src="img/t1.jpg" class="img-fluid">
+                                                </div>
+                                                
+                                            </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <?php
 include "footer.php";
 ?>
