@@ -2,46 +2,34 @@
 <html class="no-js" lang="en">
 
 
-<!-- Mirrored from www.affinity.salon/about-us.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jun 2025 13:36:44 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><head>
+    <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="canonical" href="about-us.html">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      
+    <link rel="shortcut icon" href="img/favicon.png">
 
-        <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
-		<meta charset="utf-8">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<link rel="canonical" href="about-us.html"> 
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-		<!-- favicon -->		
-		<link rel="shortcut icon" href="img/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-		<!-- all css here -->
-                <link rel="stylesheet" href="css/bootstrap.min.css">
-		
-		<link href="../cdn.jsdelivr.net/npm/bootstrap%405.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-                <link href="https://fonts.googleapis.com/css2?family=Bellefair&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
 
-                
-                
-                <link rel="stylesheet" href="../cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min.css" />
-                <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-                
-                <link rel="stylesheet" href="../cdn.jsdelivr.net/npm/bootstrap-icons%401.11.3/font/bootstrap-icons.min.css">
-                
-		
-                <link rel="stylesheet" href="css/fonts.css">
-		<link rel="stylesheet" href="css/meanmenu.min.css">
-		
-        
-		<link rel="stylesheet" href="css/slidemenu.css">
-		
-		<link rel="stylesheet" href="css/style.css">
-		<!-- responsive css -->
-		<link rel="stylesheet" href="css/responsive.css">
-		<script type="application/ld+json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+    <link rel="stylesheet" href="css/slidemenu.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "WebSite",
@@ -55,7 +43,6 @@
 }
 </script>
 <script type="application/ld+json">
-
 {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -70,274 +57,230 @@
   ]
 }
 </script>
-<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+'https://www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
-<!-- End Google Tag Manager -->    <title>About Us</title>
+<title>About Us</title>
 
 </head>
-	<body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
-        
-		
-      
-   <?php
-include "navbar.php";
-?>
-		            <section class="bg5 text-center ptb50">
-                <div class="container-fluid">
-                
-                <div class="row">
-                    <div class="col-sm-12">
-                    <div class=" bigheading clry text-uppercase">ABOUT US</div>
-                    </div>
-                </div>
-                </div>
-            </section>
-                <section class="innerbanner">
-               <div class="swiper">
-                    <div class="swiper-wrapper">
-                     <div class="swiper-slide">
-                         <img src="img/servicebg.jpg" class="img-fluid innerimg" alt="">
-                        
-                      </div>
-                        
-                     
+<body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
 
-                    </div>
+    <?php include "navbar.php"; ?>
 
-                       
-                    </div>
-           </section>
-           
-                
-		<!-- Start About Area -->
-       <section class="">
+    <section class="bg5 text-center ptb50">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="bigheading clry text-uppercase">ABOUT US</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="innerbanner">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="img/servicebg.jpg" class="img-fluid innerimg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="">
         <div class="about bg2 py-5 text-center">
             <div class="container-fluid">
-                
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="headtext2 mb-3">
                             Our Story
                         </div>
-                        
                         <p>
-                            Our journey began in 1992 with a vision to offer luxurious beauty services tailored to individual needs. Founded in Green Park, Delhi, we have since grown into a leading name in the beauty industry, known for our comprehensive service mix and exceptional customer satisfaction. *Affinity Salon, formerly known as Affinity Elite and registered under the name SIDANYA ENTERPRISES, has continually evolved to meet the highest standards of luxury and grooming. Under the new leadership of Mr. Vinit Dua since 2018, we've redefined luxury grooming, combining innovative technology with world-class expertise. Our team of skilled professionals ensures that every client leaves felling their best.
+                            Our journey began in 1992 with a vision to offer luxurious beauty services tailored to individual needs. Founded in Green Park, Delhi, we have since grown into a leading name in the beauty industry, known for our comprehensive service mix and exceptional customer satisfaction. *Affinity Salon, formerly known as Affinity Elite and registered under the name SIDANYA ENTERPRISES, has continually evolved to meet the highest standards of luxury and grooming. Under the new leadership of Mr. Vinit Dua since 2018, we've redefined luxury grooming, combining innovative technology with world-class expertise. Our team of skilled professionals ensures that every client leaves feeling their best.
                         </p>
                     </div>
                 </div>
-              
-                
             </div>
         </div>
-       </section> 
-                
-                <section class="">
+    </section>
+
+    <section class="">
         <div class="about bg3 py-5 text-center">
             <div class="container-fluid">
-                
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="headtext2 mb-3">
                             Our Vision
                         </div>
-                        
                         <p class="text-uppercase subtext2">
                             To make the world a beautiful place, one makeover at a time.
                         </p>
                     </div>
                 </div>
-              
-                
             </div>
         </div>
-       </section> 
-                
-                <section class="">
+    </section>
+
+    <section class="">
         <div class="about bg4 py-5 text-center">
             <div class="container-fluid">
-                
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="headtext2 mb-3">
-                           Our mission
+                            Our mission
                         </div>
-                        
                         <p class="text-uppercase subtext2">
                             To create a world-class grooming experience and make it accessible across India.
                         </p>
                     </div>
                 </div>
-              
-                
             </div>
         </div>
-       </section> 
-                
-                
-                <section class="">
+    </section>
+
+    <section class="">
         <div class="about bg3 py-5">
             <div class="container-fluid">
-                
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-9">
-                        
-                        
                         <p class="">
                             <span class="clro"> Ms. Ghazal,</span> Chairman of Affinity Salon, is a visionary entrepreneur who has transformed the salon into a luxury brand. Her expertise across various industries, including construction, interiors, and high-end hospitality, has contributed to the salon's success. Since 2018, she has introduced innovative strategies, ensuring that Affinity remains a leader in grooming services.
                         </p>
                     </div>
                     <div class="col-sm-3">
-                        <img class ="" src="img/founder1.jpg"/>
+                        <img class ="" src="img/founder1.jpg" alt="Ms. Ghazal, Chairman"/>
                     </div>
-                    
                 </div>
-              
-                
             </div>
         </div>
-       </section> 
-                
-                <section class="">
+    </section>
+
+    <section class="">
         <div class="about bg4 py-5">
             <div class="container-fluid">
-                
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-9">
-                        
-                        
                         <p class="">
                             <span class="clro"> Ms. Aisha Dua,</span> CEO, brings a fresh perspective to Affinity. With experience as a project manager in the U.S., she focuses on expanding the brand and implementing technological advancements to enhance operational efficiency. Her goal is to make Affinity a globally recognized name in luxury grooming.
                         </p>
                     </div>
                     <div class="col-sm-3">
-                        <img class ="" src="img/founder2.jpg"/>
+                        <img class ="" src="img/founder2.jpg" alt="Ms. Aisha Dua, CEO"/>
                     </div>
-                    
                 </div>
-              
-                
             </div>
         </div>
-       </section> 
+    </section>
 
-        
-        <sction>
-            <img class ="" src="img/galery.png"/>
-        </sction>
-        
+    <section>
+        <img class ="" src="img/galery.png" alt="Gallery image"/>
+    </section>
 
-   <?php
-include "footer.php";
-?>
-        <!-- all js here -->
 
-		<!-- jquery latest version -->
-		<script src="../code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-		<script src="../cdn.jsdelivr.net/npm/bootstrap%405.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-                <script src="../cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min.js"></script>
-                <script>
-                    var swiper = new Swiper(".banner", {
-                         slidesPerView:1,
-                         spaceBetween:0,
-                         //loop: true,
-                         //mousewheel: true,
-                      //effect: 'fade',
+    <?php include "footer.php"; ?>
 
-                      autoplay: {
-                        delay: 5000,
-                       // disableOnInteraction: false,
-                      },
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".banner", {
+            slidesPerView:1,
+            spaceBetween:0,
+            //loop: true,
+            //mousewheel: true,
+            //effect: 'fade',
 
-                     /* pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                      },*/
-                      navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                      },
-                    });
-                    
-                    
-                      var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
+            autoplay: {
+                delay: 5000,
+                // disableOnInteraction: false,
+            },
 
-                        mySwiper1 = new Swiper('.h__partners-swiper1', {
-                            //grabCursor: false,
-                            loop: true,
+            /* pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },*/
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
 
-                            slidesPerView: 'auto',
 
-                            shortSwipes: true,
-                            longSwipes: true,
-                            allowTouchMove: true,
-                            autoplay: {
-                              delay: 1, 
-                            }, 
-                            freeMode: true, 
-                            speed: 5000,
-                        });
-    
-                </script>
-                
-                <script>
-    var swiper = new Swiper(".testi", {
-         slidesPerView:1,
-         spaceBetween: 30,
-         loop: true,
-         //mousewheel: true,
-      //effect: 'fade',
-     
-      autoplay: {
-        delay: 5000,
-       // disableOnInteraction: false,
-      },
-      
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-     /* navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },*/
-    });
-    
-   $(".hide-btn").click(function(){
-        $("#slide-nav").css("display", "none");
-         $("body").removeClass("slide-open");
-    });
-     $(".show-btn").click(function(){
-        $("#slide-nav").css("display", "block");
-       
-        
-    });
-  </script>
-                
-                
-                <script src="js/jquery.meanmenu.js"></script>
-                <script src="js/iscroll.js"></script>
-                <script src="js/slidemenu.js"></script>
-                <script src="js/main.js"></script>
-               
-                <script src="../code.jquery.com/jquery-1.12.4.js"></script>
-               <script src="../code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-               <script src="../kit.fontawesome.com/a076d05399.html"></script>
-               <script>
-                        jQuery(document).ready(function () {
-                            jQuery('#datepicker').datepicker({
-                                    dateFormat: 'dd-mm-yy',
-                                    
-                                startDate: '+1d',
-                                
-                                minDate: 0
-                            });
-                        });
-               </script>
-               
+        var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
+
+        mySwiper1 = new Swiper('.h__partners-swiper1', {
+            //grabCursor: false,
+            loop: true,
+
+            slidesPerView: 'auto',
+
+            shortSwipes: true,
+            longSwipes: true,
+            allowTouchMove: true,
+            autoplay: {
+                delay: 1,
+            },
+            freeMode: true,
+            speed: 5000,
+        });
+
+    </script>
+
+    <script>
+        var swiper = new Swiper(".testi", {
+            slidesPerView:1,
+            spaceBetween: 30,
+            loop: true,
+            //mousewheel: true,
+            //effect: 'fade',
+
+            autoplay: {
+                delay: 5000,
+                // disableOnInteraction: false,
+            },
+
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            /* navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },*/
+        });
+
+        $(".hide-btn").click(function(){
+            $("#slide-nav").css("display", "none");
+            $("body").removeClass("slide-open");
+        });
+        $(".show-btn").click(function(){
+            $("#slide-nav").css("display", "block");
+        });
+    </script>
+
+
+    <script src="js/jquery.meanmenu.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/slidemenu.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('#datepicker').datepicker({
+                dateFormat: 'dd-mm-yy',
+
+                startDate: '+1d',
+
+                minDate: 0
+            });
+        });
+    </script>
+
 
 <script>
     // Define the service options for each gender
@@ -364,29 +307,29 @@ include "footer.php";
     function updateServices() {
         const gender = document.getElementById("genderSelect").value;
         const serviceSelect = document.getElementById("serviceSelect");
-        
+
         // Clear previous options
         serviceSelect.innerHTML = '<option value="">Select Service</option>';
-        
+
         // Enable the service dropdown only if a gender is selected
         if (gender) {
             serviceSelect.disabled = false;
-            
+
             // Determine the appropriate services based on gender
             const services = gender === "1" ? ladiesServices : gentsServices;
-            
+
             // Populate the service options
             services.forEach(group => {
                 const optgroup = document.createElement("optgroup");
                 optgroup.label = group.label;
-                
+
                 group.options.forEach(service => {
                     const option = document.createElement("option");
                     option.value = service;
                     option.textContent = service;
                     optgroup.appendChild(option);
                 });
-                
+
                 serviceSelect.appendChild(optgroup);
             });
         } else {
@@ -398,24 +341,13 @@ include "footer.php";
     document.getElementById("genderSelect").addEventListener("change", updateServices);
 </script>
 
- <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-       
-       
-       
-       
-       <!--form validation -->
-       
-       
-       
-       
-        <script type="text/javascript">
+<script type="text/javascript">
     function validateEmail(email)
     {
-        // a very simple email validation checking. 
-        // you can add more complex email checking if it helps 
+        // a very simple email validation checking.
+        // you can add more complex email checking if it helps
         if (email.length <= 0)
         {
             return true;
@@ -452,7 +384,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
     function validateFrme()
     {
-      // Clear all error messages
+    // Clear all error messages
     document.getElementById('nameErr').innerHTML = "";
     document.getElementById('genderErr').innerHTML = "";
     document.getElementById('phoneErr').innerHTML = "";
@@ -500,7 +432,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (serviceElement) serviceElement.focus();
         return false;
     }
- 
+
         var form=$("#frm");
         $('#btn_apppointment').hide();
         // $('#processing').show();
@@ -508,30 +440,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 type:"POST",
                 url:'process.php',
                 data:form.serialize(),
-                 success: function(response){
+                success: function(response){
                     if(response==1)
                     {
-                        window.location = "thanks.html";     
+                        window.location = "thanks.html";
                     }else{
-                  
+
                     $('#alert_message').html(response);
                     // $('#processing').hide();
                     $('#btn_apppointment').show();
                     $('#frm')[0].reset();
                     window.setTimeout(function() {
                 $(".alert").fadeTo(500, 0).slideUp(500, function(){
-                    $(this).remove(); 
+                    $(this).remove();
                 });
-               }, 4000);
-               }
-                   
+                }, 4000);
+                }
+
                 }
             });
         return true;
     }
-</script>                          
-	</body>
+</script>
+</body>
 
 
-<!-- Mirrored from www.affinity.salon/about-us.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jun 2025 13:36:49 GMT -->
 </html>

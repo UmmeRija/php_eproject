@@ -256,7 +256,7 @@
                                     <i class="bi bi-house-door"></i>
                                 </div>
                                 <div>
-                                    <p class="mb-0  text-light">64, Block-B, Sushant Lok Phase 1, Sector-43, Gurugram, Haryana-122022</p>
+                                <p class="mb-0  text-light">123 Street, PECHS Block II, Karachi, Sindh</p>
                                 </div>
                             </div>
                             <div class="mainicon">
@@ -264,7 +264,7 @@
                                     <i class="bi bi-envelope"></i>
                                 </div>
                                 <div>
-                                    <p class="mb-0  text-light">support@affinity.salon</p>
+                                    <p class="mb-0  text-light">elegancesalon@gmail.com</p>
                                 </div>
                             </div>
                             <div class="mainicon">
@@ -272,7 +272,8 @@
                                     <i class="bi bi-telephone"></i>
                                 </div>
                                 <div>
-                                    <p class="mb-0 text-light">9899178000</p>
+                                    <p class="mb-0 text-light">+92 9899178000</p>
+
                                 </div>
                             </div>
                         </div>

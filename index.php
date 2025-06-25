@@ -1,35 +1,20 @@
 <?php
-include "connection.php"; // Make sure connection.php sets up $con
+include "connection.php"; 
 session_start();
-
-// Enable error reporting for debugging - REMOVE IN PRODUCTION
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
-
 $is_logged_in = isset($_SESSION['id']);
-$num_rows = 0; // Initialize for no appointments by default
-$query = null; // Initialize query result
+$num_rows = 0; 
+$query = null; 
 
-// Fetch appointments only if the user is logged in
 if ($is_logged_in) {
-    // IMPORTANT: Make sure 'user_id' in your 'appointment' table
-    // corresponds to 'id' in your 'users' table and $_SESSION['id']
     $id = mysqli_real_escape_string($con, $_SESSION['id']);
     $sql = "SELECT * FROM appointment WHERE user_id = '$id'";
-    $query = mysqli_query($con, $sql);
-
-    // Check if the query itself failed (e.g., table doesn't exist, bad connection)
-    if (!$query) {
-        // If query failed, display an error message and stop execution
+    $query = mysqli_query($con, $sql);    
+    if (!$query) {   
         echo "<!doctype html><html><head><title>Error</title><link rel='stylesheet' href='css/bootstrap.min.css'><style>body{background-color:#000;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;font-family:'Bellefair',serif;} .error-message{text-align:center;padding:20px;border:1px solid #e2b97f;border-radius:8px;} h1{color:#e2b97f;}</style></head><body><div class='error-message'><h1>Database Error!</h1><p>Failed to retrieve appointments. Please try again later or contact support.</p><p>Technical details: " . mysqli_error($con) . "</p></div></body></html>";
-        exit(); // Stop script execution here
-    }
-
-    // Get the number of rows only if the query was successful
+        exit(); 
+    } 
     $num_rows = mysqli_num_rows($query);
 }
-// If not logged in, $query remains null and $num_rows remains 0,
-// which is correct for displaying the "login to view" message.
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -77,9 +62,8 @@ if ($is_logged_in) {
             "url": "https://www.affinity.salon/",
             "logo": "",
             "sameAs": [
-                "https://www.facebook.com/affinityeliteindia",
-                "https://www.instagram.com/affinity.elite",
-                "https://www.affinity.salon/"
+                "https://www.facebook.com",
+                "https://www.instagram.com"
             ]
         }
     </script>
@@ -128,8 +112,6 @@ if ($is_logged_in) {
                 letter-spacing: 1px;
             }
         }
-
-        /* NEW STYLES FOR LOGIN PROMPT BOX */
         .login-prompt-box {
             background-color: #1a1a1a;
             border-radius: 8px;
@@ -164,24 +146,22 @@ if ($is_logged_in) {
             background-color: #d1a86e;
             border-color: #d1a86e;
         }
-      /* Existing styles for .table-responsive .btn-edit, .table-responsive .btn-delete */
 .table-responsive .btn-edit,
 .table-responsive .btn-delete {
-    padding: 4px 8px; /* Adjust padding for button size */
+    padding: 4px 8px; 
     border: none;
-    border-radius: 4px; /* Slightly rounded corners */
-    font-size: 13px; /* Adjust font size */
-    font-weight: 500; /* Medium font weight */
+    border-radius: 4px; 
+    font-size: 13px;
+    font-weight: 500; 
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    text-transform: uppercase; /* Match your other buttons if they are uppercase */
-    margin: 0 5px; /* Add some space between buttons */
-    display: inline-flex; /* Allows text and icons to align well if you add icons later */
+    text-transform: uppercase; 
+    margin: 0 5px; 
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Styles for Delete Button */
 .table-responsive .btn-delete {
     background-color: #5a3d31; 
     color: #fff;
@@ -200,15 +180,14 @@ if ($is_logged_in) {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* --- ADD THESE STYLES FOR EDIT BUTTON --- */
 .table-responsive .btn-edit {
-    background-color: #e2b97f; /* Your theme's gold/brown color */
-    color: #000; /* Black text for contrast */
+    background-color: #e2b97f; 
+    color: #000; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .table-responsive .btn-edit:hover {
-    background-color: #d1a968; /* Slightly darker gold on hover */
+    background-color: #d1a968;
     color: #000;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -218,11 +197,20 @@ if ($is_logged_in) {
     transform: translateY(0);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-/* --- END ADDED STYLES --- */
 thead{
 color: #d1a86e;
 }
- 
+
+        /* FIX FOR DROPDOWN LABELS (optgroup) */
+        .selctbox optgroup {
+            color: black !important; /* Force black color for optgroup labels */
+            background-color: white !important; /* Ensure a white background */
+        }
+
+        .selctbox option {
+            color: black !important; /* Ensure options text is black */
+            background-color: white !important; /* Ensure a white background for options */
+        }
     </style>
 </head>
 
@@ -237,7 +225,7 @@ color: #d1a86e;
         </div>
     </div>
 
-    <section class="testibg py-5">
+     <section class="testibg py-5">
         <div class="container-fluid">
             <div class="row g-0">
                 <div class="col-sm-8 mx-auto">
@@ -287,29 +275,30 @@ color: #d1a86e;
                                                 <option>01:00 PM</option>
                                                 <option>02:00 PM</option>
                                                 <option>03:00 PM</option>
+                                                <option>04:00 PM</option>
+                                                <option>05:00 PM</option>
                                             </select>
                                         </div>
                                         <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-regular fa-handshake"></i> BRANCH</label>
                                             <select class="selctbox" name="branch">
                                                 <option>Select Branch</option>
-                                                <option>Green Park</option>
-                                                <option>Greater kailash II</option>
-                                                <option>New Friends Colony</option>
-                                                <option>Shivalik Road</option>
-                                                <option>Bengali Market</option>
-                                                <option>Gurugram</option>
+                                                <option>Saddar</option>
+                                                <option>PECHS Block II</option>
+                                                <option>Defence Block V</option>
+                                                <option>North Nazimabad</option>
+                                                <option>Malir Cantt</option>
                                             </select>
                                         </div>
                                        <div class="width-auto-100 mt-2 mb-2">
-    <label><i class="fa-solid fa-list"></i> Service</label>
-    <select name="service" class="selctbox" id="serviceSelect" required>
-        <option value="">Select Service</option>
-        </select>
-    <span id="serviceErr" style="color: red;"></span>
-</div>
+                                            <label><i class="fa-solid fa-list"></i> Service</label>
+                                            <select name="service" class="selctbox" id="serviceSelect" required>
+                                                <option value="">Select Service</option>
+                                                </select>
+                                            <span id="serviceErr" style="color: red;"></span>
                                         </div>
-                                           <div class="width-auto-100 mt-2 mb-2">
+                                    </div>
+                                       <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-solid fa-users"></i> Stylist</label>
                                             <select class="selctbox" name="stylist">
                                                 <option>Select Stylist</option>
@@ -319,6 +308,7 @@ color: #d1a86e;
                                                 <option>01:00 PM</option>
                                                 <option>02:00 PM</option>
                                                 <option>03:00 PM</option>
+                                                <option>04:00 PM</option>
                                             </select>
                                         </div>
                                         <div class="width-auto-100 mt-3 mb-2 text-center ">
@@ -354,7 +344,6 @@ color: #d1a86e;
                                 <th>Time</th>
                                 <th>Branch</th>
                                 <th>Service</th>
-                                <!-- <th>Stylist</th> -->
                                 <th>Status</th>
                                 <th>Options</th>
                             </tr>
@@ -363,13 +352,12 @@ color: #d1a86e;
                             <?php while ($row = mysqli_fetch_assoc($query)) { ?>
                                 <tr>
                                    <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['gender']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['dates']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['times']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['branch']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['service']); ?></td>
-                                     <!-- <td><?php echo htmlspecialchars($row['stylist']); ?></td> -->
-                                      <td><?php echo htmlspecialchars($row['status']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['gender']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['dates']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['times']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['branch']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['service']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['status']); ?></td>
                                     <td>
                                         <a href="edit.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-edit">
                                             Edit Appointment
@@ -421,8 +409,8 @@ color: #d1a86e;
                                 <h3 class="text-dark">Feel Divine, Look Great</h3>
                                 <span class="side-head top-head">Luxury & Affordability Under One Roof</span>
                             </div>
-                            <p class="text-dark"> At Affinity Salon, we believe that a makeover can transform not just how you look, but how you feel. Our team of skilled professionals is dedicated to giving you a flawless experience, where luxury and perfection come together.
-                                Feel divine with Affinity.</p>
+                            <p class="text-dark"> At Elegance Salon, we believe that a makeover can transform not just how you look, but how you feel. Our team of skilled professionals is dedicated to giving you a flawless experience, where luxury and perfection come together.
+                                Feel divine with Elegance.</p>
 
                             <a href="#appointment" class="btn1">
                                 Book appointment
@@ -489,7 +477,7 @@ color: #d1a86e;
 
                             </div>
                             <p class="text-light">
-                                At Affinity Salon, we offer a curated selection of the finest beauty products. From our signature range to trusted brands like Kérastase and Olaplex, everything you need to maintain your look is just a click away.
+                                At Elegance Salon, we offer a curated selection of the finest beauty products. From our signature range to trusted brands like Kérastase and Olaplex, everything you need to maintain your look is just a click away.
                             </p>
                             <!--<a href="#" class="btn1">
                                Shop Now
@@ -620,15 +608,8 @@ color: #d1a86e;
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
-
-
-
-
     </section>
 
     <section class="testibg py-5">
@@ -648,10 +629,10 @@ color: #d1a86e;
                                         <div class="">
                                             <div class="icon"><img src="img/testiicon.png"></div>
                                             <p class="text-dark">
-                                                Had a wonderful day at affinity. Looking for a clean and refreshing look and they exceeded my expectations. Also, it was a super clean process. A Guy named Piyush there guided me through all the services. Great experience
+                                                Had a wonderful day at Elegance. Looking for a clean and refreshing look and they exceeded my expectations. Also, it was a super clean process. A guy named Ayaan there guided me through all the services. Great experience! Would definitely visit again.
 
                                             </p>
-                                            <p class="text-dark"><u>Aaditya Rai</u>
+                                            <p class="text-dark"><u>Zara Ali</u>
                                                 <br>Google Review
                                             </p>
                                         </div>
@@ -671,11 +652,10 @@ color: #d1a86e;
                                         <div class="">
                                             <div class="icon"><img src="img/testiicon.png"></div>
                                             <p class="text-dark">
-                                                Ms. Sujata, Hair Stylist at Affinity Elite, New Friends Colony, New Delhi is an expert and a master hair stylist. I have been searching for such expertise for a long time now. The travel from Gurgaon to Delhi to avail of Sujata's services has been highly
-                                                satisfying and very much to my expectations. I would also like to commend the management and staff of the NFC Affinity Elite for their professionalism, friendly behaviour and superb service. Dahlia
-
+                                                Ms. Ria, Hair Stylist at Elegance Elite, Saddar, Karachi is an expert and a master hair stylist. I have been searching for such expertise for a long time now. The travel from Hyderabad to Karachi to avail of Ria's services has been highly
+                                                satisfying and very much to my expectations. I would also like to commend the management and staff of the NFC Elegance Elite for their professionalism, friendly behaviour and superb service.
                                             </p>
-                                            <p class="text-dark"><u>Dahlia Dutta</u>
+                                            <p class="text-dark"><u>Sana Ahmed</u>
                                                 <br>Google Review
                                             </p>
                                         </div>
@@ -687,14 +667,8 @@ color: #d1a86e;
                                                 
                                             </div>-->
                                 </div>
-
                             </div>
-
-
-
                         </div>
-
-
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
@@ -702,12 +676,9 @@ color: #d1a86e;
         </div>
     </section>
 
-<?php
+    <?php
 include "footer.php";
 ?>
-    <!-- all js here -->
-
-    <!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -725,9 +696,9 @@ include "footer.php";
             },
 
             /* pagination: {
-               el: ".swiper-pagination",
-               clickable: true,
-             },*/
+                el: ".swiper-pagination",
+                clickable: true,
+               },*/
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -868,7 +839,7 @@ include "footer.php";
                 serviceSelect.disabled = false;
 
                 // Determine the appropriate services based on gender
-                const services = gender === "1" ? ladiesServices : gentsServices;
+                const services = gender === "Female" ? ladiesServices : gentsServices; // Corrected the comparison to "Female"
 
                 // Populate the service options
                 services.forEach(group => {
@@ -891,25 +862,18 @@ include "footer.php";
 
         // Event listener for gender selection change
         document.getElementById("genderSelect").addEventListener("change", updateServices);
+
+        // Call updateServices initially to set the correct state and populate based on default/pre-selected gender
+        // For example, if you want the services to load on page load if a gender is already selected (e.g., from a PHP session)
+        document.addEventListener("DOMContentLoaded", updateServices); // This will call it when the DOM is ready
     </script>
 
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-
-
-
-    <!--form validation -->
-
-
-
-
     <script type="text/javascript">
         function validateEmail(email) {
-            // a very simple email validation checking. 
-            // you can add more complex email checking if it helps 
+            // a very simple email validation checking.
+            // you can add more complex email checking if it helps
             if (email.length <= 0) {
                 return true;
             }

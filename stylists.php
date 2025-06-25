@@ -7,44 +7,38 @@ include "connection.php";
 <html class="no-js" lang="en">
 
 
-<!-- Mirrored from www.affinity.salon/service.php by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jun 2025 13:36:24 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
- 
-        <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
-		<meta charset="utf-8">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<link rel="canonical" href="service.html"> 
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><head>
 
-		<!-- favicon -->		
-		<link rel="shortcut icon" href="img/favicon.png">
+    <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="canonical" href="service.html">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- all css here -->
-                <link rel="stylesheet" href="css/bootstrap.min.css">
-		
-		<link href="../cdn.jsdelivr.net/npm/bootstrap%405.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-                <link href="https://fonts.googleapis.com/css2?family=Bellefair&amp;display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.png">
 
-                
-                
-                <link rel="stylesheet" href="../cdn.jsdelivr.net/npm/swiper%4011/swiper-bundle.min.css" />
-                <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-                
-                <link rel="stylesheet" href="../cdn.jsdelivr.net/npm/bootstrap-icons%401.11.3/font/bootstrap-icons.min.css">
-                
-		
-                <link rel="stylesheet" href="css/fonts.css">
-		<link rel="stylesheet" href="css/meanmenu.min.css">
-		
-        
-		<link rel="stylesheet" href="css/slidemenu.css">
-		
-		<link rel="stylesheet" href="css/style.css">
-		<!-- responsive css -->
-		<link rel="stylesheet" href="css/responsive.css">
-		<script type="application/ld+json">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bellefair&amp;display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+
+
+    <link rel="stylesheet" href="css/slidemenu.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
   "@type": "WebSite",
@@ -73,15 +67,14 @@ include "connection.php";
   ]
 }
 </script>
-<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+'https://www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
-<!-- End Google Tag Manager --><title>Our Services</title>
- <style>
-    /* --- New Service Banner Styling (to match About Us layout from screenshot) --- */
+<title>Our Stylists</title>
+   <style>
+     /* --- New Service Banner Styling (to match About Us layout from screenshot) --- */
 
 .service-banner-text-band {
     background-color: #000; /* Dark background as seen in your screenshot */
@@ -138,17 +131,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         font-size: 1.7rem; /* Smallest font for extra small mobile screens */
     }
 }
- </style>
+   </style>
 </head>
-	<body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
-        
-		
-          
-   <?php
-include "navbar.php";
-?>
-		           <!-- Start Slider Area -->
-     <section class="service-banner-section">
+    <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
+
+
+    <?php include "navbar.php"; ?>
+
+                       <section class="service-banner-section">
     <div class="service-banner-text-band">
         <div class="container">
             <h1 class="service-page-title text-uppercase text-white">Our Stylists</h1>
@@ -159,7 +149,7 @@ include "navbar.php";
   <section class="">
         <div class="about-area py-5">
             <div class="container-fluid">
-     
+
                 <div class="row g-0">
 
                     <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
@@ -167,19 +157,56 @@ include "navbar.php";
                             <div class="about-headline">
 
                                 <h3 class="text-light">Meet Our Stylists</h3>
-                                 <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
+                                <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
 
                             </div>
                             <p class="text-light">
-                              Meet our exceptional team of talented stylists, each a dedicated professional committed to mastering their craft. Experience personalized attention and innovative techniques designed to make you feel confident, refreshed, and absolutely radiant.Discover the difference that true expertise, combined with a genuine understanding of your needs.</p>
+                                Meet our exceptional team of talented stylists, each a dedicated professional committed to mastering their craft. Experience personalized attention and innovative techniques designed to make you feel confident, refreshed, and absolutely radiant.Discover the difference that true expertise, combined with a genuine understanding of your needs.</p>
                             <a href="#stylists" class="btn1">
-                              Meet our Stylists
+                                Meet our Stylists
                             </a>
 
 
                         </div>
                     </div>
-                     <div class="col-md-6">
+                       <div class="col-md-6">
+                        <div class="about-images">
+                            <div class="about-top-image">
+                                <img class="ab-image" src="img/partner6.jpg" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="row g-0">
+                    <div class="col-md-6 rdnone">
+                        <div class="about-images">
+                            <div class="about-top-image">
+                                <img class="ab-image" src="img/img2.jpg" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  bg1 px-5 text-center d-flex align-items-center">
+                        <div class="about-content">
+                            <div class="about-headline">
+
+                                <h3 class="text-dark">Feel Divine, Look Great</h3>
+                                <span class="side-head top-head">Luxury & Affordability Under One Roof</span>
+                            </div>
+                            <p class="text-dark"> At Elegance Salon, we believe that a makeover can transform not just how you look, but how you feel. Our team of skilled professionals is dedicated to giving you a flawless experience, where luxury and perfection come together.
+                                Feel divine with Elegance.</p>
+
+                            <a href="index.php#appointment" class="btn1">
+                                Book appointment
+                            </a>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 rdblock">
                         <div class="about-images">
                             <div class="about-top-image">
                                 <img class="ab-image" src="img/img2.jpg" alt="">
@@ -189,49 +216,9 @@ include "navbar.php";
                     </div>
                 </div>
 
-              <!-- <section class="appointments-table-section py-5">
-    <div class="container-fluid">
-            <?php if ($num_rows > 0) { ?>
-                <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Our Stylists</h2>
-                <div class="table-responsive">
-                    <table class="table table-dark table-striped table-hover" id="stylists">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Branch</th>
-                                <th>Service</th>
-                               
-                            </tr>
-                            </thead>
-                        <tbody>
-                            <?php while ($row = mysqli_fetch_assoc($query)) { ?>
-                                <tr>
-                                   <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['gender']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['dates']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['times']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['branch']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['service']); ?></td>
-                                    
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-            
-            <?php } ?>
-        
-    </div>
-</section> -->
-<?php
+              <?php
 include "footer.php";
 ?>
-    <!-- all js here -->
-
-    <!-- jquery latest version -->
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -321,17 +308,7 @@ include "footer.php";
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
-    <script>
-       
-    </script>
-   
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    </body>
+</html>
