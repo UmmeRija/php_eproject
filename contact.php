@@ -9,35 +9,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <!-- all css here -->
-    <!-- Original local Bootstrap (if you're still using an older version locally, keep this) -->
     <link rel="stylesheet" href="css/bootstrap.min.css"> 
 
-    <!-- Bootstrap 5.0.2 CDN (Preferred for modern features) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <!-- Bootstrap Icons (still included, might be used elsewhere on the page) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Your Custom CSS files -->
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/meanmenu.min.css">
     <link rel="stylesheet" href="css/slidemenu.css">
     <link rel="stylesheet" href="css/style.css">
-    <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
 
-    <!-- Inline Custom Styles to complement Bootstrap and match original aesthetic -->
     <style>
         /* This section contains custom styles to match your template's look
            without conflicting with Bootstrap's grid or form structure. */
@@ -202,7 +191,6 @@
             ]
         }
     </script>
-    <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -219,7 +207,6 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NJW4QH8K');
     </script>
-    <!-- End Google Tag Manager -->
     <title>Contact Us</title>
 </head>
 
@@ -227,8 +214,7 @@
 
     <?php include "navbar.php"; ?>
 
-    <!-- Start Slider Area -->
- <section class="contact-banner-section">
+    <section class="contact-banner-section">
     <div class="contact-banner-text-band">
         <div class="container">
             <h1 class="contact-page-title text-uppercase text-white">Contact Us</h1>
@@ -240,7 +226,6 @@
     <img src="img/partnerbg3.jpg" class="img-fluid contact-banner-image" alt="Contact Us Banner">
 </section>
 
-    <!-- Contact Info Section -->
     <section class="ptb50 contactbox">
         <div class="container-fluid">
             <div class="row">
@@ -283,7 +268,6 @@
         </div>
     </section>
 
-    <!-- Get In Touch Form Section -->
     <section class="ptb50 gettouch text-center">
         <div class="container-fluid">
             <div class="row">
@@ -293,39 +277,28 @@
 
                     <div class="row">
                         <div class="col-md-7 mx-auto">
-                            <div class="custom-form-card"> <!-- Styled card-like container for the form -->
-                                <!-- The 'alert_message' div remains for displaying feedback to the user -->
-                                <div id="alert_message" class="alert alert-danger" role="alert" style="display:none; margin-bottom: 15px;"></div>
+                            <div class="custom-form-card"> <div id="alert_message" class="alert alert-danger" role="alert" style="display:none; margin-bottom: 15px;"></div>
                                 
                                 <form action="savecontact.php" method="post" id="frm" onsubmit="return validateFrme();">
                                     <input type="hidden" name="date" value="2025-06-21">
                                     <input type="hidden" name="source" value="contact">
 
-                                    <!-- Name Field -->
                                     <div class="mb-3">
                                         <input type="text" class="form-control custom-input-field" id="cname" name="name" placeholder="Name" pattern="[A-Za-z\s]+" title="Enter your Name!" required>
                                     </div>
-                                    <div id="nameErr" class="text-danger text-start"></div> <!-- Error message display -->
-
-                                    <!-- Email Field -->
-                                    <div class="mb-3">
+                                    <div id="nameErr" class="text-danger text-start"></div> <div class="mb-3">
                                         <input type="email" class="form-control custom-input-field" id="cemail" name="email" placeholder="Email" required>
                                     </div>
                                     <div id="emailErr" class="text-danger text-start"></div> 
 
 
-                                    <!-- Phone Field -->
                                     <div class="mb-3">
-                                        <input type="tel" minlength="10" maxlength="13" class="form-control custom-input-field" id="phone" name="phone" placeholder="Phone" pattern="[0-9]{10,13}" title="Enter a valid phone number!" required>
+                                        <input type="tel" minlength="12" maxlength="12" class="form-control custom-input-field" id="phone" name="phone" placeholder="Phone (e.g., 03XX-XXXXXXX)" pattern="^\d{4}-\d{7}$" title="Enter a valid phone number in 0000-0000000 format!" required>
                                     </div>
-                                    <div id="phoneErr" class="text-danger text-start"></div> <!-- Error message display -->
-
-                                    <!-- Message Field -->
-                                    <div class="mb-3">
+                                    <div id="phoneErr" class="text-danger text-start"></div> <div class="mb-3">
                                         <textarea class="form-control custom-input-field" placeholder="Leave us a Message" name="message" rows="3" maxlength="500" required></textarea>
                                     </div>
 
-                                    <!-- Submit Button -->
                                     <div>
                                         <button type="submit" class="custom-submit-button" id="btn_apppointment">Submit</button>
                                     </div>
@@ -340,12 +313,7 @@
 
     <?php include "footer.php"; ?>
 
-    <!-- all js here -->
-    <!-- jquery latest version (moved to bottom for better page load performance) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <!-- Bootstrap 5.0.2 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- Swiper JS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".banner", {
@@ -400,71 +368,68 @@
         });
     </script>
 
-    <!-- Original JS files -->
     <script src="js/jquery.meanmenu.js"></script>
     <script src="js/iscroll.js"></script>
     <script src="js/slidemenu.js"></script>
     <script src="js/main.js"></script>
 
-    <!-- jQuery UI for Datepicker -->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- Font Awesome Kit -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script>
+        // Ensure jQuery UI is loaded before attempting to use .datepicker()
+        // And make sure you are using the full jQuery version (3.7.1.min.js) for jQuery UI.
         jQuery(document).ready(function() {
             jQuery('#datepicker').datepicker({
                 dateFormat: 'dd-mm-yy',
-                startDate: '+1d',
+                startDate: '+1d', // This is not a standard jQuery UI option, likely from another datepicker
                 minDate: 0
             });
         });
     </script>
 
-    <!-- Service Selection Logic (This part of the JS is NOT connected to the contact form) -->
     <script>
         const ladiesServices = [{
-            label: "Hair Styling",
-            options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-        }, {
-            label: "Make Up",
-            options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-        }, {
-            label: "Hair Texture",
-            options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-        }, {
-            label: "Facials & Rituals",
-            options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-        }, {
-            label: "Hand & Feet",
-            options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-        }, {
-            label: "Nail Care",
-            options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-        }];
+                label: "Hair Styling",
+                options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
+            }, {
+                label: "Make Up",
+                options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
+            }, {
+                label: "Hair Texture",
+                options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
+            }, {
+                label: "Hair Treatments",
+                options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
+            }, {
+                label: "Facials & Rituals",
+                options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
+            }, {
+                label: "Hand & Feet",
+                options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
+            }, {
+                label: "Nail Care",
+                options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
+            }];
 
         const gentsServices = [{
-            label: "Hair Cut & Finish",
-            options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-        }, {
-            label: "Hair Colour",
-            options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-        }, {
-            label: "Hair Texture",
-            options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-        }, {
-            label: "Skin Care",
-            options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-        }, {
-            label: "Beard Grooming",
-            options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-        }];
+                label: "Hair Cut & Finish",
+                options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
+            }, {
+                label: "Hair Colour",
+                options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
+            }, {
+                label: "Hair Texture",
+                options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
+            }, {
+                label: "Hair Treatments",
+                options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
+            }, {
+                label: "Skin Care",
+                options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
+            }, {
+                label: "Beard Grooming",
+                options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
+            }];
 
         function updateServices() {
             const genderSelectElement = document.getElementById("genderSelect");
@@ -505,37 +470,15 @@
         }
     </script>
 
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <!-- Form Validation Script -->
     <script type="text/javascript">
         function validateEmail(email) {
-            if (email.length <= 0) {
-                return true;
-            }
-            var splitted = email.match(/^(.+)@(.+)$/);
-            if (splitted == null) return false;
-
-            var regexp_user = /^\"?[\w-_\.]*\"?$/;
-            var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
-
-            if (splitted[1] && splitted[1].match(regexp_user) == null) return false;
-            if (splitted[2] && splitted[2].match(regexp_domain) == null) {
-                var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
-                if (splitted[2].match(regexp_ip) == null) return false;
-            }
-            return true;
+            // Updated regex for email validation to be more robust
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email);
         }
 
-        function isInteger(s) {
-            for (var i = 0; i < s.length; i++) {
-                var c = s.charAt(i);
-                if (((c < "0") || (c > "9"))) return false;
-            }
-            return true;
-        }
+        // Removed isInteger as it's no longer needed with the new phone validation regex
 
         function validateFrme() {
             // Clear all previous error messages and hide the alert_message div
@@ -581,6 +524,8 @@
 
             // Validate Phone
             var phone = phoneElement ? phoneElement.value : '';
+            // Regex for "0000-0000000" format
+            const phoneRegex = /^\d{4}-\d{7}$/; 
             if (!phone.trim()) {
                 document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
                 if (phoneElement) phoneElement.focus();
@@ -588,11 +533,12 @@
                 console.log("Button visible: Client-side Phone empty");
                 return false;
             }
-            if (isNaN(phone)) {
-                document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
+            // UPDATED: Use regex for phone validation
+            if (!phoneRegex.test(phone)) {
+                document.getElementById('phoneErr').innerHTML = "Phone No. should be in 0000-0000000 format (e.g., 03XX-XXXXXXX).";
                 if (phoneElement) phoneElement.focus();
                 submitButton.show(); // Show button on validation failure
-                console.log("Button visible: Client-side Phone not numeric");
+                console.log("Button visible: Client-side Phone format invalid");
                 return false;
             }
 
@@ -631,14 +577,15 @@
                     // Check if response contains '1' anywhere, or if it's "success"
                     if (response.trim().includes('1')) { // Changed to .includes('1') for more robustness
                         console.log("AJAX Success: Server indicated success. Redirecting...");
-                        window.location = "savecontact.php"; // Redirect immediately on confirmed success
+                        // Changed redirect to contact.php to avoid re-triggering savecontact.php
+                        window.location = "contact.php?success=1"; // Added success parameter
                     } else {
                         // Server returned an error message or non-'1' response
                         console.log("AJAX Success but server did not return '1'. Displaying response.");
                         $('#alert_message').html(response).show();
                         submitButton.show(); // Show button for server-side error message
                         console.log("Button visible: Server returned non-'1' response.");
-                        $('#frm')[0].reset(); // Reset form on server-side error, as per your original logic
+                        // $('#frm')[0].reset(); // Moved form reset to after showing success/error
                         window.setTimeout(function() {
                             $("#alert_message").fadeTo(500, 0).slideUp(500, function() {
                                 $(this).html('').hide();
@@ -664,6 +611,23 @@
             });
             return false; // Prevent default form submission as AJAX is used
         }
+
+        // New function to display success message from URL parameter
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === '1') {
+                $('#alert_message').removeClass('alert-danger').addClass('alert-success').html('Thank you for contacting us! Your message has been sent successfully.').show();
+                $('#frm')[0].reset(); // Reset form on successful submission
+                window.setTimeout(function() {
+                    $("#alert_message").fadeTo(500, 0).slideUp(500, function() {
+                        $(this).html('').hide();
+                        // Optional: remove the URL parameter after message is shown
+                        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                        window.history.replaceState({path:newUrl},'',newUrl);
+                    });
+                }, 4000);
+            }
+        });
     </script>
 </body>
 
