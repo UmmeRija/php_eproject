@@ -33,7 +33,7 @@ $query = mysqli_query($con, $sql); // Line 17 (now might be line 29 with comment
 
 // Check if the query was successful before redirecting
 if ($query) {
-    header('location: http://localhost/elegance/service.php');
+    header('location: http://localhost/elegance/index.php#appointment');
 } else {
     // If there's an error, display it for debugging.
     // In a live site, you might redirect to an error page or log the error.

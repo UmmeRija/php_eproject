@@ -83,7 +83,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="img/servicebg.jpg" class="img-fluid innerimg" alt="">
+                    <img src="img/aboutus.png" class="img-fluid innerimg" alt="">
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             Our Story
                         </div>
                         <p>
-                            Our journey began in 1992 with a vision to offer luxurious beauty services tailored to individual needs. Founded in Green Park, Delhi, we have since grown into a leading name in the beauty industry, known for our comprehensive service mix and exceptional customer satisfaction. *Affinity Salon, formerly known as Affinity Elite and registered under the name SIDANYA ENTERPRISES, has continually evolved to meet the highest standards of luxury and grooming. Under the new leadership of Mr. Vinit Dua since 2018, we've redefined luxury grooming, combining innovative technology with world-class expertise. Our team of skilled professionals ensures that every client leaves feeling their best.
+                            Our journey began in 1992 with a vision to offer luxurious beauty services tailored to individual needs. Founded in Karachi, we have since grown into a leading name in the beauty industry, known for our comprehensive service mix and exceptional customer satisfaction. *Elegance Salon, formerly known as Elegance Elite and registered under the name SIDANYA ENTERPRISES, has continually evolved to meet the highest standards of luxury and grooming. Under the new leadership of Ms. Ghazal since 2018, we've redefined luxury grooming, combining innovative technology with world-class expertise. Our team of skilled professionals ensures that every client leaves feeling their best.
                         </p>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             Our mission
                         </div>
                         <p class="text-uppercase subtext2">
-                            To create a world-class grooming experience and make it accessible across India.
+                            To create a world-class grooming experience and make it accessible across Pakistan.
                         </p>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-9">
                         <p class="">
-                            <span class="clro"> Ms. Ghazal,</span> Chairman of Affinity Salon, is a visionary entrepreneur who has transformed the salon into a luxury brand. Her expertise across various industries, including construction, interiors, and high-end hospitality, has contributed to the salon's success. Since 2018, she has introduced innovative strategies, ensuring that Affinity remains a leader in grooming services.
+                            <span class="clro"> Ms. Ghazal,</span> Chairman of Elegance Salon, is a visionary entrepreneur who has transformed the salon into a luxury brand. Her expertise across various industries, including construction, interiors, and high-end hospitality, has contributed to the salon's success. Since 2018, she has introduced innovative strategies, ensuring that Elegance remains a leader in grooming services.
                         </p>
                     </div>
                     <div class="col-sm-3">

@@ -11,30 +11,47 @@ if (!isset($_SESSION['id'])) {
 $user_session_id = mysqli_real_escape_string($con, $_SESSION['id']); // Sanitize user ID from session
 $appointment = null; // Initialize appointment variable
 
-// Function to format date from YYYY-MM-DD (database) to DD/MM/YYYY (display)
+// Function to format date from database (DD-MM-YYYY VARCHAR or old YYYY-MM-DD) to DD-MM-YYYY (display)
 function formatDateForDisplay($dateString) {
     if (empty($dateString) || $dateString == '0000-00-00') {
         return '';
     }
+    
+    // Check if the date string from DB is already DD-MM-YYYY
+    if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $dateString)) {
+        return $dateString; // It's already in the desired display format
+    }
+    
+    // Attempt to convert from YYYY-MM-DD if it's not DD-MM-YYYY
     $date = DateTime::createFromFormat('Y-m-d', $dateString);
     if ($date) {
-        $formattedDate = $date->format('d/m/Y');
-        return $formattedDate;
+        return $date->format('d-m-Y'); // Convert to DD-MM-YYYY
     }
-    return $dateString;
+    
+    // Attempt to convert from DD/MM/YYYY if it's not DD-MM-YYYY
+    $date = DateTime::createFromFormat('d/m/Y', $dateString);
+    if ($date) {
+        return $date->format('d-m-Y'); // Convert to DD-MM-YYYY
+    }
+    
+    return $dateString; // Return as is if format is unknown/invalid
 }
 
-// Function to format date from DD/MM/YYYY (input) to YYYY-MM-DD (database)
+// Function to format date from input (DD/MM/YYYY) to DD-MM-YYYY for database (VARCHAR)
 function formatDateForDatabase($dateString) {
     if (empty($dateString)) {
         return '';
     }
+    // Convert DD/MM/YYYY to DD-MM-YYYY
     $date = DateTime::createFromFormat('d/m/Y', $dateString);
     if ($date) {
-        $formattedDate = $date->format('Y-m-d');
-        return $formattedDate;
+        return $date->format('d-m-Y');
     }
-    return $dateString;
+    // If input is already DD-MM-YYYY, pass it through
+    if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $dateString)) {
+        return $dateString;
+    }
+    return $dateString; // Return as is if format is unknown/invalid
 }
 
 
@@ -43,9 +60,9 @@ if (isset($_POST['update_appointment'])) {
     if (isset($_POST['appointment_id']) && !empty($_POST['appointment_id'])) {
         $appointment_id = mysqli_real_escape_string($con, $_POST['appointment_id']);
         
-        // DATES ARE SENT AS DD/MM/YYYY from input, SO CONVERT FOR DB
+        // DATES ARE SENT AS DD/MM/YYYY from input, SO CONVERT FOR DB to DD-MM-YYYY
         $dates_raw = $_POST['dates'];
-        $dates = mysqli_real_escape_string($con, formatDateForDatabase($dates_raw)); // Convert to YYYY-MM-DD for DB
+        $dates = mysqli_real_escape_string($con, formatDateForDatabase($dates_raw)); // Convert to DD-MM-YYYY for DB
         
         $times = mysqli_real_escape_string($con, $_POST['times']);
         $gender = mysqli_real_escape_string($con, $_POST['gender']);
@@ -405,7 +422,7 @@ if ($appointment_id_to_fetch) {
             <input type="hidden" name="appointment_id" value="<?php echo htmlspecialchars($appointment['id']); ?>">
 
             <div class="width-auto-100 mt-2 mb-2">
-                <label><i class="fa-regular fa-calendar"></i> Date (DD/MM/YYYY)</label>
+                <label><i class="fa-regular fa-calendar"></i> Date (DD-MM-YYYY)</label>
                 <input type="text" required name="dates" class="form-control" id="datePicker" value="<?php echo htmlspecialchars($appointment['dates_display']); ?>">
             </div>
 
@@ -439,7 +456,7 @@ if ($appointment_id_to_fetch) {
                 <select class="selctbox" name="branch" required>
                     <option value="">Select Branch</option>
                     <?php
-                    $branches = ["Green Park", "Greater kailash II", "New Friends Colony", "Shivalik Road", "Bengali Market", "Gurugram"];
+                    $branches = ["Saddar", "PECHS Block II", "Defence Block V", "North Nazimabad", "Malir Cantt"];
                     foreach ($branches as $branch_option) {
                         $selected = ($appointment['branch'] == $branch_option) ? 'selected' : '';
                         echo "<option value=\"$branch_option\" $selected>$branch_option</option>";
@@ -598,7 +615,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             return false;
         }
 
-        // Validate date input for format DD/MM/YYYY
+        // Validate date input for format DD-MM-YYYY
         var dateInput = document.getElementById('datePicker'); 
         if (!dateInput.value.trim()) {
             alert("Please enter a Date.");
@@ -607,17 +624,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         const dateValue = dateInput.value.trim();
-        // Regex for DD/MM/YYYY format
-        const datePattern = /^\d{2}\/\d{2}\/\d{4}$/; 
+        // Regex for DD-MM-YYYY format
+        const datePattern = /^\d{2}-\d{2}-\d{4}$/; 
         if (!datePattern.test(dateValue)) {
-            alert("Please enter the Date in DD/MM/YYYY format (e.g., 25/12/2025).");
+            alert("Please enter the Date in DD-MM-YYYY format (e.g., 25-12-2025).");
             dateInput.focus();
             return false;
         }
 
         // --- NEW DATE VALIDATION LOGIC ---
-        const [day, month, year] = dateValue.split('/').map(Number);
+        // Parse the date to ensure it's a valid date and not in the past or too far in the future
+        const [day, month, year] = dateValue.split('-').map(Number); // Split by '-'
         const inputDate = new Date(year, month - 1, day); // Month is 0-indexed
+
+        // Check if Date object is valid (e.g., handles "31-02-2025")
+        if (isNaN(inputDate.getTime()) || inputDate.getDate() !== day || inputDate.getMonth() !== (month - 1) || inputDate.getFullYear() !== year) {
+             alert("The entered date is not a valid date. Please enter a valid date in DD-MM-YYYY format.");
+             dateInput.focus();
+             return false;
+        }
 
         // Get today's date, normalized to midnight for accurate comparison
         const today = new Date();
