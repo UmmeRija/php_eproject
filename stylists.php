@@ -1,8 +1,8 @@
 <?php
 include "connection.php";
-// $sql = "SELECT * FROM ";
-// $query = mysqli_query($con, $sql);
-// $num_rows = mysqli_num_rows($query);?>
+$sql = "SELECT * FROM ";
+$query = mysqli_query($con, $sql);
+$num_rows = mysqli_num_rows($query);?>
 <!doctype html>
 <html class="no-js" lang="en">
 

@@ -22,11 +22,12 @@ $date = mysqli_real_escape_string($con, $_POST['date']);
 $time = mysqli_real_escape_string($con, $_POST['time']);
 $branch = mysqli_real_escape_string($con, $_POST['branch']);
 $service = mysqli_real_escape_string($con, $_POST['service']);
+$stylist = mysqli_real_escape_string($con, $_POST['stylist']);
 
 // Corrected SQL query (Fixes the syntax error with quotes around $name)
 // Ensure 'appointment' matches your table name exactly (singular or plural)
-$sql = "INSERT INTO appointment (`user_id`, `name`, `email`, `phone`, `gender`, `dates`, `times`, `branch`, `service`)
-        VALUES ('$logged_in_user_id', '$name', '$email', '$phone', '$gender', '$date', '$time', '$branch', '$service')";
+$sql = "INSERT INTO appointment (`user_id`, `name`, `email`, `phone`, `gender`, `dates`, `times`, `branch`, `service` , `stylist`)
+        VALUES ('$logged_in_user_id', '$name', '$email', '$phone', '$gender', '$date', '$time', '$branch', '$service' , '$stylist')";
 // The fix was specifically here:                           ^ added missing quote here, and removed extra quote before '$name'
 
 $query = mysqli_query($con, $sql); // Line 17 (now might be line 29 with comments)

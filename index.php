@@ -300,18 +300,26 @@ color: #d1a86e;
                                         </div>
                                     </div>
                                        <div class="width-auto-100 mt-2 mb-2">
-                                            <label><i class="fa-solid fa-users"></i> Stylist</label>
-                                            <select class="selctbox" name="stylist">
-                                                <option>Select Stylist</option>
-                                                <option>10:00 AM</option>
-                                                <option>11:00 AM</option>
-                                                <option>12:00 PM</option>
-                                                <option>01:00 PM</option>
-                                                <option>02:00 PM</option>
-                                                <option>03:00 PM</option>
-                                                <option>04:00 PM</option>
+                                        <label><i class="fa-solid fa-users"></i> Stylist</label>
+                                            <select class="selctbox" name="stylist" required>
+                                            <option value="">Select Stylist</option>
+                                                <?php
+                                                include 'connection.php'; // Ensure this points to your DB connection
+
+                                                $sql = "SELECT FullName FROM stylist";
+                                                $query = mysqli_query($con, $sql);
+
+                                                if ($query && mysqli_num_rows($query) > 0) {
+                                                while ($row = mysqli_fetch_assoc($query)) {
+                                                    echo '<option value="' . htmlspecialchars($row['FullName']) . '">' . htmlspecialchars($row['FullName']) . '</option>';
+                                                    }
+                                                } else {
+                                                    echo '<option disabled>No Stylists Available</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
+
                                         <div class="width-auto-100 mt-3 mb-2 text-center ">
                                             <input value="Book appointment" type="submit" class="sumbitbtn w-50">
                                         </div>
@@ -346,6 +354,7 @@ color: #d1a86e;
                                 <th>Branch</th>
                                 <th>Service</th>
                                 <th>Status</th>
+                                <th>Stylist</th>
                                 <th>Options</th>
                             </tr>
                             </thead>
@@ -358,7 +367,8 @@ color: #d1a86e;
                                    <td><?php echo htmlspecialchars($row['times']); ?></td>
                                    <td><?php echo htmlspecialchars($row['branch']); ?></td>
                                    <td><?php echo htmlspecialchars($row['service']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['status']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['status']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['stylist']); ?></td>
                                     <td>
                                         <a href="edit.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-edit">
                                             Edit Appointment
