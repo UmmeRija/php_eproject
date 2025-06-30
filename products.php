@@ -5,18 +5,16 @@
     <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="canonical" href="https://www.affinity.salon/contact.php">
-    <meta name="description" content="">
+    <link rel="canonical" href="https://www.affinity.salon/products.php">
+    <meta name="description" content="Explore our premium range of hair and beauty products.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" href="img/favicon.png">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css"> 
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -27,140 +25,338 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
+    <title>Our Products - Affinity Salon</title>
+
     <style>
-        /* This section contains custom styles to match your template's look
-           without conflicting with Bootstrap's grid or form structure. */
-
-        /* General form container styling - similar to your 'formbox' concept */
-        .custom-form-card {
-            background-color: #fff;
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-        }
-
-        /* Styling for the input/textarea itself */
-        .form-control.custom-input-field {
-            border-radius: 8px; /* Rounded corners on all sides now */
-            padding: 0.65rem 1rem; /* Consistent padding */
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif; /* Apply Inter font */
-            color: #333; /* Darker text color */
-            border: 1px solid #dee2e6; /* Standard Bootstrap border color */
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
-            line-height: 1.5; /* Ensure consistent line height */
-        }
-
-        /* Focus state for form controls */
-        .form-control.custom-input-field:focus {
-            background-color: #fff; /* Explicitly keep background white on focus */
-            color: #333; /* Explicitly keep text dark on focus */
-            border-color: #a96b48; /* Highlight border on focus */
-            box-shadow: 0 0 0 0.25rem rgba(169, 107, 72, 0.25); /* Bootstrap-like focus glow */
-            outline: 0; /* Remove default browser outline */
-        }
-
-        /* Submit Button Styling */
-        .custom-submit-button {
-            background-color: #7d4d3a; /* Brown color from your image */
-            color: #fff;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 100%;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .custom-submit-button:hover {
-            background-color: #a96b48; /* Lighter brown on hover */
-            transform: translateY(-2px); /* Slight lift effect */
-        }
-
-        .custom-submit-button:active {
-            transform: translateY(0); /* Press effect */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Adjust placeholder color */
-        .form-control.custom-input-field::placeholder {
-            color: #888;
-        }
-
-        /* General body font and color if not already set by style.css */
+        /* General body font and color */
         body {
             font-family: 'Inter', sans-serif;
-            color: #333;
-        }
-        /* Ensure specific elements from your contactbox have correct colors */
-        .contactbox .mainicon p {
-            color: #333; /* Or whatever dark color is appropriate for readability */
+            color: #333; /* Default body text, though much of the page will be white/light */
+            background-color: #000; /* Dark background for the entire page */
         }
 
-        /* Re-apply Bellefair font to specific headings */
-        .gettouch h3 {
+        /* --- Global / Re-used Styles (from your provided snippet) --- */
+        .footer-head h4,
+        .footer-heading {
             font-family: 'Bellefair', serif;
+            color: #e2b97f; /* Gold/tan accent color */
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        /* --- New Contact Banner Styling (to match About Us/Service layout) --- */
 
-.contact-banner-text-band {
-    background-color: #000; /* Dark background */
-    padding: 40px 0; /* Adjust padding to control height of the black band */
-    text-align: center; /* Centers the text inside this band */
-}
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-.contact-page-title {
-    font-family: 'Bellefair', serif; /* Assuming 'Bellefair' is your preferred elegant font */
-    font-size: 3rem; /* Adjust font size to match "ABOUT US" / "Our Services" */
-    font-weight: normal;
-    color: #fff; /* White text color */
-    margin: 0; /* Remove default top/bottom margins from the heading */
-    line-height: 1;
-}
+        .contact-info li {
+            margin-bottom: 10px;
+            color: #bbb;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            line-height: 1.4;
+        }
 
-.contact-banner-text-band p {
-    font-size: 1.1rem; /* Adjust paragraph font size */
-    color: #fff;
-    margin-top: 15px; /* Space between title and paragraph */
-}
+        .contact-info li .footer-icon {
+            color: #e2b97f;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
 
-.contact-banner-image {
-    width: 100%; /* Makes the image span the full width */
-    height: auto; /* Maintains the image's aspect ratio */
-    display: block; /* Important to remove any extra space below the image */
-    /* You can uncomment and adjust these if you want the image to fill a specific height and crop: */
-    /* height: 500px; */
-    /* object-fit: cover; */
-}
+        .contact-info li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-/* --- Responsive Adjustments for the new Contact banner --- */
-@media (max-width: 992px) {
-    .contact-page-title {
-        font-size: 2.5rem;
-    }
-}
+        .contact-info li a:hover {
+            color: #e2b97f;
+        }
 
-@media (max-width: 768px) {
-    .contact-banner-text-band {
-        padding: 30px 0;
-    }
-    .contact-page-title {
-        font-size: 2rem;
-    }
-}
+        .footer-area {
+            background-color: #000;
+            padding: 60px 0;
+        }
 
-@media (max-width: 576px) {
-    .contact-banner-text-band {
-        padding: 25px 0;
-    }
-    .contact-page-title {
-        font-size: 1.7rem;
-    }
-}
+        .footer-content {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .footer-head {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        /* --- Product Page Specific Styles --- */
+
+        /* Banner section */
+        .products-banner-text-band {
+            background-color: #000;
+            padding: 60px 0; /* Increased padding for a more prominent banner */
+            text-align: center;
+        }
+
+        .products-page-title {
+            font-family: 'Bellefair', serif;
+            font-size: 3.5rem; /* Slightly larger title for product page */
+            font-weight: normal;
+            color: #fff;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .products-banner-text-band p {
+            font-size: 1.2rem; /* Slightly larger paragraph */
+            color: #ccc; /* Lighter grey for better contrast on black */
+            margin-top: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .products-banner-image {
+            width: 100%;
+            height: 400px; /* Fixed height for consistency */
+            object-fit: cover; /* Ensures image covers the area, cropping if necessary */
+            display: block;
+        }
+
+        /* Main content area */
+        .products-content-area {
+            background-color: #000; /* Main content background */
+            padding: 60px 0; /* Padding for the entire content section */
+        }
+
+        /* Sidebar styles */
+        .products-sidebar {
+            background-color: #1a1a1a; /* Slightly lighter dark for sidebar */
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px; /* Space below sidebar on small screens */
+        }
+
+        .products-sidebar h5 {
+            font-family: 'Bellefair', serif;
+            color: #e2b97f;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .products-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .products-sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .products-sidebar ul li a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            display: block; /* Make the whole area clickable */
+            padding: 5px 0;
+        }
+
+        .products-sidebar ul li a:hover,
+        .products-sidebar ul li a.active {
+            color: #e2b97f;
+        }
+        
+        /* Price filter specific styles */
+        .products-sidebar .price-filter-range {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            color: #ccc;
+        }
+        .products-sidebar .price-filter-range span {
+            font-size: 0.9rem;
+        }
+        .products-sidebar .price-filter-input {
+            width: 80px;
+            background-color: #000;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .products-sidebar .price-filter-button {
+            background-color: #e2b97f;
+            color: #000; /* Black text on gold button */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: block; /* Make it a block button */
+            width: 100%;
+        }
+        .products-sidebar .price-filter-button:hover {
+            background-color: #d1a86e; /* Darker gold on hover */
+        }
+
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+            gap: 30px; /* Space between product cards */
+        }
+
+        /* Individual Product Card */
+        .product-card {
+            background-color: #1a1a1a; /* Dark background for product card */
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px; /* Fixed height for product images */
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid #333; /* Separator for image */
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 10px;
+            min-height: 2.4em; /* Ensure consistent height for names */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limit to 2 lines */
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price {
+            font-family: 'Bellefair', serif;
+            font-size: 1.4rem;
+            color: #e2b97f;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .product-button {
+            background-color: #e2b97f;
+            color: #000; /* Black text on gold button */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none; /* For anchor tags if used */
+            display: inline-block; /* For button/link consistency */
+        }
+
+        .product-button:hover {
+            background-color: #d1a86e; /* Darker gold on hover */
+            transform: translateY(-2px);
+            color: #000; /* Ensure text color remains black on hover */
+        }
+        .product-button:active {
+            transform: translateY(0);
+        }
+
+
+        /* Responsive adjustments for product grid */
+        @media (max-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 25px;
+            }
+            .products-page-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .products-content-area {
+                padding: 40px 0;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            .products-page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-page-title {
+                font-size: 2rem;
+            }
+            .products-banner-text-band {
+                padding: 40px 20px;
+            }
+            .products-banner-text-band p {
+                font-size: 1rem;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+                gap: 15px;
+            }
+            .products-sidebar {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-page-title {
+                font-size: 1.8rem;
+            }
+            .products-banner-text-band {
+                padding: 30px 15px;
+            }
+            .products-banner-image {
+                height: 250px; /* Shorter image on small mobiles */
+            }
+            .product-grid {
+                grid-template-columns: 1fr; /* Single column on small mobiles */
+            }
+            .products-sidebar {
+                padding: 20px;
+            }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -207,41 +403,118 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NJW4QH8K');
     </script>
-    <title>Contact Us</title>
 </head>
 
 <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
 
     <?php include "navbar.php"; ?>
-    
-              <?php
-include "footer.php";
-?>
-  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-<script src="js/jquery.meanmenu.js"></script>
-<script src="js/iscroll.js"></script>
-<script src="js/slidemenu.js"></script>
-<script src="js/main.js"></script>
+    <section class="products-banner-section">
+        <div class="products-banner-text-band">
+            <div class="container">
+                <h1 class="products-page-title">OUR PRODUCTS</h1>
+                <p>Discover our curated selection of premium hair and skincare products designed to elevate your beauty routine.</p>
+            </div>
+        </div>
+        <img src="img/banner.jpg" alt="Products Banner" class="products-banner-image img-fluid">
+    </section>
 
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <section class="products-content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <div class="products-sidebar">
+                        <h5>Shop By Category</h5>
+                        <ul>
+                            <li><a href="#" class="active">All Products</a></li>
+                            <li><a href="#">Hair Care</a></li>
+                            <li><a href="#">Skin Care</a></li>
+                            <li><a href="#">Styling Tools</a></li>
+                            <li><a href="#">Fragrances</a></li>
+                            <li><a href="#">Gifts & Kits</a></li>
+                        </ul>
 
-<script>
-    var swiperBanner = new Swiper(".banner", {
-        slidesPerView: 1,
-        spaceBetween: 0,
-        autoplay: {
-            delay: 5000,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-</script>
-    </body>
+                        <h5 class="mt-4">Shop By Brand</h5>
+                        <ul>
+                            <li><a href="#">Kerastase</a></li>
+                            <li><a href="#">Skeyndor</a></li>
+                            <li><a href="#">Lakme</a></li>
+                            <li><a href="#">Other Brands</a></li>
+                        </ul>
+
+                        <h5 class="mt-4">Price Range</h5>
+                        <div class="price-filter-range">
+                            <span>PKR 0</span>
+                            <span>PKR 50,000+</span>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <input type="number" class="form-control price-filter-input me-2" placeholder="Min" value="0">
+                            <span class="text-white mx-1">-</span>
+                            <input type="number" class="form-control price-filter-input ms-2" placeholder="Max" value="50000">
+                        </div>
+                        <button class="price-filter-button mt-3">Filter</button>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <?php include "footer.php"; ?>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script src="js/jquery.meanmenu.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/slidemenu.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        var swiperBanner = new Swiper(".banner", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            autoplay: {
+                delay: 5000,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        // Add any other specific product page scripts here if needed, e.g., for filters
+        $(document).ready(function() {
+            // Example for active category link
+            $('.products-sidebar ul li a').on('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                $('.products-sidebar ul li a').removeClass('active');
+                $(this).addClass('active');
+                // In a real application, you would trigger product filtering here
+                console.log("Category clicked: " + $(this).text());
+            });
+
+            // jQuery UI slider for price range (if you choose to implement it)
+            // You'll need to make sure the jQuery UI CSS is also linked in the head for full styling.
+            // if ($.fn.slider) {
+            //     $("#slider-range").slider({
+            //         range: true,
+            //         min: 0,
+            //         max: 10000,
+            //         values: [0, 50000],
+            //         slide: function(event, ui) {
+            //             $("#amount").val("PKR " + ui.values[0] + " - PKR " + ui.values[1]);
+            //         }
+            //     });
+            //     $("#amount").val("PKR " + $("#slider-range").slider("values", 0) +
+            //         " - PKR " + $("#slider-range").slider("values", 1));
+            // }
+        });
+    </script>
+</body>
+
 </html>
