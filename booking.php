@@ -23,6 +23,9 @@ $time = mysqli_real_escape_string($con, $_POST['time']);
 $branch = mysqli_real_escape_string($con, $_POST['branch']);
 $service = mysqli_real_escape_string($con, $_POST['service']);
 $stylist = mysqli_real_escape_string($con, $_POST['stylist']);
+if(empty($stylist)){
+    $stylist = "No Preferences";
+}
 
 // Corrected SQL query (Fixes the syntax error with quotes around $name)
 // Ensure 'appointment' matches your table name exactly (singular or plural)

@@ -1,43 +1,45 @@
 <?php
-session_start(); // Make sure this is the very first line of code
-
+session_start();
 include "connection.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['email']) && isset($_POST['password'])) {
-        // Sanitize inputs to prevent SQL injection
-        $email = mysqli_real_escape_string($con, $_POST['email']);
-        $password = $_POST['password']; // Password will be verified, no need to escape here yet
+$error_message = '';
+$email_error = '';
+$password_error = '';
+$email = '';
+$password = '';
 
-        $sql = "SELECT id, name, email, phone, passwords FROM register WHERE email = '$email'"; // Added 'phone' to SELECT
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = isset($_POST['email']) ? mysqli_real_escape_string($con, $_POST['email']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+
+    if (empty($email) && empty($password)) {
+        $error_message = "Please enter both email and password.";
+    } elseif (empty($email)) {
+        $email_error = "Please enter your email."; 
+    } elseif (empty($password)) {
+        $password_error = "Please enter your password."; 
+    } else {
+        $sql = "SELECT id, name, email, phone, passwords FROM register WHERE email = '$email'";
         $query = mysqli_query($con, $sql);
 
-        // Check if query executed successfully AND if any rows were returned
         if ($query && mysqli_num_rows($query) > 0) {
-            $row = mysqli_fetch_assoc($query); // Fetch the single matching user row
+            $row = mysqli_fetch_assoc($query);
 
-            // Verify the hashed password
             if (password_verify($password, $row['passwords'])) {
-                // Set all necessary session variables upon successful login
+                
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['name'] = $row['name'];
-                $_SESSION['email'] = $row['email']; // <-- ADDED: Store user's email in session
-                $_SESSION['phone'] = $row['phone']; // <-- ADDED: Store user's phone in session (assuming 'phone' is the column name in your 'register' table)
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['phone'] = $row['phone'];
 
-                // Redirect to index.php after successful login
                 header('location:http://localhost/elegance/index.php');
-                exit(); // Always exit after a header redirect
+                exit();
             } else {
-                // Password does not match
-                echo "Invalid username and password";
+                $password_error = "Incorrect password. Try again.";
             }
         } else {
-            // No user found with that email
-            echo "Invalid username and password";
+            $email_error = "Email not found. Please try again or register."; 
         }
-    } else {
-        // Email or password not provided in the POST request
-        echo "Please enter both email and password.";
     }
 }
 ?>
@@ -175,6 +177,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .bottom-links a:hover {
             text-decoration: underline;
         }
+        .error-message {
+            color: #ff6b6b; 
+            font-size: 12px;
+            margin-top: -15px; 
+            margin-bottom: 10px;
+            text-align: left; 
+        }
     </style>
 </head>
 
@@ -184,11 +193,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="login-card">
             <h1 class="title">WELCOME BACK</h1>
             <form method="POST" action="">
+                <?php if ($error_message): ?>
+                    <p class="error-message text-center"><?php echo $error_message; ?></p>
+                <?php endif; ?>
+
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="abc@example.com" />
+                <input type="email" id="email" name="email" required placeholder="abc@example.com" value="<?php echo htmlspecialchars($email); ?>" />
+                <?php if ($email_error): ?>
+                    <p class="error-message"><?php echo $email_error; ?></p>
+                <?php endif; ?>
 
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required placeholder="Enter your password" />
+                <?php if ($password_error): ?>
+                    <p class="error-message"><?php echo $password_error; ?></p>
+                <?php endif; ?>
 
                 <button type="submit">LOG IN</button>
             </form>

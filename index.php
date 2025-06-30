@@ -301,17 +301,18 @@ color: #d1a86e;
                                     </div>
                                        <div class="width-auto-100 mt-2 mb-2">
                                         <label><i class="fa-solid fa-users"></i> Stylist</label>
-                                            <select class="selctbox" name="stylist" required>
+                                            <select class="selctbox" name="stylist">
                                             <option value="">Select Stylist</option>
+                                            <option value="No Preferences">No Preferences</option>
                                                 <?php
-                                                include 'connection.php'; // Ensure this points to your DB connection
+                                                include 'connection.php'; 
 
-                                                $sql = "SELECT FullName FROM stylist";
-                                                $query = mysqli_query($con, $sql);
+                                                $sql1 = "SELECT FullName FROM stylist";
+                                                $query1 = mysqli_query($con, $sql1);
 
-                                                if ($query && mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) {
-                                                    echo '<option value="' . htmlspecialchars($row['FullName']) . '">' . htmlspecialchars($row['FullName']) . '</option>';
+                                                if ($query1 && mysqli_num_rows($query1) > 0) {
+                                                while ($row1 = mysqli_fetch_assoc($query1)) {
+                                                    echo '<option value="' . htmlspecialchars($row1['FullName']) . '">' . htmlspecialchars($row1['FullName']) . '</option>';
                                                     }
                                                 } else {
                                                     echo '<option disabled>No Stylists Available</option>';
@@ -837,46 +838,96 @@ include "footer.php";
             options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
         }];
 
+const combinedServices = [{
+     label: "Hair Styling",
+            options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
+        }, {
+            label: "Make Up",
+            options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
+        }, {
+            label: "Hair Texture",
+            options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
+        }, {
+            label: "Hair Treatments",
+            options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
+        }, {
+            label: "Facials & Rituals",
+            options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
+        }, {
+            label: "Hand & Feet",
+            options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
+        }, {
+            label: "Nail Care",
+            options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
+        },{
+         label: "Hair Cut & Finish",
+            options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
+        }, {
+            label: "Hair Colour",
+            options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
+        }, {
+            label: "Hair Texture",
+            options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
+        }, {
+            label: "Hair Treatments",
+            options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
+        }, {
+            label: "Skin Care",
+            options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
+        }, {
+            label: "Beard Grooming",
+            options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
+}];
         // Function to populate the service dropdown based on selected gender
-        function updateServices() {
-            const gender = document.getElementById("genderSelect").value;
-            const serviceSelect = document.getElementById("serviceSelect");
+  function updateServices() {
+        const gender = document.getElementById("genderSelect").value;
+        const serviceSelect = document.getElementById("serviceSelect");
 
-            // Clear previous options
-            serviceSelect.innerHTML = '<option value="">Select Service</option>';
+        // Clear previous options
+        serviceSelect.innerHTML = '<option value="">Select Service</option>';
 
-            // Enable the service dropdown only if a gender is selected
-            if (gender) {
-                serviceSelect.disabled = false;
+        // Enable the service dropdown only if a gender is selected
+        if (gender) {
+            serviceSelect.disabled = false;
 
-                // Determine the appropriate services based on gender
-                const services = gender === "Female" ? ladiesServices : gentsServices; // Corrected the comparison to "Female"
-
-                // Populate the service options
-                services.forEach(group => {
-                    const optgroup = document.createElement("optgroup");
-                    optgroup.label = group.label;
-
-                    group.options.forEach(service => {
-                        const option = document.createElement("option");
-                        option.value = service;
-                        option.textContent = service;
-                        optgroup.appendChild(option);
-                    });
-
-                    serviceSelect.appendChild(optgroup);
-                });
+            // Determine the appropriate services based on gender
+            let servicesToDisplay; // Changed variable name for clarity
+            if (gender === "Female") {
+                servicesToDisplay = ladiesServices;
+            } else if (gender === "Male") { // Only "Male" now points to gentsServices
+                servicesToDisplay = gentsServices;
+            } else if (gender === "Others/Undefined") { // New condition for combined services
+                servicesToDisplay = combinedServices;
             } else {
+                // If gender is selected but doesn't match a known category, disable and return.
                 serviceSelect.disabled = true;
+                return;
             }
+
+            // Populate the service options
+            servicesToDisplay.forEach(group => { // Use servicesToDisplay here
+                const optgroup = document.createElement("optgroup");
+                optgroup.label = group.label;
+
+                group.options.forEach(service => {
+                    const option = document.createElement("option");
+                    option.value = service;
+                    option.textContent = service;
+                    optgroup.appendChild(option);
+                });
+
+                serviceSelect.appendChild(optgroup);
+            });
+        } else {
+            serviceSelect.disabled = true;
         }
+    }
 
-        // Event listener for gender selection change
-        document.getElementById("genderSelect").addEventListener("change", updateServices);
+    // Event listener for gender selection change
+    document.getElementById("genderSelect").addEventListener("change", updateServices);
 
-        // Call updateServices initially to set the correct state and populate based on default/pre-selected gender
-        // For example, if you want the services to load on page load if a gender is already selected (e.g., from a PHP session)
-        document.addEventListener("DOMContentLoaded", updateServices); // This will call it when the DOM is ready
+    // Call updateServices initially to set the correct state and populate based on default/pre-selected gender
+    document.addEventListener("DOMContentLoaded", updateServices);
     </script>
 
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"

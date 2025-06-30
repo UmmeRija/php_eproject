@@ -472,7 +472,15 @@ if ($appointment_id_to_fetch) {
                 </select>
                 <span id="serviceErr" style="color: red; font-size: 0.9em;"></span>
             </div>
-
+ <div class="width-auto-100 mt-2 mb-2">
+                <label><i class="fa-regular fa-clock"></i> Stylists</label>
+                <select class="selctbox" name="times" required>
+                    <option value="">Select Stylists</option>
+                    <?php
+                   
+                    ?>
+                </select>
+            </div>
             <div class="d-flex justify-content-between mt-4">
                 <button type="submit" name="update_appointment" class="btn btn-submit-edit">Update Appointment</button>
                 <a href="index.php" class="btn btn-back">Back to Appointments</a>
