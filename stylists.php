@@ -1,6 +1,6 @@
 <?php
 include "connection.php";
-$sql = "SELECT * FROM ";
+$sql = "SELECT * FROM stylist";
 $query = mysqli_query($con, $sql);
 $num_rows = mysqli_num_rows($query);?>
 <!doctype html>
@@ -74,52 +74,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
 <title>Our Stylists</title>
    <style>
-     /* --- New Service Banner Styling (to match About Us layout from screenshot) --- */
-
+    
 .service-banner-text-band {
-    background-color: #000; /* Dark background as seen in your screenshot */
-    padding: 40px 0; /* Adjust padding top/bottom to control height of the black band */
-    text-align: center; /* Centers the text inside this band */
+    background-color: #000; 
+    padding: 40px 0; 
+    text-align: center; 
 }
 
 .service-page-title {
-    font-family: 'Bellefair', serif; /* Assuming this is the elegant font used for "ABOUT US" */
-    font-size: 3rem; /* Adjust this font size to perfectly match "ABOUT US" in your screenshot */
-    font-weight: normal; /* The "ABOUT US" in the screenshot doesn't look bold */
-    color: #fff; /* White text color */
-    margin: 0; /* Remove default top/bottom margins from the heading */
-    line-height: 1; /* Adjust line height for tighter spacing if needed */
+    font-family: 'Bellefair', serif; 
+    font-size: 3rem; 
+    font-weight: normal; 
+    color: #fff; 
+    margin: 0; 
+    line-height: 1; 
 }
 
-/* If you added the optional paragraph back in the HTML, style it here */
 .service-banner-text-band p {
-    font-size: 1.1rem; /* Adjust paragraph font size */
+    font-size: 1.1rem; 
     color: #fff;
-    margin-top: 15px; /* Space between title and paragraph */
+    margin-top: 15px; 
 }
 
 .service-banner-image {
-    width: 100%; /* Makes the image span the full width */
-    height: auto; /* Maintains the image's aspect ratio */
-    display: block; /* Important to remove any extra space below the image */
-    /* If you want the image to fill a specific height and crop, you can uncomment and adjust these: */
-    /* height: 500px; */
-    /* object-fit: cover; */
+    width: 100%; 
+    height: auto; 
+    display: block; 
 }
 
-/* --- Responsive Adjustments for the new banner --- */
 @media (max-width: 992px) {
     .service-page-title {
-        font-size: 2.5rem; /* Smaller font for medium screens */
+        font-size: 2.5rem; 
     }
 }
 
 @media (max-width: 768px) {
     .service-banner-text-band {
-        padding: 30px 0; /* Reduce padding on smaller screens */
+        padding: 30px 0; 
     }
     .service-page-title {
-        font-size: 2rem; /* Even smaller font for tablet/mobile */
+        font-size: 2rem; 
     }
 }
 
@@ -128,7 +122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         padding: 25px 0;
     }
     .service-page-title {
-        font-size: 1.7rem; /* Smallest font for extra small mobile screens */
+        font-size: 1.7rem; 
     }
 }
    </style>
@@ -144,7 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <h1 class="service-page-title text-uppercase text-white">Our Stylists</h1>
             </div>
     </div>
-    <img src="img/servicebg.jpg" class="img-fluid service-banner-image" alt="Our Services Banner">
+    <img src="img/servicebg.png" class="img-fluid service-banner-image" alt="Our Services Banner">
 </section>
   <section class="">
         <div class="about-area py-5">
@@ -200,9 +194,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <a href="index.php#appointment" class="btn1">
                                 Book appointment
                             </a>
-
-
-
                         </div>
                     </div>
 
@@ -216,6 +207,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     </div>
                 </div>
 
+                  <section class="appointments-table-section py-5">
+    <div class="container-fluid">
+       
+            <?php if ($num_rows > 0) { ?>
+                <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Our Stylists</h2>
+                <div class="table-responsive" id="stylists">
+                    <table class="table table-dark table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Specilization</th>
+                                <th>Years of Experience</th>
+                                <th>Working Hours</th>
+                                <!-- <th>Branch</th> -->
+                            </tr>
+                            </thead>
+                        <tbody>
+                            <?php while ($row = mysqli_fetch_assoc($query)) { 
+ if(htmlspecialchars($row['Status']) == "Accepted"){?>
+                                <tr>
+                                   <td><?php echo htmlspecialchars($row['FullName']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['Gender']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['Specialization']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['YearsOfExperience']); ?></td>
+                                   <td><?php echo htmlspecialchars($row['WorkingHours']); ?></td>
+                                   <!-- <td><?php echo htmlspecialchars($row['Branch']); ?></td> -->
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php } 
+            ?> 
+    </div>
+</section>
+<?php } ?>
               <?php
 include "footer.php";
 ?>
@@ -295,11 +323,8 @@ include "footer.php";
         $(".show-btn").click(function() {
             $("#slide-nav").css("display", "block");
 
-
         });
     </script>
-
-
     <script src="js/jquery.meanmenu.js"></script>
     <script src="js/iscroll.js"></script>
     <script src="js/slidemenu.js"></script>

@@ -175,7 +175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </section>
 
     <section>
-        <img class ="" src="img/galery.png" alt="Gallery image"/>
+        <img class ="" src="img/gallery.png" alt="Gallery image"/>
     </section>
 
 

@@ -68,13 +68,15 @@ if (isset($_POST['update_appointment'])) {
         $gender = mysqli_real_escape_string($con, $_POST['gender']);
         $branch = mysqli_real_escape_string($con, $_POST['branch']);
         $service = mysqli_real_escape_string($con, $_POST['service']);
+         $stylist = mysqli_real_escape_string($con, $_POST['stylist']);
 
         $update_sql = "UPDATE appointment SET
                                 dates = '$dates',
                                 times = '$times',
                                 gender = '$gender',
                                 branch = '$branch',
-                                service = '$service'
+                                service = '$service',
+                                stylist = '$stylist'
                                 WHERE id = '$appointment_id' AND user_id = '$user_session_id'";
 
         if (mysqli_query($con, $update_sql)) {
@@ -469,16 +471,27 @@ if ($appointment_id_to_fetch) {
                 <label><i class="fa-solid fa-list"></i> Service</label>
                 <select name="service" class="selctbox" id="serviceSelect" required>
                     <option value="">Select Service</option>
+                    
                 </select>
                 <span id="serviceErr" style="color: red; font-size: 0.9em;"></span>
             </div>
  <div class="width-auto-100 mt-2 mb-2">
-                <label><i class="fa-regular fa-clock"></i> Stylists</label>
-                <select class="selctbox" name="times" required>
-                    <option value="">Select Stylists</option>
+                <label><i class="fa-solid fa-users"></i> Stylists</label>
+                <select class="selctbox" name="stylist">
+                                            <option value="">Select Stylist</option>
+                                            <option value="No Preferences">No Preferences</option>
                     <?php
-                   
-                    ?>
+                   $sql = "SELECT FullName FROM stylist";
+                    $query = mysqli_query($con, $sql);
+                      if ($query && mysqli_num_rows($query) > 0) {
+                                                while ($row = mysqli_fetch_assoc($query)) {
+                                                    echo '<option value="' . htmlspecialchars($row['FullName']) . '">' . htmlspecialchars($row['FullName']) . '</option>';
+                                                    }
+                                                } else {
+                                                    echo '<option disabled>No Stylists Available</option>';
+                                                }
+                                                ?>
+
                 </select>
             </div>
             <div class="d-flex justify-content-between mt-4">

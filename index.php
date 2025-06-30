@@ -558,7 +558,7 @@ color: #d1a86e;
     </section>
 
     <sction>
-        <img class="" src="img/galery.png" />
+        <img class="" src="img/gallery.png"/>
     </sction>
 
     <section class="py-5 bg2 leader team">
