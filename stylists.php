@@ -270,51 +270,6 @@ include "footer.php";
             prevEl: ".swiper-button-prev",
         },
     });
-
-    // var mySwiperPartnersElement = document.querySelector('.h__partners-swiper1');
-    // if (mySwiperPartnersElement) {
-    //     var mySwiperPartners = new Swiper('.h__partners-swiper1', {
-    //         loop: true,
-    //         slidesPerView: 'auto',
-    //         shortSwipes: true,
-    //         longSwipes: true,
-    //         allowTouchMove: true,
-    //         autoplay: {
-    //             delay: 1,
-    //         },
-    //         freeMode: true,
-    //         speed: 5000,
-    //     });
-    // }
-    // var swiperTesti = new Swiper(".testi", {
-    //     slidesPerView: 1,
-    //     spaceBetween: 30,
-    //     loop: true,
-    //     autoplay: {
-    //         delay: 5000,
-    //     },
-    //     pagination: {
-    //         el: ".swiper-pagination",
-    //         clickable: true,
-    //     },
-    // });
-
-    // $(".hide-btn").click(function() {
-    //     $("#slide-nav").css("display", "none");
-    //     $("body").removeClass("slide-open");
-    // });
-    // $(".show-btn").click(function() {
-    //     $("#slide-nav").css("display", "block");
-    //     $("body").addClass("slide-open");
-    // });
-    // jQuery(document).ready(function() {
-    //     if (jQuery.fn.datepicker) {
-    //         jQuery('#datepicker').datepicker({
-    //             dateFormat: 'dd-mm-yy',
-    //             minDate: 0
-    //         });
-    //     }
-    // });
 </script>
     </body>
 </html>
