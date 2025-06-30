@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2025 at 04:54 PM
+-- Generation Time: Jun 30, 2025 at 10:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `appointment` (
   `user_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` varchar(11) DEFAULT NULL,
   `gender` varchar(20) DEFAULT NULL,
   `dates` varchar(100) DEFAULT NULL,
   `times` varchar(255) DEFAULT NULL,
@@ -47,17 +47,21 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`id`, `user_id`, `name`, `email`, `phone`, `gender`, `dates`, `times`, `branch`, `service`, `status`, `stylist`) VALUES
-(1, 1, 'Yumna', 'yumna@gmail.com', 321, 'Female', '28-06-2025', '02:00 PM', 'PECHS Block II', 'Global Colouring', 'Pending', NULL),
-(2, 1, 'Yumna', 'yumna@gmail.com', 321, 'Female', '12-07-2025', '01:00 PM', 'Saddar', 'Eye Make Up', 'Pending', NULL),
-(4, 2, 'Hala', 'hala@gmail.com', 334, 'Female', '30-06-2025', '01:00 PM', 'PECHS Block II', 'Luxury Facials/Rituals', 'Pending', NULL),
-(5, 2, 'Hala', 'hala@gmail.com', 334, 'Female', '12-07-2025', '11:00 AM', 'PECHS Block II', 'Advanced Hair Moisturising', 'Pending', NULL),
-(6, 3, 'Raza', 'raza@gmail.com', 331, 'Male', '04-07-2025', '11:00 AM', 'North Nazimabad', 'Cut and Hair Care', 'Pending', NULL),
-(7, 4, 'Sania', 'sania@gmail.com', 334, 'Others/Undefined', '04-07-2025', '01:00 PM', 'Saddar', 'Straightening', 'Pending', NULL),
-(8, 8, 'Hala Khan', 'haladawood2828@gmail.com', 312, 'Female', '30-06-2025', '12:00 PM', 'Saddar', 'Global Colouring', 'Pending', NULL),
-(9, 1, 'Hala Khan', 'haladawood2828@gmail.com', 2147483647, 'Female', '30-06-2025', '02:00 PM', 'Defence Block V', 'Oiling', 'Pending', NULL),
-(10, 8, 'Hala Khan', 'haladawood2828@gmail.com', 312, 'Female', '02-07-2025', '11:00 AM', 'North Nazimabad', 'Engagement Make Up', 'Pending', NULL),
-(11, 8, 'Hala Khan', 'haladawood2828@gmail.com', 312, 'Female', '30-06-2025', '03:00 PM', 'Defence Block V', 'Hala Khan', 'Pending', ''),
-(12, 7, 'Alisha Rajput', 'alishakhan22@gmail.com', 312, 'Female', '24-07-2025', '12:00 PM', 'North Nazimabad', 'Head Massage', 'Pending', 'Hala Khan');
+(1, 1, 'Yumna', 'yumna@gmail.com', '321', 'Female', '28-07-2025', '02:00 PM', 'PECHS Block II', 'Global Colouring', 'Pending', 'Hala Khan'),
+(2, 1, 'Yumna', 'yumna@gmail.com', '321', 'Female', '12-07-2025', '01:00 PM', 'Saddar', 'Eye Make Up', 'Pending', NULL),
+(4, 2, 'Hala', 'hala@gmail.com', '334', 'Female', '30-06-2025', '01:00 PM', 'PECHS Block II', 'Luxury Facials/Rituals', 'Pending', NULL),
+(5, 2, 'Hala', 'hala@gmail.com', '334', 'Female', '12-07-2025', '11:00 AM', 'PECHS Block II', 'Advanced Hair Moisturising', 'Pending', NULL),
+(6, 3, 'Raza', 'raza@gmail.com', '331', 'Male', '04-07-2025', '11:00 AM', 'North Nazimabad', 'Cut and Hair Care', 'Pending', NULL),
+(7, 4, 'Sania', 'sania@gmail.com', '334', 'Others/Undefined', '04-07-2025', '01:00 PM', 'Saddar', 'Straightening', 'Pending', NULL),
+(8, 8, 'Hala Khan', 'haladawood2828@gmail.com', '312', 'Female', '30-06-2025', '12:00 PM', 'Saddar', 'Global Colouring', 'Pending', NULL),
+(9, 1, 'Hala Khan', 'haladawood2828@gmail.com', '2147483647', 'Female', '30-06-2025', '02:00 PM', 'Defence Block V', 'Oiling', 'Pending', NULL),
+(10, 8, 'Hala Khan', 'haladawood2828@gmail.com', '312', 'Female', '02-07-2025', '11:00 AM', 'North Nazimabad', 'Engagement Make Up', 'Pending', NULL),
+(11, 8, 'Hala Khan', 'haladawood2828@gmail.com', '312', 'Female', '30-06-2025', '03:00 PM', 'Defence Block V', 'Hala Khan', 'Pending', ''),
+(12, 7, 'Alisha Rajput', 'alishakhan22@gmail.com', '312', 'Female', '24-07-2025', '12:00 PM', 'North Nazimabad', 'Head Massage', 'Pending', 'Hala Khan'),
+(13, 1, 'Yumna', 'yumna@gmail.com', '321', 'Female', '18-07-2025', '12:00 PM', 'Defence Block V', 'Base Make Up', 'Pending', 'Hala Khan'),
+(14, 1, 'Yumna', 'yumna@gmail.com', '0321-388073', 'Female', '05-07-2025', '11:00 AM', 'Saddar', 'Rebonding', 'Pending', 'Hala Khan'),
+(15, 1, 'Yumna', 'yumna@gmail.com', '0321-388073', 'Female', '11-07-2025', '12:00 PM', 'Defence Block V', 'Hair Cut', 'Pending', 'Hala Khan'),
+(16, 1, 'Yumna', 'yumna@gmail.com', '0321-388073', 'Female', '18-07-2025', '05:00 PM', 'Malir Cantt', 'Bridal & Reception Make Up', 'Pending', 'No Preferences');
 
 -- --------------------------------------------------------
 
@@ -78,7 +82,8 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `message`) VALUES
-(1, 'abc', 'abc@gmail.com', '0333-4567891', 'hello this is a test');
+(1, 'abc', 'abc@gmail.com', '0333-4567891', 'hello this is a test'),
+(2, 'yumna', 'yumna@gmail.com', '0321-3880737', 'cfhujhuf');
 
 -- --------------------------------------------------------
 
@@ -199,13 +204,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `register`

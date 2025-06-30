@@ -202,15 +202,14 @@ thead{
 color: #d1a86e;
 }
 
-        /* FIX FOR DROPDOWN LABELS (optgroup) */
         .selctbox optgroup {
-            color: black !important; /* Force black color for optgroup labels */
-            background-color: white !important; /* Ensure a white background */
+            color: black !important; 
+            background-color: white !important;
         }
 
         .selctbox option {
-            color: black !important; /* Ensure options text is black */
-            background-color: white !important; /* Ensure a white background for options */
+            color: black !important; 
+            background-color: white !important; 
         }
     </style>
 </head>
@@ -401,7 +400,6 @@ color: #d1a86e;
         <?php } ?>
     </div>
 </section>
-    <!-- Start About Area -->
     <section class="">
         <div class="about-area py-5">
             <div class="container-fluid">
@@ -410,26 +408,20 @@ color: #d1a86e;
                         <div class="about-images">
                             <div class="about-top-image">
                                 <img class="ab-image" src="img/img1.jpg" alt="">
-
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6  bg1 px-5 text-center d-flex align-items-center">
                         <div class="about-content">
                             <div class="about-headline">
-
                                 <h3 class="text-dark">Feel Divine, Look Great</h3>
                                 <span class="side-head top-head">Luxury & Affordability Under One Roof</span>
                             </div>
                             <p class="text-dark"> At Elegance Salon, we believe that a makeover can transform not just how you look, but how you feel. Our team of skilled professionals is dedicated to giving you a flawless experience, where luxury and perfection come together.
                                 Feel divine with Elegance.</p>
-
                             <a href="#appointment" class="btn1">
                                 Book appointment
                             </a>
-
-
-
                         </div>
                     </div>
 
@@ -437,33 +429,24 @@ color: #d1a86e;
                         <div class="about-images">
                             <div class="about-top-image">
                                 <img class="ab-image" src="img/img1.jpg" alt="">
-
                             </div>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="row g-0">
-
                     <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
                         <div class="about-content">
                             <div class="about-headline">
-
                                 <h3 class="text-light">Discover Your Look</h3>
                                  <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
-
                             </div>
                             <p class="text-light">
                                Looking for some inspiration? Whether you're aiming for a bold new look or enhancing your everyday style, our professionals are here to create something tailored just for you.</p>
                             <a href="service.php" class="btn1">
                               Meet our Stylists
                             </a>
-
-
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="about-images">
                             <div class="about-top-image">
@@ -473,32 +456,18 @@ color: #d1a86e;
                         </div>
                     </div>
                 </div>
-
-
-
-             
-
-
-                <div class="row g-0" style="display: none;">
+    <div class="row g-0" style="display: none;">
 
                     <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
                         <div class="about-content">
                             <div class="about-headline">
-
                                 <h3 class="text-light">Shop Salon-Quality Products</h3>
-
                             </div>
                             <p class="text-light">
                                 At Elegance Salon, we offer a curated selection of the finest beauty products. From our signature range to trusted brands like Kérastase and Olaplex, everything you need to maintain your look is just a click away.
                             </p>
-                            <!--<a href="#" class="btn1">
-                               Shop Now
-                            </a>
-                          -->
-
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="about-images">
                             <div class="about-top-image">
@@ -507,19 +476,15 @@ color: #d1a86e;
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </section>
-
     <section class="">
         <div class="container-fluid py-5">
             <div class="h__partners" style="width:100%; overflow: hidden;">
                 <div class="h__partners-swiper1">
                     <div class="swiper-wrapper">
-                        <!-- Slides -->
                         <div class="swiper-slide">
                             <img class="h__partners-image" src="img/mlogo1.png" />
                         </div>
@@ -548,19 +513,14 @@ color: #d1a86e;
                         <div class="swiper-slide">
                             <img class="h__partners-image" src="img/mlogo8.png" />
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
-
     <sction>
         <img class="" src="img/gallery.png"/>
     </sction>
-
     <section class="py-5 bg2 leader team">
         <div class="container-fluid">
             <div class="row">
@@ -570,7 +530,6 @@ color: #d1a86e;
                     </div>
                 </div>
             </div>
-
             <div class="row d-flex justify-content-center">
                 <div class="col-sm-6 col-md-4 mt-5">
                     <div class="row">
@@ -623,7 +582,6 @@ color: #d1a86e;
             </div>
         </div>
     </section>
-
     <section class="testibg py-5">
         <div class="container">
             <div class="row">
@@ -649,15 +607,8 @@ color: #d1a86e;
                                             </p>
                                         </div>
                                     </div>
-                                    <!--<div class="col-md-6">
-                                                <div class="imgs">
-                                                    <img src="img/t1.jpg" class="img-fluid">
-                                                </div>
-                                            </div>-->
                                 </div>
-
                             </div>
-
                             <div class="swiper-slide bg1">
                                 <div class="row g-0 py-5">
                                     <div class="col-md-12  text-center px-3 d-flex align-items-center">
@@ -672,12 +623,6 @@ color: #d1a86e;
                                             </p>
                                         </div>
                                     </div>
-                                    <!--<div class="col-md-6">
-                                                <div class="imgs">
-                                                    <img src="img/t1.jpg" class="img-fluid">
-                                                </div>
-                                                
-                                            </div>-->
                                 </div>
                             </div>
                         </div>
@@ -687,225 +632,179 @@ color: #d1a86e;
             </div>
         </div>
     </section>
-
     <?php
 include "footer.php";
 ?>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".banner", {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            //loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
+  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="js/jquery.meanmenu.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/slidemenu.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<script>
+  
+    var swiper = new Swiper(".banner", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        autoplay: {
+            delay: 5000,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
 
-            autoplay: {
-                delay: 5000,
-                // disableOnInteraction: false,
-            },
+    var mySwiper1 = new Swiper('.h__partners-swiper1', {
+        loop: true,
+        slidesPerView: 'auto',
+        shortSwipes: true,
+        longSwipes: true,
+        allowTouchMove: true,
+        autoplay: {
+            delay: 1,
+        },
+        freeMode: true,
+        speed: 5000,
+    });
 
-            /* pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-               },*/
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+    var swiper = new Swiper(".testi", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+
+    $(".hide-btn").click(function() {
+        $("#slide-nav").css("display", "none");
+        $("body").removeClass("slide-open");
+    });
+    $(".show-btn").click(function() {
+        $("#slide-nav").css("display", "block");
+    });
+
+    // jQuery UI Datepicker
+    jQuery(document).ready(function() {
+        jQuery('#datepicker').datepicker({
+            dateFormat: 'dd-mm-yy',
+            startDate: '+1d',
+            minDate: 0
         });
+    });
 
+    const ladiesServices = [{
+        label: "Hair Styling",
+        options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
+    }, {
+        label: "Make Up",
+        options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
+    }, {
+        label: "Hair Texture",
+        options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
+    }, {
+        label: "Hair Treatments",
+        options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
+    }, {
+        label: "Facials & Rituals",
+        options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
+    }, {
+        label: "Hand & Feet",
+        options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
+    }, {
+        label: "Nail Care",
+        options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
+    }];
 
-        var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
+    const gentsServices = [{
+        label: "Hair Cut & Finish",
+        options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
+    }, {
+        label: "Hair Colour",
+        options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
+    }, {
+        label: "Hair Texture",
+        options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
+    }, {
+        label: "Hair Treatments",
+        options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
+    }, {
+        label: "Skin Care",
+        options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
+    }, {
+        label: "Beard Grooming",
+        options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
+    }];
 
-        mySwiper1 = new Swiper('.h__partners-swiper1', {
-            //grabCursor: false,
-            loop: true,
+    const combinedServices = [{
+        label: "Hair Styling",
+        options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
+    }, {
+        label: "Make Up",
+        options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
+    }, {
+        label: "Hair Texture",
+        options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
+    }, {
+        label: "Hair Treatments",
+        options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
+    }, {
+        label: "Facials & Rituals",
+        options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
+    }, {
+        label: "Hand & Feet",
+        options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
+    }, {
+        label: "Nail Care",
+        options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
+    }, {
+        label: "Hair Cut & Finish",
+        options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
+    }, {
+        label: "Hair Colour",
+        options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
+    }, {
+        label: "Hair Texture",
+        options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
+    }, {
+        label: "Hair Treatments",
+        options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
+    }, {
+        label: "Skin Care",
+        options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
+    }, {
+        label: "Beard Grooming",
+        options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
+    }];
 
-            slidesPerView: 'auto',
-
-            shortSwipes: true,
-            longSwipes: true,
-            allowTouchMove: true,
-            autoplay: {
-                delay: 1,
-            },
-            freeMode: true,
-            speed: 5000,
-        });
-    </script>
-
-    <script>
-        var swiper = new Swiper(".testi", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
-
-            autoplay: {
-                delay: 5000,
-                // disableOnInteraction: false,
-            },
-
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            /* navigation: {
-               nextEl: ".swiper-button-next",
-               prevEl: ".swiper-button-prev",
-             },*/
-        });
-
-        $(".hide-btn").click(function() {
-            $("#slide-nav").css("display", "none");
-            $("body").removeClass("slide-open");
-        });
-        $(".show-btn").click(function() {
-            $("#slide-nav").css("display", "block");
-
-
-        });
-    </script>
-
-
-    <script src="js/jquery.meanmenu.js"></script>
-    <script src="js/iscroll.js"></script>
-    <script src="js/slidemenu.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#datepicker').datepicker({
-                dateFormat: 'dd-mm-yy',
-
-                startDate: '+1d',
-
-                minDate: 0
-            });
-        });
-    </script>
-
-
-    <script>
-        // Define the service options for each gender
-        const ladiesServices = [{
-            label: "Hair Styling",
-            options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-        }, {
-            label: "Make Up",
-            options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-        }, {
-            label: "Hair Texture",
-            options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-        }, {
-            label: "Facials & Rituals",
-            options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-        }, {
-            label: "Hand & Feet",
-            options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-        }, {
-            label: "Nail Care",
-            options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-        }];
-
-        const gentsServices = [{
-            label: "Hair Cut & Finish",
-            options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-        }, {
-            label: "Hair Colour",
-            options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-        }, {
-            label: "Hair Texture",
-            options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-        }, {
-            label: "Skin Care",
-            options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-        }, {
-            label: "Beard Grooming",
-            options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-        }];
-
-const combinedServices = [{
-     label: "Hair Styling",
-            options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-        }, {
-            label: "Make Up",
-            options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-        }, {
-            label: "Hair Texture",
-            options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-        }, {
-            label: "Facials & Rituals",
-            options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-        }, {
-            label: "Hand & Feet",
-            options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-        }, {
-            label: "Nail Care",
-            options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-        },{
-         label: "Hair Cut & Finish",
-            options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-        }, {
-            label: "Hair Colour",
-            options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-        }, {
-            label: "Hair Texture",
-            options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-        }, {
-            label: "Hair Treatments",
-            options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-        }, {
-            label: "Skin Care",
-            options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-        }, {
-            label: "Beard Grooming",
-            options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-}];
-        // Function to populate the service dropdown based on selected gender
-  function updateServices() {
+   
+    function updateServices() {
         const gender = document.getElementById("genderSelect").value;
         const serviceSelect = document.getElementById("serviceSelect");
-
-        // Clear previous options
         serviceSelect.innerHTML = '<option value="">Select Service</option>';
-
-        // Enable the service dropdown only if a gender is selected
         if (gender) {
             serviceSelect.disabled = false;
-
-            // Determine the appropriate services based on gender
-            let servicesToDisplay; // Changed variable name for clarity
+            let servicesToDisplay;
             if (gender === "Female") {
                 servicesToDisplay = ladiesServices;
-            } else if (gender === "Male") { // Only "Male" now points to gentsServices
+            } else if (gender === "Male") {
                 servicesToDisplay = gentsServices;
-            } else if (gender === "Others/Undefined") { // New condition for combined services
+            } else if (gender === "Others/Undefined") {
                 servicesToDisplay = combinedServices;
             } else {
-                // If gender is selected but doesn't match a known category, disable and return.
                 serviceSelect.disabled = true;
                 return;
             }
-
-            // Populate the service options
-            servicesToDisplay.forEach(group => { // Use servicesToDisplay here
+            servicesToDisplay.forEach(group => {
                 const optgroup = document.createElement("optgroup");
                 optgroup.label = group.label;
 
@@ -922,142 +821,113 @@ const combinedServices = [{
             serviceSelect.disabled = true;
         }
     }
-
-    // Event listener for gender selection change
     document.getElementById("genderSelect").addEventListener("change", updateServices);
-
-    // Call updateServices initially to set the correct state and populate based on default/pre-selected gender
     document.addEventListener("DOMContentLoaded", updateServices);
-    </script>
+    // Email validation
+    function validateEmail(email) {
+        if (email.length <= 0) {
+            return true;
+        }
+        var splitted = email.match("^(.+)@(.+)$");
+        if (splitted == null) return false;
+        if (splitted[1] != null) {
+            var regexp_user = /^\"?[\w-_\.]*\"?$/;
+            if (splitted[1].match(regexp_user) == null) return false;
+        }
+        if (splitted[2] != null) {
+            var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
+            if (splitted[2].match(regexp_domain) == null) {
+                var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
+                if (splitted[2].match(regexp_ip) == null) return false;
+            }
+            return true;
+        }
+        return false;
+    }
 
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script type="text/javascript">
-        function validateEmail(email) {
-            // a very simple email validation checking.
-            // you can add more complex email checking if it helps
-            if (email.length <= 0) {
-                return true;
-            }
-            var splitted = email.match("^(.+)@(.+)$");
-            if (splitted == null) return false;
-            if (splitted[1] != null) {
-                var regexp_user = /^\"?[\w-_\.]*\"?$/;
-                if (splitted[1].match(regexp_user) == null) return false;
-            }
-            if (splitted[2] != null) {
-                var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
-                if (splitted[2].match(regexp_domain) == null) {
-                    var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
-                    if (splitted[2].match(regexp_ip) == null) return false;
-                } // if
-                return true;
-            }
+    function isInteger(s) {
+        for (var i = 0; i < s.length; i++) {
+            var c = s.charAt(i);
+            if (((c < "0") || (c > "9"))) return false;
+        }
+        return true;
+    }
+
+    // Form validation
+    function validateFrme() {
+        document.getElementById('nameErr').innerHTML = "";
+        document.getElementById('genderErr').innerHTML = "";
+        document.getElementById('phoneErr').innerHTML = "";
+        document.getElementById('serviceErr').innerHTML = "";
+        var nameElement = document.getElementById('cname');
+        var name = nameElement ? nameElement.value : '';
+
+        if (!name.trim()) {
+            document.getElementById('nameErr').innerHTML = "Please Enter Name";
+            if (nameElement) nameElement.focus();
             return false;
         }
 
-        function isInteger(s) {
-            var i;
-            for (i = 0; i < s.length; i++) {
-                var c = s.charAt(i);
-                if (((c < "0") || (c > "9"))) return false;
-            }
-            // All characters are numbers.
-            return true;
+        var genderElement = document.getElementById('gender');
+        var gender = genderElement ? genderElement.value : '';
+
+        if (!gender.trim()) {
+            document.getElementById('genderErr').innerHTML = "Please Select Gender";
+            if (genderElement) genderElement.focus();
+            return false;
         }
 
-        function validateFrme() {
-            // Clear all error messages
-            document.getElementById('nameErr').innerHTML = "";
-            document.getElementById('genderErr').innerHTML = "";
-            document.getElementById('phoneErr').innerHTML = "";
-            document.getElementById('serviceErr').innerHTML = "";
+        var phoneElement = document.getElementById('phone');
+        var phone = phoneElement ? phoneElement.value : '';
 
-            // Validate fields
-            var nameElement = document.getElementById('cname');
-            var name = nameElement ? nameElement.value : '';
+        if (!phone.trim()) {
+            document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
+            if (phoneElement) phoneElement.focus();
+            return false;
+        }
 
-            if (!name.trim()) {
-                document.getElementById('nameErr').innerHTML = "Please Enter Name";
-                if (nameElement) nameElement.focus();
-                return false;
-            }
+        if (isNaN(phone)) {
+            document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
+            if (phoneElement) phoneElement.focus();
+            return false;
+        }
 
-            var genderElement = document.getElementById('gender');
-            var gender = genderElement ? genderElement.value : '';
+        var serviceElement = document.getElementById('service');
+        var service = serviceElement ? serviceElement.value : '';
 
-            if (!gender.trim()) {
-                document.getElementById('genderErr').innerHTML = "Please Select Gender";
-                if (genderElement) genderElement.focus();
-                return false;
-            }
+        if (!service.trim()) {
+            document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
+            if (serviceElement) serviceElement.focus();
+            return false;
+        }
 
-            var phoneElement = document.getElementById('phone');
-            var phone = phoneElement ? phoneElement.value : '';
-
-            if (!phone.trim()) {
-                document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
-                if (phoneElement) phoneElement.focus();
-                return false;
-            }
-
-            if (isNaN(phone)) {
-                document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
-                if (phoneElement) phoneElement.focus();
-                return false;
-            }
-
-            var serviceElement = document.getElementById('service');
-            var service = serviceElement ? serviceElement.value : '';
-
-            if (!service.trim()) {
-                document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
-                if (serviceElement) serviceElement.focus();
-                return false;
-            }
-
-            var form = $("#frm");
-            $('#btn_apppointment').hide();
-            // $('#processing').show();
-            $.ajax({
-                type: "POST",
-                url: 'process.php',
-                data: form.serialize(),
-                success: function(response) {
-                    if (response == 1) {
-                        window.location = "thanks.php";
-                    } else {
-
-                        $('#alert_message').html(response);
-                        // $('#processing').hide();
-                        $('#btn_apppointment').show();
-                        $('#frm')[0].reset();
-                        window.setTimeout(function() {
-                            $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                                $(this).remove();
-                            });
-                        }, 4000);
-                    }
-
+        var form = $("#frm");
+        $('#btn_apppointment').hide();
+        $.ajax({
+            type: "POST",
+            url: 'process.php',
+            data: form.serialize(),
+            success: function(response) {
+                if (response == 1) {
+                    window.location = "thanks.php";
+                } else {
+                    $('#alert_message').html(response);
+                    $('#btn_apppointment').show();
+                    $('#frm')[0].reset();
+                    window.setTimeout(function() {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                            $(this).remove();
+                        });
+                    }, 4000);
                 }
-            });
-            return true;
-        }
-    </script>
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-
-    <script>
-        // JavaScript function to prompt login and redirect
-        function promptLoginForBooking() {
-            // alert('Please log in to book an appointment!');
-            window.location.href = 'login.php'; // Redirect to your login page
-        }
-    </script>
+            }
+        });
+        return true;
+    }
+    function promptLoginForBooking() {
+        window.location.href = 'login.php'; 
+    }
+</script>
 </body>
 
 </html>

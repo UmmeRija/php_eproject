@@ -1,69 +1,49 @@
 <?php
 session_start();
-include "connection.php"; // Your database connection file
-
-// Check if user is logged in
+include "connection.php";
 if (!isset($_SESSION['id'])) {
-    header("Location: login.php"); // Redirect to login if not logged in
+    header("Location: login.php");
     exit();
 }
 
-$user_session_id = mysqli_real_escape_string($con, $_SESSION['id']); // Sanitize user ID from session
-$appointment = null; // Initialize appointment variable
-
-// Function to format date from database (DD-MM-YYYY VARCHAR or old YYYY-MM-DD) to DD-MM-YYYY (display)
+$user_session_id = mysqli_real_escape_string($con, $_SESSION['id']);
+$appointment = null;
 function formatDateForDisplay($dateString) {
     if (empty($dateString) || $dateString == '0000-00-00') {
         return '';
     }
-    
-    // Check if the date string from DB is already DD-MM-YYYY
     if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $dateString)) {
-        return $dateString; // It's already in the desired display format
+        return $dateString;
     }
-    
-    // Attempt to convert from YYYY-MM-DD if it's not DD-MM-YYYY
     $date = DateTime::createFromFormat('Y-m-d', $dateString);
     if ($date) {
-        return $date->format('d-m-Y'); // Convert to DD-MM-YYYY
+        return $date->format('d-m-Y');
     }
-    
-    // Attempt to convert from DD/MM/YYYY if it's not DD-MM-YYYY
-    $date = DateTime::createFromFormat('d/m/Y', $dateString);
-    if ($date) {
-        return $date->format('d-m-Y'); // Convert to DD-MM-YYYY
-    }
-    
-    return $dateString; // Return as is if format is unknown/invalid
-}
-
-// Function to format date from input (DD/MM/YYYY) to DD-MM-YYYY for database (VARCHAR)
-function formatDateForDatabase($dateString) {
-    if (empty($dateString)) {
-        return '';
-    }
-    // Convert DD/MM/YYYY to DD-MM-YYYY
     $date = DateTime::createFromFormat('d/m/Y', $dateString);
     if ($date) {
         return $date->format('d-m-Y');
     }
-    // If input is already DD-MM-YYYY, pass it through
+    return $dateString; 
+}
+
+function formatDateForDatabase($dateString) {
+    if (empty($dateString)) {
+        return '';
+    }
+    $date = DateTime::createFromFormat('d/m/Y', $dateString);
+    if ($date) {
+        return $date->format('d-m-Y');
+    }
     if (preg_match('/^\d{2}-\d{2}-\d{4}$/', $dateString)) {
         return $dateString;
     }
-    return $dateString; // Return as is if format is unknown/invalid
+    return $dateString;
 }
-
-
-// --- START: Handle form submission (POST request) first ---
 if (isset($_POST['update_appointment'])) {
     if (isset($_POST['appointment_id']) && !empty($_POST['appointment_id'])) {
         $appointment_id = mysqli_real_escape_string($con, $_POST['appointment_id']);
-        
-        // DATES ARE SENT AS DD/MM/YYYY from input, SO CONVERT FOR DB to DD-MM-YYYY
         $dates_raw = $_POST['dates'];
-        $dates = mysqli_real_escape_string($con, formatDateForDatabase($dates_raw)); // Convert to DD-MM-YYYY for DB
-        
+        $dates = mysqli_real_escape_string($con, formatDateForDatabase($dates_raw));
         $times = mysqli_real_escape_string($con, $_POST['times']);
         $gender = mysqli_real_escape_string($con, $_POST['gender']);
         $branch = mysqli_real_escape_string($con, $_POST['branch']);
@@ -90,9 +70,6 @@ if (isset($_POST['update_appointment'])) {
         echo "<script>alert('Error: Appointment ID not provided for update.');</script>";
     }
 }
-// --- END: Handle form submission ---
-
-// --- START: Fetch appointment data for displaying the form (GET request or after a failed POST) ---
 $appointment_id_to_fetch = null;
 
 if (isset($_GET['appointment_id']) && !empty($_GET['appointment_id'])) {
@@ -118,8 +95,6 @@ if ($appointment_id_to_fetch) {
     echo "<script>window.location.href='index.php';</script>";
     exit();
 }
-// --- END: Fetch appointment data ---
-
 ?>
 
 <!doctype html>
@@ -583,7 +558,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         populateAllServices('serviceSelect', currentService);
     });
 
-    // Your existing validation functions
     function validateEmail(email) {
         if (email.length <= 0) {
             return true;
@@ -635,8 +609,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (serviceElement) serviceElement.focus();
             return false;
         }
-
-        // Validate date input for format DD-MM-YYYY
         var dateInput = document.getElementById('datePicker'); 
         if (!dateInput.value.trim()) {
             alert("Please enter a Date.");
@@ -645,46 +617,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         const dateValue = dateInput.value.trim();
-        // Regex for DD-MM-YYYY format
         const datePattern = /^\d{2}-\d{2}-\d{4}$/; 
         if (!datePattern.test(dateValue)) {
             alert("Please enter the Date in DD-MM-YYYY format (e.g., 25-12-2025).");
             dateInput.focus();
             return false;
         }
-
-        // --- NEW DATE VALIDATION LOGIC ---
-        // Parse the date to ensure it's a valid date and not in the past or too far in the future
-        const [day, month, year] = dateValue.split('-').map(Number); // Split by '-'
-        const inputDate = new Date(year, month - 1, day); // Month is 0-indexed
-
-        // Check if Date object is valid (e.g., handles "31-02-2025")
+        const [day, month, year] = dateValue.split('-').map(Number);
+        const inputDate = new Date(year, month - 1, day); 
         if (isNaN(inputDate.getTime()) || inputDate.getDate() !== day || inputDate.getMonth() !== (month - 1) || inputDate.getFullYear() !== year) {
              alert("The entered date is not a valid date. Please enter a valid date in DD-MM-YYYY format.");
              dateInput.focus();
              return false;
         }
-
-        // Get today's date, normalized to midnight for accurate comparison
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-
-        // Check for year > 2025
         if (year > 2025) {
             alert("The appointment year cannot be greater than 2025.");
             dateInput.focus();
             return false;
         }
-
-        // Check for date less than today's date
-        // Note: This comparison works reliably when both dates are normalized to midnight.
         if (inputDate < today) {
             alert("The appointment date cannot be in the past. Please select today's date or a future date.");
             dateInput.focus();
             return false;
         }
-        // --- END NEW DATE VALIDATION LOGIC ---
-
         return true;
     }
 

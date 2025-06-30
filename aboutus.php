@@ -1,7 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><head>
     <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
     <meta charset="utf-8">
@@ -178,291 +176,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <img class ="" src="img/gallery.png" alt="Gallery image"/>
     </section>
 
-
     <?php include "footer.php"; ?>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".banner", {
-            slidesPerView:1,
-            spaceBetween:0,
-            //loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
-
-            autoplay: {
-                delay: 5000,
-                // disableOnInteraction: false,
-            },
-
-            /* pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },*/
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-
-
-        var mySwiper1 = document.querySelector('.h__partners-swiper1').slider;
-
-        mySwiper1 = new Swiper('.h__partners-swiper1', {
-            //grabCursor: false,
-            loop: true,
-
-            slidesPerView: 'auto',
-
-            shortSwipes: true,
-            longSwipes: true,
-            allowTouchMove: true,
-            autoplay: {
-                delay: 1,
-            },
-            freeMode: true,
-            speed: 5000,
-        });
-
-    </script>
-
-    <script>
-        var swiper = new Swiper(".testi", {
-            slidesPerView:1,
-            spaceBetween: 30,
-            loop: true,
-            //mousewheel: true,
-            //effect: 'fade',
-
-            autoplay: {
-                delay: 5000,
-                // disableOnInteraction: false,
-            },
-
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            /* navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },*/
-        });
-
-        $(".hide-btn").click(function(){
-            $("#slide-nav").css("display", "none");
-            $("body").removeClass("slide-open");
-        });
-        $(".show-btn").click(function(){
-            $("#slide-nav").css("display", "block");
-        });
-    </script>
-
-
-    <script src="js/jquery.meanmenu.js"></script>
-    <script src="js/iscroll.js"></script>
-    <script src="js/slidemenu.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        jQuery(document).ready(function () {
-            jQuery('#datepicker').datepicker({
-                dateFormat: 'dd-mm-yy',
-
-                startDate: '+1d',
-
-                minDate: 0
-            });
-        });
-    </script>
-
-
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="js/jquery.meanmenu.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/slidemenu.js"></script>
+<script src="js/main.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script>
-    // Define the service options for each gender
-    const ladiesServices = [
-        { label: "Hair Styling", options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"] },
-        { label: "Make Up", options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"] },
-        { label: "Hair Texture", options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"] },
-        { label: "Hair Treatments", options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"] },
-        { label: "Facials & Rituals", options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"] },
-        { label: "Hand & Feet", options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"] },
-        { label: "Nail Care", options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"] }
-    ];
-
-    const gentsServices = [
-        { label: "Hair Cut & Finish", options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"] },
-        { label: "Hair Colour", options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"] },
-        { label: "Hair Texture", options: ["Straightening", "Smoothening", "Rebonding", "Perming"] },
-        { label: "Hair Treatments", options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"] },
-        { label: "Skin Care", options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"] },
-        { label: "Beard Grooming", options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"] }
-    ];
-
-    // Function to populate the service dropdown based on selected gender
-    function updateServices() {
-        const gender = document.getElementById("genderSelect").value;
-        const serviceSelect = document.getElementById("serviceSelect");
-
-        // Clear previous options
-        serviceSelect.innerHTML = '<option value="">Select Service</option>';
-
-        // Enable the service dropdown only if a gender is selected
-        if (gender) {
-            serviceSelect.disabled = false;
-
-            // Determine the appropriate services based on gender
-            const services = gender === "1" ? ladiesServices : gentsServices;
-
-            // Populate the service options
-            services.forEach(group => {
-                const optgroup = document.createElement("optgroup");
-                optgroup.label = group.label;
-
-                group.options.forEach(service => {
-                    const option = document.createElement("option");
-                    option.value = service;
-                    option.textContent = service;
-                    optgroup.appendChild(option);
-                });
-
-                serviceSelect.appendChild(optgroup);
-            });
-        } else {
-            serviceSelect.disabled = true;
-        }
-    }
-
-    // Event listener for gender selection change
-    document.getElementById("genderSelect").addEventListener("change", updateServices);
+    var swiperBanner = new Swiper(".banner", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        autoplay: {
+            delay: 5000,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
 </script>
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script type="text/javascript">
-    function validateEmail(email)
-    {
-        // a very simple email validation checking.
-        // you can add more complex email checking if it helps
-        if (email.length <= 0)
-        {
-            return true;
-        }
-        var splitted = email.match("^(.+)@(.+)$");
-        if (splitted == null) return false;
-        if (splitted[1] != null)
-        {
-            var regexp_user = /^\"?[\w-_\.]*\"?$/;
-            if (splitted[1].match(regexp_user) == null) return false;
-        }
-        if (splitted[2] != null)
-        {
-            var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
-            if (splitted[2].match(regexp_domain) == null)
-            {
-                var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
-                if (splitted[2].match(regexp_ip) == null) return false;
-            } // if
-            return true;
-        }
-        return false;
-    }
-    function isInteger(s)
-    {
-        var i;
-        for (i = 0; i < s.length; i++)
-        {
-            var c = s.charAt(i);
-            if (((c < "0") || (c > "9"))) return false;
-        }
-        // All characters are numbers.
-        return true;
-    }
-    function validateFrme()
-    {
-    // Clear all error messages
-    document.getElementById('nameErr').innerHTML = "";
-    document.getElementById('genderErr').innerHTML = "";
-    document.getElementById('phoneErr').innerHTML = "";
-    document.getElementById('serviceErr').innerHTML = "";
-
-    // Validate fields
-    var nameElement = document.getElementById('cname');
-    var name = nameElement ? nameElement.value : '';
-
-    if (!name.trim()) {
-        document.getElementById('nameErr').innerHTML = "Please Enter Name";
-        if (nameElement) nameElement.focus();
-        return false;
-    }
-
-    var genderElement = document.getElementById('gender');
-    var gender = genderElement ? genderElement.value : '';
-
-    if (!gender.trim()) {
-        document.getElementById('genderErr').innerHTML = "Please Select Gender";
-        if (genderElement) genderElement.focus();
-        return false;
-    }
-
-    var phoneElement = document.getElementById('phone');
-    var phone = phoneElement ? phoneElement.value : '';
-
-    if (!phone.trim()) {
-        document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
-        if (phoneElement) phoneElement.focus();
-        return false;
-    }
-
-    if (isNaN(phone)) {
-        document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
-        if (phoneElement) phoneElement.focus();
-        return false;
-    }
-
-    var serviceElement = document.getElementById('service');
-    var service = serviceElement ? serviceElement.value : '';
-
-    if (!service.trim()) {
-        document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
-        if (serviceElement) serviceElement.focus();
-        return false;
-    }
-
-        var form=$("#frm");
-        $('#btn_apppointment').hide();
-        // $('#processing').show();
-        $.ajax({
-                type:"POST",
-                url:'process.php',
-                data:form.serialize(),
-                success: function(response){
-                    if(response==1)
-                    {
-                        window.location = "thanks.html";
-                    }else{
-
-                    $('#alert_message').html(response);
-                    // $('#processing').hide();
-                    $('#btn_apppointment').show();
-                    $('#frm')[0].reset();
-                    window.setTimeout(function() {
-                $(".alert").fadeTo(500, 0).slideUp(500, function(){
-                    $(this).remove();
-                });
-                }, 4000);
-                }
-
-                }
-            });
-        return true;
-    }
+   
 </script>
 </body>
-
-
 </html>

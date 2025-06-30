@@ -313,322 +313,207 @@
 
     <?php include "footer.php"; ?>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".banner", {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            autoplay: {
-                delay: 5000,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-        var mySwiper1 = document.querySelector('.h__partners-swiper1');
-        if (mySwiper1) {
-            mySwiper1 = new Swiper('.h__partners-swiper1', {
-                loop: true,
-                slidesPerView: 'auto',
-                shortSwipes: true,
-                longSwipes: true,
-                allowTouchMove: true,
-                autoplay: {
-                    delay: 1,
-                },
-                freeMode: true,
-                speed: 5000,
-            });
+<script src="js/jquery.meanmenu.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/slidemenu.js"></script>
+<script src="js/main.js"></script>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<script type="text/javascript">
+    // Swiper for banner
+   // Swiper for banner
+var swiperBanner = new Swiper(".banner", {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    autoplay: {
+        delay: 5000,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
+
+// Swiper for partners
+var mySwiperPartners = document.querySelector('.h__partners-swiper1');
+if (mySwiperPartners) {
+    mySwiperPartners = new Swiper('.h__partners-swiper1', {
+        loop: true,
+        slidesPerView: 'auto',
+        shortSwipes: true,
+        longSwipes: true,
+        allowTouchMove: true,
+        autoplay: {
+            delay: 1,
+        },
+        freeMode: true,
+        speed: 5000,
+    });
+}
+
+// Swiper for testimonials
+var swiperTesti = new Swiper(".testi", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+        delay: 5000,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+});
+
+// Toggle slide navigation
+$(".hide-btn").click(function() {
+    $("#slide-nav").css("display", "none");
+    $("body").removeClass("slide-open");
+});
+$(".show-btn").click(function() {
+    $("#slide-nav").css("display", "block");
+    $("body").addClass("slide-open");
+});
+
+jQuery(document).ready(function() {
+    if (jQuery.fn.datepicker) {
+        jQuery('#datepicker').datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: 0
+        });
+    } else {
+        console.warn("jQuery UI Datepicker is not loaded or '#datepicker' element is missing.");
+    }
+});
+
+function validateEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+}
+
+function validateFrme() {
+    $('#nameErr').html("");
+    $('#phoneErr').html("");
+    $('#emailErr').html("");
+    $('#alert_message').hide().html('');
+
+    var nameElement = document.getElementById('cname');
+    var emailElement = document.getElementById('cemail');
+    var phoneElement = document.getElementById('phone');
+    var submitButton = $('#btn_apppointment');
+
+    var name = nameElement ? nameElement.value : '';
+    if (!name.trim()) {
+        $('#nameErr').html("Please Enter Name");
+        if (nameElement) nameElement.focus();
+        submitButton.show();
+        return false;
+    }
+
+    var email = emailElement ? emailElement.value : '';
+    if (!email.trim()) {
+        $('#emailErr').html("Please Enter Email");
+        if (emailElement) emailElement.focus();
+        submitButton.show();
+        return false;
+    }
+    if (!validateEmail(email)) {
+        $('#emailErr').html("Please Enter a valid Email address!");
+        if (emailElement) emailElement.focus();
+        submitButton.show();
+        return false;
+    }
+
+    var phone = phoneElement ? phoneElement.value : '';
+    const phoneRegex = /^\d{4}-\d{7}$/;
+    if (!phone.trim()) {
+        $('#phoneErr').html("Please Enter Phone Number");
+        if (phoneElement) phoneElement.focus();
+        submitButton.show();
+        return false;
+    }
+    if (!phoneRegex.test(phone)) {
+        $('#phoneErr').html("Phone No. should be in 0000-0000000 format (e.g., 03XX-XXXXXXX).");
+        if (phoneElement) phoneElement.focus();
+        submitButton.show();
+        return false;
+    }
+
+    var form = $("#frm");
+    if (form.length === 0) {
+        console.error("Form with ID 'frm' not found for AJAX submission. Skipping AJAX.");
+        $('#alert_message').html("Form not found. Please refresh the page.").show();
+        submitButton.show();
+        return false;
+    }
+
+    submitButton.hide();
+
+    const failsafeTimeout = setTimeout(() => {
+        if (submitButton.is(':hidden')) {
+            submitButton.show();
+            $('#alert_message').html("Submission taking longer than expected. Please wait or try again.").show();
         }
-    </script>
+    }, 5000);
 
-    <script>
-        var swiper = new Swiper(".testi", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            autoplay: {
-                delay: 5000,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-        });
-
-        $(".hide-btn").click(function() {
-            $("#slide-nav").css("display", "none");
-            $("body").removeClass("slide-open");
-        });
-        $(".show-btn").click(function() {
-            $("#slide-nav").css("display", "block");
-        });
-    </script>
-
-    <script src="js/jquery.meanmenu.js"></script>
-    <script src="js/iscroll.js"></script>
-    <script src="js/slidemenu.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        // Ensure jQuery UI is loaded before attempting to use .datepicker()
-        // And make sure you are using the full jQuery version (3.7.1.min.js) for jQuery UI.
-        jQuery(document).ready(function() {
-            jQuery('#datepicker').datepicker({
-                dateFormat: 'dd-mm-yy',
-                startDate: '+1d', // This is not a standard jQuery UI option, likely from another datepicker
-                minDate: 0
-            });
-        });
-    </script>
-
-    <script>
-        const ladiesServices = [{
-                label: "Hair Styling",
-                options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-            }, {
-                label: "Make Up",
-                options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-            }, {
-                label: "Hair Texture",
-                options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-            }, {
-                label: "Hair Treatments",
-                options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-            }, {
-                label: "Facials & Rituals",
-                options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-            }, {
-                label: "Hand & Feet",
-                options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-            }, {
-                label: "Nail Care",
-                options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-            }];
-
-        const gentsServices = [{
-                label: "Hair Cut & Finish",
-                options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-            }, {
-                label: "Hair Colour",
-                options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-            }, {
-                label: "Hair Texture",
-                options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-            }, {
-                label: "Hair Treatments",
-                options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-            }, {
-                label: "Skin Care",
-                options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-            }, {
-                label: "Beard Grooming",
-                options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-            }];
-
-        function updateServices() {
-            const genderSelectElement = document.getElementById("genderSelect");
-            const serviceSelectElement = document.getElementById("serviceSelect");
-
-            if (!genderSelectElement || !serviceSelectElement) {
-                return;
-            }
-
-            const gender = genderSelectElement.value;
-            const serviceSelect = serviceSelectElement;
-
-            serviceSelect.innerHTML = '<option value="">Select Service</option>';
-
-            if (gender) {
-                serviceSelect.disabled = false;
-                const services = gender === "1" ? ladiesServices : gentsServices;
-
-                services.forEach(group => {
-                    const optgroup = document.createElement("optgroup");
-                    optgroup.label = group.label;
-
-                    group.options.forEach(service => {
-                        const option = document.createElement("option");
-                        option.value = service;
-                        option.textContent = service;
-                        optgroup.appendChild(option);
-                    });
-                    serviceSelect.appendChild(optgroup);
-                });
+    $.ajax({
+        type: "POST",
+        url: 'savecontact.php',
+        data: form.serialize(),
+        success: function(response) {
+            clearTimeout(failsafeTimeout);
+            if (response.trim().includes('1')) {
+                window.location = "contact.php?success=1";
             } else {
-                serviceSelect.disabled = true;
-            }
-        }
-        const genderSelectElement = document.getElementById("genderSelect");
-        if (genderSelectElement) {
-            genderSelectElement.addEventListener("change", updateServices);
-        }
-    </script>
-
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script type="text/javascript">
-        function validateEmail(email) {
-            // Updated regex for email validation to be more robust
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            return emailRegex.test(email);
-        }
-
-        // Removed isInteger as it's no longer needed with the new phone validation regex
-
-        function validateFrme() {
-            // Clear all previous error messages and hide the alert_message div
-            document.getElementById('nameErr').innerHTML = "";
-            document.getElementById('phoneErr').innerHTML = "";
-            document.getElementById('emailErr').innerHTML = "";
-            $('#alert_message').hide().html('');
-
-            // Get elements
-            var nameElement = document.getElementById('cname');
-            var emailElement = document.getElementById('cemail');
-            var phoneElement = document.getElementById('phone');
-            var submitButton = $('#btn_apppointment');
-
-            // --- Client-side Validation ---
-
-            // Validate Name
-            var name = nameElement ? nameElement.value : '';
-            if (!name.trim()) {
-                document.getElementById('nameErr').innerHTML = "Please Enter Name";
-                if (nameElement) nameElement.focus();
-                submitButton.show(); // Show button on validation failure
-                console.log("Button visible: Client-side Name validation failed");
-                return false;
-            }
-
-            // Validate Email
-            var email = emailElement ? emailElement.value : '';
-            if (!email.trim()) {
-                document.getElementById('emailErr').innerHTML = "Please Enter Email";
-                if (emailElement) emailElement.focus();
-                submitButton.show(); // Show button on validation failure
-                console.log("Button visible: Client-side Email empty");
-                return false;
-            }
-            if (!validateEmail(email)) {
-                document.getElementById('emailErr').innerHTML = "Please Enter a valid Email address!";
-                if (emailElement) emailElement.focus();
-                submitButton.show(); // Show button on validation failure
-                console.log("Button visible: Client-side Email format invalid");
-                return false;
-            }
-
-            // Validate Phone
-            var phone = phoneElement ? phoneElement.value : '';
-            // Regex for "0000-0000000" format
-            const phoneRegex = /^\d{4}-\d{7}$/; 
-            if (!phone.trim()) {
-                document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
-                if (phoneElement) phoneElement.focus();
-                submitButton.show(); // Show button on validation failure
-                console.log("Button visible: Client-side Phone empty");
-                return false;
-            }
-            // UPDATED: Use regex for phone validation
-            if (!phoneRegex.test(phone)) {
-                document.getElementById('phoneErr').innerHTML = "Phone No. should be in 0000-0000000 format (e.g., 03XX-XXXXXXX).";
-                if (phoneElement) phoneElement.focus();
-                submitButton.show(); // Show button on validation failure
-                console.log("Button visible: Client-side Phone format invalid");
-                return false;
-            }
-
-            // --- AJAX Submission ---
-            var form = $("#frm");
-            if (form.length === 0) {
-                console.error("Form with ID 'frm' not found for AJAX submission. Skipping AJAX.");
-                $('#alert_message').html("Form not found. Please refresh the page.").show();
-                submitButton.show(); // Ensure button is shown if form is missing
-                console.log("Button visible: Form ID missing");
-                return false;
-            }
-
-            // Hide button and possibly show a loading indicator
-            submitButton.hide();
-            console.log("Button hidden: Submitting form...");
-            // $('#processing').show(); // Uncomment if you have a processing spinner
-
-            // Failsafe timeout to show button if AJAX takes too long or gets stuck
-            const failsafeTimeout = setTimeout(() => {
-                if (submitButton.is(':hidden')) {
-                    submitButton.show();
-                    console.warn("Button forcibly shown by failsafe timeout.");
-                    $('#alert_message').html("Submission taking longer than expected. Please wait or try again.").show();
-                }
-            }, 5000); // 5 seconds. Adjust as needed.
-
-            $.ajax({
-                type: "POST",
-                url: 'savecontact.php', // Ensure this path is correct
-                data: form.serialize(),
-                success: function(response) {
-                    clearTimeout(failsafeTimeout); // Clear failsafe if AJAX succeeded
-                    console.log("AJAX Success Response (Raw): '" + response + "'"); // LOG THE RAW RESPONSE
-
-                    // Check if response contains '1' anywhere, or if it's "success"
-                    if (response.trim().includes('1')) { // Changed to .includes('1') for more robustness
-                        console.log("AJAX Success: Server indicated success. Redirecting...");
-                        // Changed redirect to contact.php to avoid re-triggering savecontact.php
-                        window.location = "contact.php?success=1"; // Added success parameter
-                    } else {
-                        // Server returned an error message or non-'1' response
-                        console.log("AJAX Success but server did not return '1'. Displaying response.");
-                        $('#alert_message').html(response).show();
-                        submitButton.show(); // Show button for server-side error message
-                        console.log("Button visible: Server returned non-'1' response.");
-                        // $('#frm')[0].reset(); // Moved form reset to after showing success/error
-                        window.setTimeout(function() {
-                            $("#alert_message").fadeTo(500, 0).slideUp(500, function() {
-                                $(this).html('').hide();
-                            });
-                        }, 4000);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    clearTimeout(failsafeTimeout); // Clear failsafe if AJAX errored
-                    // AJAX request failed (e.g., 404, 500, network issue)
-                    console.error("AJAX Error: ", status, error, "Response Text:", xhr.responseText); // Log full responseText
-                    let errorMessage = "An error occurred during submission. Please try again.";
-                    if (xhr.status) {
-                        errorMessage += ` (Status: ${xhr.status} - ${xhr.statusText})`;
-                    }
-                    if (xhr.responseText && xhr.status !== 404) {
-                        errorMessage += `<br>Server Debug: <pre>${xhr.responseText.substring(0, 500)}</pre>`; // Show more of the responseText
-                    }
-                    $('#alert_message').html(errorMessage).show();
-                    submitButton.show(); // Show button for AJAX error
-                    console.log("Button visible: AJAX request error.");
-                }
-            });
-            return false; // Prevent default form submission as AJAX is used
-        }
-
-        // New function to display success message from URL parameter
-        $(document).ready(function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('success') === '1') {
-                $('#alert_message').removeClass('alert-danger').addClass('alert-success').html('Thank you for contacting us! Your message has been sent successfully.').show();
-                $('#frm')[0].reset(); // Reset form on successful submission
+                $('#alert_message').html(response).show();
+                submitButton.show();
                 window.setTimeout(function() {
                     $("#alert_message").fadeTo(500, 0).slideUp(500, function() {
                         $(this).html('').hide();
-                        // Optional: remove the URL parameter after message is shown
-                        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-                        window.history.replaceState({path:newUrl},'',newUrl);
                     });
                 }, 4000);
             }
-        });
-    </script>
+        },
+        error: function(xhr, status, error) {
+            clearTimeout(failsafeTimeout);
+            let errorMessage = "An error occurred during submission. Please try again.";
+            if (xhr.status) {
+                errorMessage += ` (Status: ${xhr.status} - ${xhr.statusText})`;
+            }
+            if (xhr.responseText && xhr.status !== 404) {
+                errorMessage += `<br>Server Debug: <pre>${xhr.responseText.substring(0, 500)}</pre>`;
+            }
+            $('#alert_message').html(errorMessage).show();
+            submitButton.show();
+        }
+    });
+    return false;
+}
+
+$(document).ready(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+        $('#alert_message').removeClass('alert-danger').addClass('alert-success').html('Thank you for contacting us! Your message has been sent successfully.').show();
+        $('#frm')[0].reset();
+        window.setTimeout(function() {
+            $("#alert_message").fadeTo(500, 0).slideUp(500, function() {
+                $(this).html('').hide();
+                const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({
+                    path: newUrl
+                }, '', newUrl);
+            });
+        }, 4000);
+    }
+});
+</script>
 </body>
 
 </html>

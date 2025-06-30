@@ -72,71 +72,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
 <title>Affinity Salon</title>
                 <style>
-/* --- Footer Heading Consistency (Updated) --- */
-/* This ensures all main footer headings like "Opening Hours" and "Get In Touch" look consistent */
 .footer-head h4,
 .footer-heading {
-    font-family: 'Bellefair', serif; /* Use your elegant font */
-    color: #e2b97f; /* Your gold/tan accent color */
-    font-size: 1.5rem; /* Consistent heading size */
-    margin-top: 0; /* Ensures consistent vertical alignment at the top of the column */
-    margin-bottom: 20px; /* Space below the heading */
-    text-transform: uppercase; /* Optional: for a refined look */
+    font-family: 'Bellefair', serif;
+    color: #e2b97f;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* --- Refined Contact Info Styling (Updated) --- */
 .contact-info {
-    list-style: none; /* Removes bullet points */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .contact-info li {
-    margin-bottom: 10px; /* Space between each contact item */
-    color: #bbb; /* Default text color for items */
+    margin-bottom: 10px;
+    color: #bbb;
     font-size: 1rem;
-    display: flex; /* Uses Flexbox for horizontal alignment of icon and text */
-    align-items: center; /* Vertically centers the icon and text within each list item */
-    line-height: 1.4; /* Improves readability and helps with vertical alignment */
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
 }
 
 .contact-info li .footer-icon {
-    color: #e2b97f; /* Gold icon color */
-    margin-right: 10px; /* Space between icon and text */
-    font-size: 1.2rem; /* Size of the icons */
-    width: 20px; /* Fixed width for icons to ensure consistent text alignment */
-    text-align: center; /* Centers the icon within its fixed width */
+    color: #e2b97f;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
 }
 
 .contact-info li a {
-    color: #bbb; /* Link color */
-    text-decoration: none; /* Removes underline from links */
-    transition: color 0.3s ease; /* Smooth color change on hover */
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .contact-info li a:hover {
-    color: #e2b97f; /* Gold on hover */
+    color: #e2b97f;
 }
 
-/* --- General Footer Area Styling (Review and keep if not conflicting with style.css) --- */
-/* These rules ensure your footer background and overall padding are consistent. */
 .footer-area {
-    background-color: #000; /* Ensure this is your desired dark background color */
-    padding: 60px 0; /* Top and bottom padding for the entire footer area */
+    background-color: #000;
+    padding: 60px 0;
 }
 
 .footer-content {
-    /* Adjust padding for individual content blocks within the footer if needed for vertical alignment */
-    padding-top: 0; 
-    padding-bottom: 0; 
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .footer-head {
-    /* Adjust margin/padding for the div wrapping headings if there's unexpected space */
-    margin-top: 0; 
+    margin-top: 0;
     padding-top: 0;
 }
+
 </style>
     </head>
     <body id="home" class="slide_menu slide-right" data-spy="scroll" data-target="#navbar-example">
