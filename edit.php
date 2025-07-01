@@ -456,6 +456,7 @@ if ($appointment_id_to_fetch) {
                                             <option value="">Select Stylist</option>
                                             <option value="No Preferences">No Preferences</option>
                     <?php
+                    if(htmlspecialchars($row['Status']) == "Accepted"){
                    $sql = "SELECT FullName FROM stylist";
                     $query = mysqli_query($con, $sql);
                       if ($query && mysqli_num_rows($query) > 0) {
@@ -465,6 +466,7 @@ if ($appointment_id_to_fetch) {
                                                 } else {
                                                     echo '<option disabled>No Stylists Available</option>';
                                                 }
+                                            }
                                                 ?>
 
                 </select>

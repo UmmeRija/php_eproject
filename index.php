@@ -306,7 +306,7 @@ color: #d1a86e;
                                             <option value="No Preferences">No Preferences</option>
                                                 <?php
                                                 include 'connection.php'; 
-
+if(htmlspecialchars($row['Status']) == "Accepted"){
                                                 $sql1 = "SELECT FullName FROM stylist";
                                                 $query1 = mysqli_query($con, $sql1);
 
@@ -317,7 +317,9 @@ color: #d1a86e;
                                                 } else {
                                                     echo '<option disabled>No Stylists Available</option>';
                                                 }
+                                            }
                                                 ?>
+                                               
                                             </select>
                                         </div>
 
