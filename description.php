@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             background-color: #1a1a1a; 
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(226, 185, 127, 0.2);
+          
             margin-top: 50px;
             margin-bottom: 50px;
         }
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             object-fit: cover; 
             border-radius: 8px;
             border: 1px solid #333; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            
         }
 
         .product-info-column h1 {
@@ -218,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             display: inline-flex; 
             align-items: center;
             gap: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+           
         }
         .btn-add-to-cart:hover {
             background-color: #d6a800 !important; 
@@ -319,7 +319,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     }
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(226, 185, 127, 0.3);
+            
         }
 
         .product-card .price {

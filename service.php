@@ -184,7 +184,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <h1 class="service-page-title text-uppercase text-white">Our Services</h1>
             </div>
         </div>
-        <img src="img/servicebg.jpg" class="img-fluid service-banner-image" alt="Our Services Banner">
+        <img src="img/servicebg.png""class="img-fluid service-banner-image" alt="Our Services Banner">
     </section>
     <section class="pt50">
         <div class="container-fluid">
