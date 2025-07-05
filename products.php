@@ -191,7 +191,7 @@ if ($is_ajax_request) {
         }
     
         .product-card {
-            background-color: #1a1a1a;
+            background-color:black;
             border: 1px solid #333;
             padding: 20px;
             text-align: center;
