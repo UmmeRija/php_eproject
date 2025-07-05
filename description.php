@@ -1,12 +1,13 @@
 <?php
-include 'connection.php';
+session_start(); // Make sure this is the very first line!
+include 'connection.php'; // Include your database connection
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     echo "<p style='color: white; text-align: center; padding-top: 100px;'>Invalid product ID.</p>";
     exit;
 }
 
-$id = intval($_GET['id']); 
+$id = intval($_GET['id']);
 
 $sql = "SELECT * FROM products WHERE id = $id LIMIT 1";
 $query = mysqli_query($con, $sql);
@@ -25,13 +26,13 @@ if (isset($product['name']) && !empty($product['name'])) {
     $product_name_lower = strtolower($product['name']);
 
     $stop_words = ['the', 'a', 'an', 'and', 'or', 'for', 'with', 'in', 'on', 'at', 'of', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'been', 'ing', 'ml', 'g', 'kg', 'oz', 'fl', 'x'];
-    $product_name_clean = preg_replace('/[^\p{L}\p{N}\s]/u', '', $product_name_lower); 
+    $product_name_clean = preg_replace('/[^\p{L}\p{N}\s]/u', '', $product_name_lower);
 
-    $words = array_unique(array_filter(explode(' ', $product_name_clean))); 
+    $words = array_unique(array_filter(explode(' ', $product_name_clean)));
 
     $keywords = [];
     foreach ($words as $word) {
-        if (!in_array($word, $stop_words) && strlen($word) > 2) { 
+        if (!in_array($word, $stop_words) && strlen($word) > 2) {
             $keywords[] = $word;
         }
     }
@@ -53,38 +54,11 @@ if (isset($product['name']) && !empty($product['name'])) {
                 $related_products[] = $row;
             }
         } else {
-            
+            // Error handling for related products query
         }
     }
 }
-// Add to Cart logic
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $item_id = $_POST['product_id'];
-    $item_name = $_POST['product_name'];
-    $item_price = $_POST['product_price'];
-    $item_image = $_POST['product_image'];
-    $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1; // Get quantity from form
-
-    if ($quantity < 1) $quantity = 1; 
-
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
-
-    if (isset($_SESSION['cart'][$item_id])) {
-        $_SESSION['cart'][$item_id]['quantity'] += $quantity; // Add to existing quantity
-    } else {
-        $_SESSION['cart'][$item_id] = [
-            'name' => $item_name,
-            'price' => $item_price,
-            'image' => $item_image,
-            'quantity' => $quantity
-        ];
-    }
-
-    header("Location: cart.php");
-    exit();
-}
+// Removed the old Add to Cart PHP logic that caused the redirect
 ?>
 
 <!DOCTYPE html>
@@ -97,81 +71,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
-    <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="canonical" href="https://www.affinity.salon/contact.php">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css"> 
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/meanmenu.min.css">
-    <link rel="stylesheet" href="css/slidemenu.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
     <style>
-
         body {
             background-color: #000;
             font-family: 'Inter', sans-serif;
             color: #fff;
         }
         .container {
-            max-width: 1200px; 
+            max-width: 1200px;
         }
 
         .product-detail-wrapper {
-            background-color:black; 
+            background-color: black;
             padding: 40px;
             border-radius: 10px;
-          
             margin-top: 50px;
             margin-bottom: 50px;
         }
 
         img.product-image-detail {
             width: 100%;
-            height: 500px; 
-            object-fit: cover; 
+            height: 500px;
+            object-fit: cover;
             border-radius: 8px;
-            border: 1px solid #333; 
-            
+            border: 1px solid #333;
         }
 
         .product-info-column h1 {
-            color: #e2b97f; 
+            color: #e2b97f;
             font-family: 'Bellefair', serif;
-            font-size: 2.8rem; 
+            font-size: 2.8rem;
             margin-bottom: 10px;
         }
 
         .product-info-column .price-display {
             font-size: 2rem;
-            color: #f0c040; 
+            color: #f0c040;
             font-weight: bold;
             margin-bottom: 20px;
-            display: block; 
+            display: block;
         }
 
         .product-info-column .product-meta {
@@ -181,10 +126,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             line-height: 1.8;
         }
         .product-info-column .product-meta strong {
-            color: #e2b97f; 
+            color: #e2b97f;
         }
         .product-info-column .product-meta a {
-            color: #f0c040; 
+            color: #f0c040;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -197,18 +142,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             margin-bottom: 25px;
         }
         .quantity-selector input[type="number"] {
-            width: 60px; 
-            padding: 8px 0; 
+            width: 60px;
+            padding: 8px 0;
             border: 1px solid #555;
             border-radius: 5px;
-            background-color: #000; 
+            background-color: #000;
             color: #fff;
             text-align: center;
-            -moz-appearance: textfield; 
+            -moz-appearance: textfield;
         }
         .quantity-selector input[type="number"]::-webkit-outer-spin-button,
         .quantity-selector input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none; 
+            -webkit-appearance: none;
             margin: 0;
         }
         .quantity-selector .btn {
@@ -231,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
         /* Add to Cart button styles */
         .btn-add-to-cart {
-            background-color: #f0c040 !important; 
+            background-color: #f0c040 !important;
             border: none;
             color: #000 !important;
             padding: 12px 30px;
@@ -239,20 +184,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             font-size: 1.1rem;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-            display: inline-flex; 
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-           
+
         }
         .btn-add-to-cart:hover {
-            background-color: #d6a800 !important; 
+            background-color: #d6a800 !important;
             color: #000 !important;
         }
 
         .social-share {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #333; 
+            border-top: 1px solid #333;
         }
         .social-share span {
             color: #bbb;
@@ -260,20 +205,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             margin-right: 15px;
         }
         .social-share a {
-            color: #e2b97f; 
+            color: #e2b97f;
             margin-right: 15px;
-            font-size: 1.3rem; 
+            font-size: 1.3rem;
             transition: color 0.3s;
         }
         .social-share a:hover {
-            color: #f0c040; 
+            color: #f0c040;
         }
 
         .product-tabs-wrapper {
             margin-top: 40px;
         }
         .nav-tabs {
-            border-bottom: 1px solid #333; 
+            border-bottom: 1px solid #333;
         }
         .nav-tabs .nav-link {
             color: #bbb;
@@ -286,15 +231,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         }
         .nav-tabs .nav-link:hover,
         .nav-tabs .nav-link.active {
-            color: #e2b97f; 
+            color: #e2b97f;
             background-color: transparent;
             border-color: #e2b97f;
         }
         .tab-content {
-            background-color: #1a1a1a; 
+            background-color: #1a1a1a;
             padding: 30px;
             border: 1px solid #222;
-            border-top: none; 
+            border-top: none;
             border-radius: 0 0 10px 10px;
             color: #ddd;
             line-height: 1.7;
@@ -311,39 +256,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             margin-bottom: 40px;
         }
 
-        
-    .product-card {
-        height: 100%; 
-        min-height: 380px; 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; 
-    }
 
-    .product-card img {
-        max-height: 180px; 
-        object-fit: contain;
-        margin-bottom: 15px;
-        width: 100%;
-        border-radius: 5px;
-    }
+        .product-card {
+            height: 100%;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    .product-card h5 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        color: #fff;
-        flex-grow: 1; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        line-height: 1.4; 
-        height: 2.8em; 
-    }
+        .product-card img {
+            max-height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .product-card h5 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #fff;
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-height: 1.4;
+            height: 2.8em;
+        }
         .product-card:hover {
             transform: translateY(-5px);
-            
+
         }
 
         .product-card .price {
@@ -369,21 +314,212 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         }
 
         .owl-nav button {
-            color: #e2b97f !important; 
+            color: #e2b97f !important;
             font-size: 2rem !important;
             margin: 0 10px !important;
             transition: color 0.3s;
         }
         .owl-nav button:hover {
-            color: #f0c040 !important; 
+            color: #f0c040 !important;
             background-color: transparent !important;
         }
         .owl-dots .owl-dot span {
-            background: #555 !important; 
+            background: #555 !important;
             transition: background 0.3s;
         }
         .owl-dots .owl-dot.active span {
-            background: #e2b97f !important; 
+            background: #e2b97f !important;
+        }
+        /* Side Cart Styles */
+
+        .side-cart {
+            position: fixed;
+            top: 0;
+            right: -350px; /* Hidden by default */
+            width: 350px;
+            height: 100%;
+            background-color: #1a1a1a;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 9999; /* <--- CHANGE THIS TO A HIGH VALUE, e.g., 9999 or 10000 */
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease-in-out;
+            color: #fff;
+        }
+
+
+        .side-cart.open {
+            right: 0; /* Slide in */
+        }
+
+        .side-cart .cart-header {
+            padding: 15px 20px;
+            background-color: #222;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .side-cart .cart-header .cart-icon-bag {
+            font-size: 1.5rem;
+            color: #e2b97f; /* Accent color */
+            position: relative;
+        }
+        .side-cart .cart-header .cart-icon-bag span {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #f0c040; /* Accent color */
+            color: #000;
+            font-size: 0.7rem;
+            border-radius: 50%;
+            padding: 2px 6px;
+            line-height: 1;
+        }
+
+        .side-cart .cart-header h4 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #e2b97f;
+            flex-grow: 1;
+        }
+
+        .side-cart .cart-header .close-btn {
+            background: none;
+            border: none;
+            color: #bbb;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 5px;
+        }
+        .side-cart .cart-header .close-btn:hover {
+            color: #f0c040;
+        }
+
+        .side-cart .cart-items-container {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto; /* Enable scrolling for many items */
+        }
+
+        .side-cart .empty-cart-text {
+            text-align: center;
+            color: #bbb;
+            padding: 30px 0;
+        }
+
+        .side-cart .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #333; /* Dashed line for items */
+        }
+        .side-cart .cart-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .side-cart .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 1px solid #555;
+        }
+
+        .side-cart .item-details {
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+        .side-cart .item-details h5 {
+            color: #e2b97f;
+            margin-bottom: 3px;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+        .side-cart .item-details p {
+            margin: 0;
+            color: #bbb;
+            font-size: 0.85rem;
+        }
+
+        .side-cart .item-remove-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d; /* Red for delete */
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+        .side-cart .item-remove-btn:hover {
+            color: #ff0000;
+        }
+
+        .side-cart .cart-footer {
+            padding: 20px;
+            background-color: #222;
+            border-top: 1px solid #333;
+        }
+
+        .side-cart .subtotal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #f0c040;
+            margin-bottom: 15px;
+        }
+
+        .side-cart .btn-dark-checkout,
+        .side-cart .btn-primary-checkout {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .side-cart .btn-dark-checkout {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+        .side-cart .btn-dark-checkout:hover {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .side-cart .btn-primary-checkout {
+            background-color: #e2b97f; /* Accent color */
+            color: #000;
+            border: none;
+        }
+        .side-cart .btn-primary-checkout:hover {
+            background-color: #f0c040; /* Lighter accent on hover */
+            color: #000;
+        }
+
+        /* Overlay to dim background */
+        .side-cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9998; /* Below side cart, above other content */
+            display: none; /* Hidden by default */
+        }
+        .side-cart-overlay.show {
+            display: block;
         }
     </style>
 </head>
@@ -405,18 +541,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 <p class="product-description"><?= nl2br(htmlspecialchars(substr($product['description'], 0, 200))) ?><?= strlen($product['description']) > 200 ? '...' : '' ?></p>
 
                 <div class="product-meta">
-                    <!-- <p><strong>SKU:</strong> N/A </p> -->
                     <p><strong>Category:</strong> <a href="#"><?= htmlspecialchars($product['category'] ?? 'N/A') ?></a></p>
-                    <!-- <p><strong>Tags:</strong> <a href="#">Hair Care</a>, <a href="#">Shampoo</a> </p> -->
                 </div>
 
-                <form method="post" class="mt-4">
-                    <div class="quantity-selector mb-3 d-flex align-items-center">
+                <form method="post" class="mt-4" name="add_to_cart_form"> <div class="quantity-selector mb-3 d-flex align-items-center">
                         <button type="button" class="btn btn-sm btn-dark" onclick="changeQty(-1)">−</button>
                         <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" class="form-control form-control-sm mx-2 text-center">
                         <button type="button" class="btn btn-sm btn-dark" onclick="changeQty(1)">+</button>
                     </div>
-
 
                     <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id']) ?>">
                     <input type="hidden" name="product_name" value="<?= htmlspecialchars($product['name']) ?>">
@@ -487,6 +619,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     </div>
 </section>
 
+<div class="side-cart" id="sideCart">
+    <div class="cart-header">
+        <div class="cart-icon-bag">
+            <i class="fas fa-shopping-bag"></i> <span id="cartItemCount">0</span>
+        </div>
+        <h4>Your Cart</h4>
+        <button type="button" class="close-btn" id="closeCartBtn">&times;</button>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer">
+        <p class="empty-cart-text">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer">
+        <div class="subtotal">
+            <span>Subtotal:</span>
+            <span id="cartSubtotal">PKR 0</span>
+        </div>
+        <a href="checkout.php" class="btn btn-primary-checkout mt-2">Checkout</a>
+    </div>
+</div>
 <?php include 'footer.php'; ?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -494,42 +645,174 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <script>
-function changeQty(delta) {
-    const qtyInput = document.getElementById('quantity');
-    let current = parseInt(qtyInput.value) || 1;
-    const min = parseInt(qtyInput.min) || 1;
-    const max = parseInt(qtyInput.max) || 100;
+    // Quantity selector functions
+    function changeQty(delta) {
+        const qtyInput = document.getElementById('quantity');
+        let current = parseInt(qtyInput.value) || 1;
+        const min = parseInt(qtyInput.min) || 1;
+        const max = parseInt(qtyInput.max) || 100;
 
-    current += delta;
+        current += delta;
 
-    if (current < min) current = min;
-    if (current > max) current = max;
+        if (current < min) current = min;
+        if (current > max) current = max;
 
-    qtyInput.value = current;
-}
+        qtyInput.value = current;
+    }
 
-$(document).ready(function(){
-    $(".related-products-carousel").owlCarousel({
-        loop: true, 
-        margin: 20,
-        nav: true, 
-        dots: true, 
-        responsive: {
-            0: {
-                items: 1 
-            },
-            576: {
-                items: 2 
-            },
-            768: {
-                items: 3 
-            },
-            992: {
-                items: 4 
+    $(document).ready(function(){
+        // Initialize Owl Carousel
+        $(".related-products-carousel").owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: true,
+            dots: true,
+            responsive: {
+                0: { items: 1 },
+                576: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 }
+            }
+        });
+
+        // --- Side Cart Logic ---
+        const sideCart = $('#sideCart');
+        const closeCartBtn = $('#closeCartBtn');
+        const cartItemsContainer = $('#cartItemsContainer');
+        const cartItemCount = $('#cartItemCount');
+        const cartSubtotal = $('#cartSubtotal');
+
+        // Create and append the overlay dynamically
+        const sideCartOverlay = $('<div class="side-cart-overlay" id="sideCartOverlay"></div>');
+        $('body').append(sideCartOverlay);
+
+
+        // Function to update the side cart's display
+        function updateSideCart(cartData) {
+            cartItemCount.text(cartData.cart_count);
+            cartSubtotal.text('PKR ' + cartData.cart_total.toLocaleString('en-PK')); // Format for Pakistan Rupee
+
+            cartItemsContainer.empty(); // Clear existing items
+
+            if (cartData.cart_items && cartData.cart_items.length > 0) {
+                cartData.cart_items.forEach(item => {
+                    const itemHtml = `
+                        <div class="cart-item">
+                            <img src="Products/products/upload_images/${item.image}" alt="${item.name}">
+                            <div class="item-details">
+                                <h5>${item.name}</h5>
+                                <p>${item.quantity} x PKR ${item.price.toLocaleString('en-PK')}</p>
+                            </div>
+                            <button class="item-remove-btn" data-product-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItemsContainer.append(itemHtml);
+                });
+            } else {
+                cartItemsContainer.append('<p class="empty-cart-text">Your cart is empty.</p>');
             }
         }
+
+        // Function to open the side cart
+        function openSideCart() {
+            sideCart.addClass('open');
+            sideCartOverlay.addClass('show'); // Show overlay
+        }
+
+        // Function to close the side cart
+        function closeSideCart() {
+            sideCart.removeClass('open');
+            sideCartOverlay.removeClass('show'); // Hide overlay
+        }
+
+        // Handle Add to Cart form submission (on description.php)
+        $('form[name="add_to_cart_form"]').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission (page reload)
+
+            const form = $(this);
+            const formData = form.serialize() + '&action=add'; // Add the action parameter
+
+            $.ajax({
+                url: 'addtocart.php', // Your new PHP endpoint
+                method: 'POST',
+                data: formData,
+                dataType: 'json', // Expect JSON response
+                success: function(response) {
+                    if (response.status === 'success') {
+                        console.log('Product added:', response.message);
+                        updateSideCart(response); // Update the visual cart
+                        openSideCart(); // Show the side cart
+                        // You can also add a small temporary notification here
+                    } else {
+                        console.error('Error adding product:', response.message);
+                        alert('Error: ' + response.message); // Show error to user
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('AJAX Error:', textStatus, errorThrown, jqXHR.responseText);
+                    alert('An error occurred while adding to cart. Please try again.');
+                }
+            });
+        });
+
+        // Event listener for closing the side cart
+        closeCartBtn.on('click', closeSideCart);
+
+        // Close side cart if overlay is clicked
+        sideCartOverlay.on('click', closeSideCart);
+
+
+        // --- Handle Remove Item from Cart (using event delegation) ---
+        cartItemsContainer.on('click', '.item-remove-btn', function() {
+            const productId = $(this).data('product-id'); // Get product ID from data attribute
+
+            if (!confirm('Are you sure you want to remove this item from your cart?')) {
+                return; // User cancelled
+            }
+
+            $.ajax({
+                url: 'addtocart.php', // Same PHP endpoint
+                method: 'POST',
+                data: {
+                    action: 'remove', // Specify the action
+                    product_id: productId // Send the product ID to remove
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        console.log('Product removed:', response.message);
+                        updateSideCart(response); // Update the visual cart
+                    } else {
+                        console.error('Error removing product:', response.message);
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('AJAX Error:', textStatus, errorThrown, jqXHR.responseText);
+                    alert('An error occurred while removing the item. Please try again.');
+                }
+            });
+        });
+
+        // --- Load initial cart state on page load ---
+        $.ajax({
+            url: 'addtocart.php', // This endpoint now handles GET for initial cart state
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    updateSideCart(response);
+                } else {
+                    console.error('Error loading initial cart:', response.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('AJAX Error loading initial cart:', textStatus, errorThrown, jqXHR.responseText);
+            }
+        });
     });
-});
 </script>
 </body>
 </html>
