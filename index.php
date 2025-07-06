@@ -701,7 +701,6 @@ include "footer.php";
         $("#slide-nav").css("display", "block");
     });
 
-    // jQuery UI Datepicker
     jQuery(document).ready(function() {
         jQuery('#datepicker').datepicker({
             dateFormat: 'dd-mm-yy',
@@ -710,91 +709,274 @@ include "footer.php";
         });
     });
 
-    const ladiesServices = [{
+const ladiesServices = [
+    {
         label: "Hair Styling",
-        options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-    }, {
+        options: [
+            "Hair Cut (Rs. 2000)",
+            "Ironing (Rs. 1500)",
+            "Global Colouring (Rs. 8000)",
+            "Blow Dry (Rs. 1000)",
+            "Root Touch Up (Rs. 3000)",
+            "Shampoo & Conditioning (Rs. 800)",
+            "Head Massage (Rs. 1200)",
+            "Roller Setting (Rs. 1800)",
+            "Oiling (Rs. 700)"
+        ]
+    },
+    {
         label: "Make Up",
-        options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-    }, {
+        options: [
+            "Party Make Up (Rs. 5000)",
+            "Engagement Make Up (Rs. 15000)",
+            "Bridal & Reception Make Up (Rs. 25000)",
+            "Base Make Up (Rs. 3000)",
+            "Eye Make Up (Rs. 2000)"
+        ]
+    },
+    {
         label: "Hair Texture",
-        options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-    }, {
+        options: [
+            "Rebonding (Rs. 10000)",
+            "Perming (Rs. 9000)",
+            "Keratin (Rs. 12000)",
+            "Colour Protection (Rs. 4000)",
+            "Smoothening (Rs. 11000)"
+        ]
+    },
+    {
         label: "Hair Treatments",
-        options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-    }, {
+        options: [
+            "Spa Treatments (Rs. 3500)",
+            "Volumizing (Rs. 4500)",
+            "Advanced Hair Moisturising (Rs. 3800)",
+            "Scalp Treatments (Rs. 3000)"
+        ]
+    },
+    {
         label: "Facials & Rituals",
-        options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-    }, {
+        options: [
+            "Bleach (Rs. 1500)",
+            "Luxury Facials/Rituals (Rs. 6000)",
+            "Clean Ups (Rs. 2500)",
+            "Body Polishing/Rejuvenation (Rs. 7000)",
+            "Threading (Rs. 500)"
+        ]
+    },
+    {
         label: "Hand & Feet",
-        options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-    }, {
+        options: [
+            "Manicure (Rs. 1800)",
+            "Spa Pedicure (Rs. 2500)",
+            "Pedicure (Rs. 2000)",
+            "Waxing (Rs. 31000)", 
+            "Spa Manicure (Rs. 2200)"
+        ]
+    },
+    {
         label: "Nail Care",
-        options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-    }];
+        options: [
+            "Nail Paint (Rs. 500)",
+            "Nail Art (Rs. 1000)",
+            "Nail Filling (Rs. 800)",
+            "Other (Rs. 500)"
+        ]
+    }
+];
 
-    const gentsServices = [{
+
+const gentsServices = [
+    {
         label: "Hair Cut & Finish",
-        options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-    }, {
+        options: [
+            "Cut and Hair Care (Rs. 1500)",
+            "Shampoo & Conditioning (Rs. 600)",
+            "Head Massage (Rs. 1000)",
+            "Beard Styling (Rs. 800)",
+            "Hair/Beard Colouring (Rs. 2500)"
+        ]
+    },
+    {
         label: "Hair Colour",
-        options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-    }, {
+        options: [
+            "Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)",
+            "Hi - Lites (Rs. 3500)",
+            "Beard Colour (Rs. 1500)"
+        ]
+    },
+    {
         label: "Hair Texture",
-        options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-    }, {
+        options: [
+            "Straightening (Rs. 8000)",
+            "Smoothening (Rs. 7500)",
+            "Rebonding (Rs. 9000)",
+            "Perming (Rs. 8500)"
+        ]
+    },
+    {
         label: "Hair Treatments",
-        options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-    }, {
+        options: [
+            "Hair Spa (Rs. 2500)",
+            "Advanced Moisturising (Rs. 3000)",
+            "Scalp Treatments (Rs. 2200)",
+            "Colour Protection (Rs. 2800)"
+        ]
+    },
+    {
         label: "Skin Care",
-        options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-    }, {
+        options: [
+            "Clean Ups (Rs. 2000)",
+            "Facials (Rs. 3500)",
+            "Organic Treatments (Rs. 4000)",
+            "Manicure (Rs. 1500)",
+            "Pedicure (Rs. 1800)"
+        ]
+    },
+    {
         label: "Beard Grooming",
-        options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-    }];
-
-    const combinedServices = [{
+        options: [
+            "Beard Trim (Rs. 500)",
+            "Beard Colour (Rs. 1500)",
+            "Beard Styling (Rs. 800)",
+            "Shave (Rs. 400)",
+            "Luxury Shave & Beard Spa (Rs. 1200)",
+            "Other (Rs. 400)"
+        ]
+    }
+];
+const combinedServices = [
+    {
         label: "Hair Styling",
-        options: ["Hair Cut", "Ironing", "Global Colouring", "Blow Dry", "Root Touch Up", "Shampoo & Conditioning", "Head Massage", "Roller Setting", "Oiling"]
-    }, {
+        options: [
+            "Hair Cut (Rs. 2000)",
+            "Ironing (Rs. 1500)",
+            "Global Colouring (Rs. 8000)",
+            "Blow Dry (Rs. 1000)",
+            "Root Touch Up (Rs. 3000)",
+            "Shampoo & Conditioning (Rs. 800)",
+            "Head Massage (Rs. 1200)",
+            "Roller Setting (Rs. 1800)",
+            "Oiling (Rs. 700)"
+        ]
+    },
+    {
         label: "Make Up",
-        options: ["Party Make Up", "Engagement Make Up", "Bridal & Reception Make Up", "Base Make Up", "Eye Make Up"]
-    }, {
-        label: "Hair Texture",
-        options: ["Rebonding", "Perming", "Keratin", "Colour Protection", "Smoothening"]
-    }, {
-        label: "Hair Treatments",
-        options: ["Spa Treatments", "Volumizing", "Advanced Hair Moisturising", "Scalp Treatments"]
-    }, {
+        options: [
+            "Party Make Up (Rs. 5000)",
+            "Engagement Make Up (Rs. 15000)",
+            "Bridal & Reception Make Up (Rs. 25000)",
+            "Base Make Up (Rs. 3000)",
+            "Eye Make Up (Rs. 2000)"
+        ]
+    },
+    {
+        label: "Hair Texture", 
+        options: [
+            "Rebonding (Rs. 10000)", 
+            "Perming (Rs. 9000)",   
+            "Keratin (Rs. 12000)",
+            "Colour Protection (Rs. 4000)",
+            "Smoothening (Rs. 11000)" 
+        ]
+    },
+    {
+        label: "Hair Treatments", 
+        options: [
+            "Spa Treatments (Rs. 3500)", 
+            "Volumizing (Rs. 4500)",
+            "Advanced Hair Moisturising (Rs. 3800)", 
+            "Scalp Treatments (Rs. 3000)" 
+        ]
+    },
+    {
         label: "Facials & Rituals",
-        options: ["Bleach", "Luxury Facials/Rituals", "Clean Ups", "Body Polishing/Rejuvenation", "Threading"]
-    }, {
+        options: [
+            "Bleach (Rs. 1500)",
+            "Luxury Facials/Rituals (Rs. 6000)",
+            "Clean Ups (Rs. 2500)", 
+            "Body Polishing/Rejuvenation (Rs. 7000)",
+            "Threading (Rs. 500)"
+        ]
+    },
+    {
         label: "Hand & Feet",
-        options: ["Manicure", "Spa Pedicure", "Pedicure", "Waxing", "Spa Manicure"]
-    }, {
+        options: [
+            "Manicure (Rs. 1800)", 
+            "Spa Pedicure (Rs. 2500)",
+            "Pedicure (Rs. 2000)",
+            "Waxing (Rs. 1000)",
+            "Spa Manicure (Rs. 2200)"
+        ]
+    },
+    {
         label: "Nail Care",
-        options: ["Nail Paint", "Nail Art", "Nail Filling", "Other"]
-    }, {
+        options: [
+            "Nail Paint (Rs. 500)",
+            "Nail Art (Rs. 1000)",
+            "Nail Filling (Rs. 800)",
+            "Other (Rs. 500)"
+        ]
+    },
+    
+    {
         label: "Hair Cut & Finish",
-        options: ["Cut and Hair Care", "Shampoo & Conditioning", "Head Massage", "Beard Styling", "Hair/Beard Colouring"]
-    }, {
+        options: [
+            "Cut and Hair Care (Rs. 1500)",
+            "Shampoo & Conditioning (Rs. 600)",
+            "Head Massage (Rs. 1000)",
+            "Beard Styling (Rs. 800)",
+            "Hair/Beard Colouring (Rs. 2500)"
+        ]
+    },
+    {
         label: "Hair Colour",
-        options: ["Hair Colour(Ammonia & Ammonia Free)", "Hi - Lites", "Beard Colour"]
-    }, {
-        label: "Hair Texture",
-        options: ["Straightening", "Smoothening", "Rebonding", "Perming"]
-    }, {
-        label: "Hair Treatments",
-        options: ["Hair Spa", "Advanced Moisturising", "Scalp Treatments", "Colour Protection"]
-    }, {
+        options: [
+            "Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)",
+            "Hi - Lites (Rs. 3500)",
+            "Beard Colour (Rs. 1500)"
+        ]
+    },
+    {
+        label: "Hair Texture", 
+        options: [
+            "Straightening (Rs. 8000)",
+            "Smoothening (Rs. 7500)",
+            "Rebonding (Rs. 9000)",
+            "Perming (Rs. 8500)"
+        ]
+    },
+    {
+        label: "Hair Treatments", 
+        options: [
+            "Hair Spa (Rs. 2500)",
+            "Advanced Moisturising (Rs. 3000)",
+            "Scalp Treatments (Rs. 2200)",
+            "Colour Protection (Rs. 2800)"
+        ]
+    },
+    {
         label: "Skin Care",
-        options: ["Clean Ups", "Facials", "Organic Treatments", "Manicure", "Pedicure"]
-    }, {
+        options: [
+            "Clean Ups (Rs. 2000)", 
+            "Facials (Rs. 3500)",
+            "Organic Treatments (Rs. 4000)",
+            "Manicure (Rs. 1500)", 
+            "Pedicure (Rs. 1800)" 
+        ]
+    },
+    {
         label: "Beard Grooming",
-        options: ["Beard Trim", "Beard Colour", "Beard Styling", "Shave", "Luxury Shave & Beard Spa", "Other"]
-    }];
+        options: [
+            "Beard Trim (Rs. 500)",
+            "Beard Colour (Rs. 1500)",
+            "Beard Styling (Rs. 800)",
+            "Shave (Rs. 400)",
+            "Luxury Shave & Beard Spa (Rs. 1200)",
+            "Other (Rs. 400)"
+        ]
+    }
+];
 
-   
     function updateServices() {
         const gender = document.getElementById("genderSelect").value;
         const serviceSelect = document.getElementById("serviceSelect");
