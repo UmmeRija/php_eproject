@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = mysqli_fetch_assoc($query);
 
             if (password_verify($password, $row['passwords'])) {
-                
+                $_SESSION['loggedin'] = true; 
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['email'] = $row['email'];

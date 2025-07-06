@@ -1,10 +1,6 @@
 <?php
-session_start(); // Start the session to access $_SESSION
+session_start();
 
-// Include your database connection (if you need it later, for now not strictly necessary for display)
-// include 'connection.php';
-
-// Initialize cart if it doesn't exist to prevent errors
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -15,26 +11,78 @@ foreach ($cart_items as $item_id => $item) {
     $cart_total += ($item['price'] * $item['quantity']);
 }
 
-// --- NEW LOGIC FOR LOGIN CHECK ---
 $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
-$login_page_url = 'login.php'; // Adjust this to your actual login page URL
-// --- END NEW LOGIC ---
-
-// You can include your navbar and footer if they are separate files
-// For now, I'm assuming you have them.
-// include 'navbar.php';
-// include 'footer.php';
+$login_page_url = 'login.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Your Store</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <head>
+
+    <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="canonical" href="service.html">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bellefair&amp;display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+
+
+    <link rel="stylesheet" href="css/slidemenu.css">
+
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  "name": "Affinity Salon",
+  "url": "https://www.affinity.salon/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Affinity Salon",
+  "alternateName": "Affinity Hair & Beauty",
+  "url": "https://www.affinity.salon/",
+  "logo": "",
+  "sameAs": [
+    "https://www.facebook.com/affinityeliteindia",
+    "https://www.instagram.com/affinity.elite",
+    "index.html"
+  ]
+}
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
     <style>
         body {
             background-color: #000;
@@ -54,35 +102,67 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
         h2 {
             color: #e2b97f;
             font-family: 'Bellefair', serif;
-            margin-bottom: 20px; /* Adjusted margin for section titles */
+            margin-bottom: 20px;
         }
         h4.order-summary-title {
-             color: #e2b97f;
-             font-family: 'Bellefair', serif;
-             margin-bottom: 20px;
-             text-align: center;
+            color: #e2b97f;
+            font-family: 'Bellefair', serif;
+            margin-bottom: 20px;
+            text-align: center;
         }
         .form-label {
             color: #bbb;
             font-size: 0.9rem;
             margin-bottom: 5px;
         }
-        .form-control, .form-select {
-            background-color: #000;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 5px;
+
+        .form-control,
+        .form-select,
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            background-color: #fff !important;
+            border: 2px solid #555 !important;
+            color: #333 !important;
+            padding: 7px 10px !important;
+            border-radius: 7px !important;
+            width: 100% !important;
+            display: block !important;
+            box-shadow: none !important;
+            outline: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
         }
-        .form-control:focus, .form-select:focus {
-            background-color: #000;
-            color: #fff;
-            border-color: #e2b97f;
-            box-shadow: 0 0 0 0.25rem rgba(226, 185, 127, 0.25);
+
+        .form-control:focus,
+        .form-select:focus,
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            background-color: #fff !important;
+            border-color: #e2b97f !important;
+            color: #333 !important;
+            box-shadow: none !important;
+            outline: none !important;
         }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+            -webkit-text-fill-color: #333 !important;
+            background-color: #fff !important;
+            color: #333 !important;
+        }
+
         .form-control::placeholder {
             color: #888;
         }
+
         .form-check-input {
             background-color: #333;
             border: 1px solid #555;
@@ -95,6 +175,7 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
         .form-check-label {
             color: #bbb;
         }
+
         .checkout-login-coupon {
             background-color: #222;
             padding: 15px;
@@ -112,7 +193,6 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
             color: #e2b97f;
         }
 
-        /* Order Summary Section */
         .order-summary-box {
             background-color: #222;
             padding: 25px;
@@ -140,7 +220,7 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
         .order-summary-box .product-line-item {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 10px;
             padding-bottom: 10px;
             border-bottom: 1px dotted #333;
@@ -157,30 +237,33 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
         }
         .order-summary-box .product-line-item .price {
             color: #fff;
-            white-space: nowrap; /* Prevent price from wrapping */
+            white-space: nowrap;
             margin-left: 15px;
         }
 
-        /* Payment methods */
         .payment-methods {
             margin-top: 20px;
         }
         .payment-method-item {
-            background-color: #333;
-            border: 1px solid #555;
-            border-radius: 5px;
-            padding: 15px;
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 15px 20px;
             margin-bottom: 15px;
             cursor: pointer;
             transition: background-color 0.2s, border-color 0.2s;
+            position: relative;
+            box-shadow: none !important;
         }
         .payment-method-item:hover {
-            background-color: #444;
+            background-color: #3a3a3a;
             border-color: #e2b97f;
+            box-shadow: none !important;
         }
         .payment-method-item.selected {
             border-color: #f0c040;
-            background-color: #2a2a2a;
+            background-color: #2f2f2f;
+            box-shadow: none !important;
         }
         .payment-method-item label {
             display: flex;
@@ -189,31 +272,41 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
             color: #fff;
             cursor: pointer;
             margin-bottom: 0;
+            position: relative;
+            z-index: 1;
         }
         .payment-method-item input[type="radio"] {
-            margin-right: 10px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: 1px solid #777;
-            border-radius: 50%;
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .payment-method-item label::before {
+            content: '';
+            display: inline-block;
             width: 18px;
             height: 18px;
-            outline: none;
-            cursor: pointer;
-            background-color: #000;
+            border: 1px solid #777;
+            border-radius: 50%;
+            margin-right: 12px;
+            background-color: transparent;
+            transition: background-color 0.2s, border-color 0.2s;
+            box-sizing: border-box;
+            box-shadow: none !important;
         }
-        .payment-method-item input[type="radio"]:checked {
+        .payment-method-item input[type="radio"]:checked + label::before {
             background-color: #e2b97f;
             border-color: #e2b97f;
-            box-shadow: 0 0 0 3px #e2b97f, inset 0 0 0 3px #000;
+            box-shadow: none !important;
+            padding: 4px;
+            background-clip: content-box;
         }
 
         .payment-description {
             font-size: 0.85rem;
             color: #bbb;
             margin-top: 10px;
-            padding-left: 28px; /* Align with radio button */
+            padding-left: 30px;
         }
 
         .btn-place-order {
@@ -233,7 +326,6 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
             color: #000 !important;
         }
 
-        /* Styles for login required message */
         .login-required-message {
             background-color: #333;
             padding: 20px;
@@ -275,11 +367,35 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
         .empty-cart-message a:hover {
             text-decoration: underline;
         }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-left: 10px;
+            padding: 0;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+        .remove-item-btn:hover {
+            color: #ff3838;
+        }
+        .product-line-item .item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .product-line-item .item-details .name-qty {
+            flex-grow: 1;
+        }
     </style>
 </head>
 <body>
 
-    <?php include 'navbar.php'; // Include your navigation bar ?>
+    <?php include 'navbar.php'; ?>
 
     <div class="container">
         <div class="checkout-page-wrapper">
@@ -292,15 +408,15 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
                         </div>
 
                         <h2>Billing details</h2>
-                        <form id="checkoutForm">
+                        <form id="checkoutForm" action="process_order.php" method="POST">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="firstName" class="form-label">*FIRST NAME</label>
-                                    <input type="text" class="form-control" id="firstName" name="first_name" required>
+                                    <input type="text" class="form-control" id="firstName" name="first_name" pattern="^[a-zA-Z\s'-]+$" title="First name can only contain letters, spaces, hyphens, or apostrophes." required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="lastName" class="form-label">*LAST NAME</label>
-                                    <input type="text" class="form-control" id="lastName" name="last_name" required>
+                                    <input type="text" class="form-control" id="lastName" name="last_name" pattern="^[a-zA-Z\s'-]+$" title="Last name can only contain letters, spaces, hyphens, or apostrophes." required>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -321,7 +437,7 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
                                     <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
                                     <option value="Balochistan">Balochistan</option>
                                     <option value="Islamabad">Islamabad Capital Territory</option>
-                                    </select>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="pinCode" class="form-label">PIN CODE</label>
@@ -330,11 +446,11 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="phone" class="form-label">*PHONE</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" pattern="^0\d{3}-\d{7}$" title="Phone number format: 0XXX-XXXXXXX" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">*EMAIL ADDRESS</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address." required>
                                 </div>
                             </div>
                             <div class="form-check mb-3">
@@ -349,7 +465,7 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
                                     Ship to a different address?
                                 </label>
                             </div>
-                            </form>
+                        </form>
                     </div>
 
                     <div class="col-lg-5">
@@ -361,9 +477,14 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
                             </div>
                             <hr>
                             <?php foreach ($cart_items as $item_id => $item): ?>
-                                <div class="summary-item product-line-item">
-                                    <span class="name-qty"><?= htmlspecialchars($item['name']) ?> × <?= htmlspecialchars($item['quantity']) ?></span>
-                                    <span class="price">PKR <?= number_format($item['price'] * $item['quantity'], 0) ?></span>
+                                <div class="summary-item product-line-item" data-item-id="<?= htmlspecialchars($item_id) ?>">
+                                    <div class="item-details">
+                                        <span class="name-qty"><?= htmlspecialchars($item['name']) ?> × <?= htmlspecialchars($item['quantity']) ?></span>
+                                        <span class="price">PKR <?= number_format($item['price'] * $item['quantity'], 0) ?></span>
+                                    </div>
+                                    <button type="button" class="remove-item-btn" data-item-id="<?= htmlspecialchars($item_id) ?>">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
                                 </div>
                             <?php endforeach; ?>
                             <hr>
@@ -373,7 +494,8 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
                             </div>
                             <div class="summary-item">
                                 <span>Shipping</span>
-                                <span>FREE</span> </div>
+                                <span>FREE</span>
+                            </div>
                             <hr>
                             <div class="summary-item total">
                                 <span>Total</span>
@@ -411,7 +533,7 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
             <?php else: ?>
                 <div class="empty-cart-message">
                     <p>Your cart is empty. Please add some items to proceed to checkout.</p>
-                    <p><a href="index.php">Continue Shopping</a></p>
+                    <p><a href="products.php">Continue Shopping</a></p>
                 </div>
             <?php endif; ?>
         </div>
@@ -421,15 +543,46 @@ $login_page_url = 'login.php'; // Adjust this to your actual login page URL
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Add/remove 'selected' class for visual feedback on payment method selection
             $('.payment-method-item').on('click', function() {
                 $('.payment-method-item').removeClass('selected');
                 $(this).addClass('selected');
                 $(this).find('input[type="radio"]').prop('checked', true);
             });
+
+            $(document).on('click', '.remove-item-btn', function() {
+                var itemId = $(this).data('item-id');
+                var $itemRow = $(this).closest('.product-line-item');
+
+                if (confirm('Are you sure you want to remove this item from your cart?')) {
+                    $.ajax({
+                        url: 'update_cart.php',
+                        method: 'POST',
+                        data: {
+                            action: 'remove',
+                            item_id: itemId
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log("Remove item AJAX success:", response);
+                            if (response.status === 'success') {
+                                $itemRow.fadeOut(300, function() {
+                                    $(this).remove();
+                                    location.reload();
+                                });
+                            } else {
+                                alert("Error: " + response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Remove item AJAX error:", status, error, xhr.responseText);
+                            alert("There was an error removing the item. Please try again. Check console for details.");
+                        }
+                    });
+                }
+            });
         });
     </script>
-    <?php include 'footer.php'; // Include your footer ?>
+    <?php include 'footer.php'; ?>
 
 </body>
 </html>

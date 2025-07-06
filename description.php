@@ -1,6 +1,6 @@
 <?php
-session_start(); // Make sure this is the very first line!
-include 'connection.php'; // Include your database connection
+session_start();
+include 'connection.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     echo "<p style='color: white; text-align: center; padding-top: 100px;'>Invalid product ID.</p>";
@@ -19,7 +19,6 @@ if (!$query || mysqli_num_rows($query) == 0) {
 
 $product = mysqli_fetch_assoc($query);
 
-// --- Fetch Related Products ---
 $related_products = [];
 if (isset($product['name']) && !empty($product['name'])) {
 
@@ -54,11 +53,9 @@ if (isset($product['name']) && !empty($product['name'])) {
                 $related_products[] = $row;
             }
         } else {
-            // Error handling for related products query
         }
     }
 }
-// Removed the old Add to Cart PHP logic that caused the redirect
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +74,71 @@ if (isset($product['name']) && !empty($product['name'])) {
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <head>
+
+    <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="canonical" href="service.html">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bellefair&amp;display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+
+
+    <link rel="stylesheet" href="css/slidemenu.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "WebSite",
+  "name": "Affinity Salon",
+  "url": "https://www.affinity.salon/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Affinity Salon",
+  "alternateName": "Affinity Hair & Beauty",
+  "url": "https://www.affinity.salon/",
+  "logo": "",
+  "sameAs": [
+    "https://www.facebook.com/affinityeliteindia",
+    "https://www.instagram.com/affinity.elite",
+    "index.html"
+  ]
+}
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJW4QH8K');</script>
 
     <style>
         body {
@@ -174,7 +236,6 @@ if (isset($product['name']) && !empty($product['name'])) {
             margin-right: 0.5rem !important;
         }
 
-        /* Add to Cart button styles */
         .btn-add-to-cart {
             background-color: #f0c040 !important;
             border: none;
@@ -299,7 +360,7 @@ if (isset($product['name']) && !empty($product['name'])) {
         }
 
         .product-card .btn-view-more {
-            background-color: #e2b97f; /* Accent color for button */
+            background-color: #e2b97f;
             border: none;
             color: #000;
             font-weight: 600;
@@ -330,17 +391,16 @@ if (isset($product['name']) && !empty($product['name'])) {
         .owl-dots .owl-dot.active span {
             background: #e2b97f !important;
         }
-        /* Side Cart Styles */
 
         .side-cart {
             position: fixed;
             top: 0;
-            right: -350px; /* Hidden by default */
+            right: -350px;
             width: 350px;
             height: 100%;
             background-color: #1a1a1a;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            z-index: 9999; /* <--- CHANGE THIS TO A HIGH VALUE, e.g., 9999 or 10000 */
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             transition: right 0.3s ease-in-out;
@@ -349,7 +409,7 @@ if (isset($product['name']) && !empty($product['name'])) {
 
 
         .side-cart.open {
-            right: 0; /* Slide in */
+            right: 0;
         }
 
         .side-cart .cart-header {
@@ -363,14 +423,14 @@ if (isset($product['name']) && !empty($product['name'])) {
 
         .side-cart .cart-header .cart-icon-bag {
             font-size: 1.5rem;
-            color: #e2b97f; /* Accent color */
+            color: #e2b97f;
             position: relative;
         }
         .side-cart .cart-header .cart-icon-bag span {
             position: absolute;
             top: -5px;
             right: -10px;
-            background-color: #f0c040; /* Accent color */
+            background-color: #f0c040;
             color: #000;
             font-size: 0.7rem;
             border-radius: 50%;
@@ -401,7 +461,7 @@ if (isset($product['name']) && !empty($product['name'])) {
         .side-cart .cart-items-container {
             flex-grow: 1;
             padding: 20px;
-            overflow-y: auto; /* Enable scrolling for many items */
+            overflow-y: auto;
         }
 
         .side-cart .empty-cart-text {
@@ -415,7 +475,7 @@ if (isset($product['name']) && !empty($product['name'])) {
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 1px dashed #333; /* Dashed line for items */
+            border-bottom: 1px dashed #333;
         }
         .side-cart .cart-item:last-child {
             border-bottom: none;
@@ -451,7 +511,7 @@ if (isset($product['name']) && !empty($product['name'])) {
         .side-cart .item-remove-btn {
             background: none;
             border: none;
-            color: #ff4d4d; /* Red for delete */
+            color: #ff4d4d;
             font-size: 1.1rem;
             cursor: pointer;
             padding: 5px;
@@ -498,16 +558,15 @@ if (isset($product['name']) && !empty($product['name'])) {
         }
 
         .side-cart .btn-primary-checkout {
-            background-color: #e2b97f; /* Accent color */
+            background-color: #e2b97f;
             color: #000;
             border: none;
         }
         .side-cart .btn-primary-checkout:hover {
-            background-color: #f0c040; /* Lighter accent on hover */
+            background-color: #f0c040;
             color: #000;
         }
 
-        /* Overlay to dim background */
         .side-cart-overlay {
             position: fixed;
             top: 0;
@@ -515,8 +574,8 @@ if (isset($product['name']) && !empty($product['name'])) {
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            z-index: 9998; /* Below side cart, above other content */
-            display: none; /* Hidden by default */
+            z-index: 99998;
+            display: none;
         }
         .side-cart-overlay.show {
             display: block;
@@ -539,10 +598,6 @@ if (isset($product['name']) && !empty($product['name'])) {
                 <span class="price-display">PKR <?= number_format($product['price'], 0) ?></span>
 
                 <p class="product-description"><?= nl2br(htmlspecialchars(substr($product['description'], 0, 200))) ?><?= strlen($product['description']) > 200 ? '...' : '' ?></p>
-
-                <div class="product-meta">
-                    <p><strong>Category:</strong> <a href="#"><?= htmlspecialchars($product['category'] ?? 'N/A') ?></a></p>
-                </div>
 
                 <form method="post" class="mt-4" name="add_to_cart_form"> <div class="quantity-selector mb-3 d-flex align-items-center">
                         <button type="button" class="btn btn-sm btn-dark" onclick="changeQty(-1)">−</button>
@@ -645,7 +700,6 @@ if (isset($product['name']) && !empty($product['name'])) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <script>
-    // Quantity selector functions
     function changeQty(delta) {
         const qtyInput = document.getElementById('quantity');
         let current = parseInt(qtyInput.value) || 1;
@@ -661,7 +715,6 @@ if (isset($product['name']) && !empty($product['name'])) {
     }
 
     $(document).ready(function(){
-        // Initialize Owl Carousel
         $(".related-products-carousel").owlCarousel({
             loop: true,
             margin: 20,
@@ -675,24 +728,20 @@ if (isset($product['name']) && !empty($product['name'])) {
             }
         });
 
-        // --- Side Cart Logic ---
         const sideCart = $('#sideCart');
         const closeCartBtn = $('#closeCartBtn');
         const cartItemsContainer = $('#cartItemsContainer');
         const cartItemCount = $('#cartItemCount');
         const cartSubtotal = $('#cartSubtotal');
 
-        // Create and append the overlay dynamically
         const sideCartOverlay = $('<div class="side-cart-overlay" id="sideCartOverlay"></div>');
         $('body').append(sideCartOverlay);
 
-
-        // Function to update the side cart's display
         function updateSideCart(cartData) {
             cartItemCount.text(cartData.cart_count);
-            cartSubtotal.text('PKR ' + cartData.cart_total.toLocaleString('en-PK')); // Format for Pakistan Rupee
+            cartSubtotal.text('PKR ' + cartData.cart_total.toLocaleString('en-PK'));
 
-            cartItemsContainer.empty(); // Clear existing items
+            cartItemsContainer.empty();
 
             if (cartData.cart_items && cartData.cart_items.length > 0) {
                 cartData.cart_items.forEach(item => {
@@ -715,39 +764,35 @@ if (isset($product['name']) && !empty($product['name'])) {
             }
         }
 
-        // Function to open the side cart
         function openSideCart() {
             sideCart.addClass('open');
-            sideCartOverlay.addClass('show'); // Show overlay
+            sideCartOverlay.addClass('show');
         }
 
-        // Function to close the side cart
         function closeSideCart() {
             sideCart.removeClass('open');
-            sideCartOverlay.removeClass('show'); // Hide overlay
+            sideCartOverlay.removeClass('show');
         }
 
-        // Handle Add to Cart form submission (on description.php)
         $('form[name="add_to_cart_form"]').on('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission (page reload)
+            e.preventDefault();
 
             const form = $(this);
-            const formData = form.serialize() + '&action=add'; // Add the action parameter
+            const formData = form.serialize() + '&action=add';
 
             $.ajax({
-                url: 'addtocart.php', // Your new PHP endpoint
+                url: 'addtocart.php',
                 method: 'POST',
                 data: formData,
-                dataType: 'json', // Expect JSON response
+                dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
                         console.log('Product added:', response.message);
-                        updateSideCart(response); // Update the visual cart
-                        openSideCart(); // Show the side cart
-                        // You can also add a small temporary notification here
+                        updateSideCart(response);
+                        openSideCart();
                     } else {
                         console.error('Error adding product:', response.message);
-                        alert('Error: ' + response.message); // Show error to user
+                        alert('Error: ' + response.message);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -757,33 +802,29 @@ if (isset($product['name']) && !empty($product['name'])) {
             });
         });
 
-        // Event listener for closing the side cart
         closeCartBtn.on('click', closeSideCart);
 
-        // Close side cart if overlay is clicked
         sideCartOverlay.on('click', closeSideCart);
 
-
-        // --- Handle Remove Item from Cart (using event delegation) ---
         cartItemsContainer.on('click', '.item-remove-btn', function() {
-            const productId = $(this).data('product-id'); // Get product ID from data attribute
+            const productId = $(this).data('product-id');
 
             if (!confirm('Are you sure you want to remove this item from your cart?')) {
-                return; // User cancelled
+                return;
             }
 
             $.ajax({
-                url: 'addtocart.php', // Same PHP endpoint
+                url: 'addtocart.php',
                 method: 'POST',
                 data: {
-                    action: 'remove', // Specify the action
-                    product_id: productId // Send the product ID to remove
+                    action: 'remove',
+                    product_id: productId
                 },
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === 'success') {
                         console.log('Product removed:', response.message);
-                        updateSideCart(response); // Update the visual cart
+                        updateSideCart(response);
                     } else {
                         console.error('Error removing product:', response.message);
                         alert('Error: ' + response.message);
@@ -796,9 +837,8 @@ if (isset($product['name']) && !empty($product['name'])) {
             });
         });
 
-        // --- Load initial cart state on page load ---
         $.ajax({
-            url: 'addtocart.php', // This endpoint now handles GET for initial cart state
+            url: 'addtocart.php',
             method: 'GET',
             dataType: 'json',
             success: function(response) {

@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session to access cart data
 include("connection.php");
 
 $filter_category = $_GET['category'] ?? 'all';
@@ -67,16 +68,19 @@ if ($is_ajax_request) {
     exit(); 
 }
 
+// Calculate total items in cart for display on the button
+$cart_item_count = 0;
+if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $cart_item_count += $item['quantity'];
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Our Products</title>
-
-  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Our Products</title>
@@ -189,7 +193,7 @@ if ($is_ajax_request) {
             margin-top: 15px;
             width: 100%;
         }
-    
+        
         .product-card {
             background-color:black;
             border: 1px solid #333;
@@ -246,12 +250,56 @@ if ($is_ajax_request) {
         .text-center.mb-4{
             color: #e0b57c;
         }
+
+        /* Cart button in header */
+        .cart-button {
+            position: fixed; /* Changed to fixed for visibility */
+            top: 20px;
+            right: 20px;
+            z-index: 1000; /* Ensure it's above other content */
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none; /* For the <a> tag */
+        }
+        .cart-button:hover {
+            background-color: #444;
+            color: #fff; /* Keep text white on hover */
+        }
+        .cart-item-count {
+            background-color: #e2b97f;
+            color: #000;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            min-width: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
 
     <?php include "navbar.php"; ?>
+
+    <!-- "View Cart" button that redirects to cart.php -->
+    <a href="cart.php" class="cart-button">
+        <i class="fas fa-shopping-cart"></i> 
+        View Cart 
+        <span class="cart-item-count" id="cartItemCount"><?= $cart_item_count ?></span>
+    </a>
 
     <section class="products-banner-section">
         <div class="container">
@@ -270,8 +318,8 @@ if ($is_ajax_request) {
                             <li><a href="?category=all&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_category === 'all') ? 'active' : '' ?>">All Products</a></li>
                             <li><a href="?category=Conditioner&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_category === 'Conditioner') ? 'active' : '' ?>">Conditioner</a></li>
                             <li><a href="?category=Hair Care&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_category === 'Hair Care') ? 'active' : '' ?>">Hair Care</a></li>
-                            <li><a href="?category=Mask&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_category === 'Mask') ? 'active' : '' ?>">Mask</a></li>
-                            <li><a href="?category=Shampoo&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_category === 'Shampoo') ? 'active' : '' ?>">Shampoo</a></li>
+                            <li><a href="?category=Mask&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_price_range === 'Mask') ? 'active' : '' ?>">Mask</a></li>
+                            <li><a href="?category=Shampoo&price_range=<?= htmlspecialchars($filter_price_range) ?>" class="filter-link <?= ($filter_price_range === 'Shampoo') ? 'active' : '' ?>">Shampoo</a></li>
                         </ul>
 
                         <h5 class="mt-4">Price Range</h5>
@@ -318,11 +366,14 @@ if ($is_ajax_request) {
     <?php include "footer.php"; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const productGrid = document.getElementById('product-grid');
             const productsSection = document.getElementById('products-section');
+            // Removed side cart specific JS
 
+            // Existing filter logic
             document.querySelectorAll('.filter-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
