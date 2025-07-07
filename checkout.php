@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "connection.php";
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
@@ -13,6 +14,39 @@ foreach ($cart_items as $item_id => $item) {
 
 $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $login_page_url = 'login.php';
+
+$user_data = [
+    'first_name' => '',
+    'last_name' => '',
+    'email' => '',
+    'phone' => ''
+];
+
+if ($is_logged_in && isset($_SESSION['id'])) {
+    $user_id = $_SESSION['id'];
+    $stmt = $con->prepare("SELECT name, email, phone FROM register WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            
+            $full_name = $row['name'];
+            $name_parts = explode(' ', $full_name, 2);
+            $user_data['first_name'] = $name_parts[0] ?? '';
+            $user_data['last_name'] = $name_parts[1] ?? '';
+            
+            $user_data['email'] = $row['email'];
+            $user_data['phone'] = $row['phone'];
+        }
+        $stmt->close();
+    }
+}
+
+if (isset($con) && $con) {
+    $con->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -407,11 +441,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="firstName" class="form-label">*FIRST NAME</label>
-                                    <input type="text" class="form-control" id="firstName" name="first_name" pattern="^[a-zA-Z\s'-]+$" title="First name can only contain letters, spaces, hyphens, or apostrophes." required>
+                                    <input type="text" class="form-control" id="firstName" name="first_name" pattern="^[a-zA-Z\s'-]+$" title="First name can only contain letters, spaces, hyphens, or apostrophes." value="<?= htmlspecialchars($user_data['first_name']) ?>" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="lastName" class="form-label">*LAST NAME</label>
-                                    <input type="text" class="form-control" id="lastName" name="last_name" pattern="^[a-zA-Z\s'-]+$" title="Last name can only contain letters, spaces, hyphens, or apostrophes." required>
+                                    <input type="text" class="form-control" id="lastName" name="last_name" pattern="^[a-zA-Z\s'-]+$" title="Last name can only contain letters, spaces, hyphens, or apostrophes." value="<?= htmlspecialchars($user_data['last_name']) ?>" required>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -441,15 +475,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="phone" class="form-label">*PHONE</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" pattern="^0\d{3}-\d{7}$" title="Phone number format: 0XXX-XXXXXXX" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" pattern="^0\d{3}-\d{7}$" title="Phone number format: 0XXX-XXXXXXX" value="<?= htmlspecialchars($user_data['phone']) ?>" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">*EMAIL ADDRESS</label>
-                                    <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address." required>
+                                    <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address." value="<?= htmlspecialchars($user_data['email']) ?>" required>
                                 </div>
                             </div>
                             <div class="form-check mb-3">
-                               
+                                
                             </div>
                             <div class="form-check mb-4">
                                
