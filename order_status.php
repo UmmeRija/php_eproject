@@ -1,18 +1,16 @@
 <?php
 session_start();
 include "connection.php";
-
 $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 $user_id = $_SESSION['id'] ?? null;
 
 $orders = [];
 
 if ($is_logged_in && $user_id) {
-    $sql_orders = "SELECT id, first_name, last_name, email, status, order_date FROM orders WHERE user_id = ? ORDER BY order_date DESC";
+    $sql_orders = "SELECT id, first_name, last_name, email, status, order_date, order_items_json FROM orders WHERE user_id = ? ORDER BY order_date DESC";
     $stmt_orders = $con->prepare($sql_orders);
 
     if ($stmt_orders === false) {
-        error_log("Order status - Failed to prepare orders statement: " . $con->error);
     } else {
         $stmt_orders->bind_param("i", $user_id);
         $stmt_orders->execute();
@@ -20,25 +18,14 @@ if ($is_logged_in && $user_id) {
 
         if ($result_orders->num_rows > 0) {
             while ($order_row = $result_orders->fetch_assoc()) {
-                $order_id = $order_row['id'];
                 $order_details = $order_row;
-                $order_details['items'] = [];
-
-                $sql_items = "SELECT product_name, quantity FROM order_items WHERE order_id = ?";
-                $stmt_items = $con->prepare($sql_items);
-
-                if ($stmt_items === false) {
-                    error_log("Order status - Failed to prepare order items statement for order ID " . $order_id . ": " . $con->error);
-                } else {
-                    $stmt_items->bind_param("i", $order_id);
-                    $stmt_items->execute();
-                    $result_items = $stmt_items->get_result();
-
-                    while ($item_row = $result_items->fetch_assoc()) {
-                        $order_details['items'][] = $item_row;
-                    }
-                    $stmt_items->close();
+                
+                $order_details['items'] = json_decode($order_row['order_items_json'], true);
+                if (json_last_error() !== JSON_ERROR_NONE) {
+                    $order_details['items'] = [];
+                  
                 }
+
                 $orders[] = $order_details;
             }
         }
@@ -54,7 +41,6 @@ if (isset($con) && $con) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -221,17 +207,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="order-status-wrapper">
             <h2>Your Order Status</h2>
 
-            <?php if (!$is_logged_in): ?>
+            <?php if (!$is_logged_in) { ?>
                 <div class="message-box">
                     <p>You need to be signed in to view your order status.</p>
                     <p><a href="login.php">Login or Sign Up</a></p>
                 </div>
-            <?php elseif (empty($orders)): ?>
+            <?php } elseif (empty($orders)) { ?>
                 <div class="message-box">
                     <p>You don't have any current orders.</p>
                     <p><a href="products.php">Order something to view its status</a></p>
                 </div>
-            <?php else: ?>
+            <?php } else { ?>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                         <thead>
@@ -245,7 +231,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($orders as $order): ?>
+                            <?php foreach ($orders as $order) { ?>
                                 <tr>
                                     <td><?= htmlspecialchars($order['id']) ?></td>
                                     <td><?= htmlspecialchars($order['first_name'] . ' ' . $order['last_name']) ?></td>
@@ -253,14 +239,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                     <td>
                                         <ul class="order-items-list">
                                             <?php
-                                            if (!empty($order['items'])):
+                                            if (!empty($order['items'])) {
+                                                foreach ($order['items'] as $item) {
                                             ?>
-                                                <?php foreach ($order['items'] as $item): ?>
-                                                    <li><?= htmlspecialchars($item['product_name']) ?> (Qty: <?= htmlspecialchars($item['quantity']) ?>)</li>
-                                                <?php endforeach; ?>
-                                            <?php else: ?>
+                                                    <li><?= htmlspecialchars($item['name']) ?> (Qty: <?= htmlspecialchars($item['quantity']) ?>)</li>
+                                            <?php
+                                                }
+                                            } else {
+                                            ?>
                                                 <li>No items found for this order.</li>
-                                            <?php endif; ?>
+                                            <?php } ?>
                                         </ul>
                                     </td>
                                     <td>
@@ -270,11 +258,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                     </td>
                                     <td><?= htmlspecialchars(date('M d, Y H:i', strtotime($order['order_date']))) ?></td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
         </div>
     </div>
 

@@ -18,8 +18,6 @@ $login_page_url = 'login.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
-
     <meta name="google-site-verification" content="HFbmTnl3DFY0OcfFafsHdSffB2itOoYCnX-j9iUUCqE" />
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -399,13 +397,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <div class="container">
         <div class="checkout-page-wrapper">
-            <?php if (!empty($cart_items)): ?>
+            <?php if (!empty($cart_items)) { ?>
                 <div class="row">
                     <div class="col-lg-7">
-                        <div class="checkout-login-coupon">
-                            Returning customer? <a href="#">Click here to login</a><br>
-                            Have a coupon? <a href="#">Click here to enter your code</a>
-                        </div>
+                        
 
                         <h2>Billing details</h2>
                         <form id="checkoutForm" action="process_order.php" method="POST">
@@ -454,16 +449,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 </div>
                             </div>
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" id="createAccount" name="create_account">
-                                <label class="form-check-label" for="createAccount">
-                                    Create an account?
-                                </label>
+                               
                             </div>
                             <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="shipToDifferentAddress" name="ship_to_different_address">
-                                <label class="form-check-label" for="shipToDifferentAddress">
-                                    Ship to a different address?
-                                </label>
+                               
                             </div>
                         </form>
                     </div>
@@ -476,7 +465,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <span class="price">Subtotal</span>
                             </div>
                             <hr>
-                            <?php foreach ($cart_items as $item_id => $item): ?>
+                            <?php foreach ($cart_items as $item_id => $item) { ?>
                                 <div class="summary-item product-line-item" data-item-id="<?= htmlspecialchars($item_id) ?>">
                                     <div class="item-details">
                                         <span class="name-qty"><?= htmlspecialchars($item['name']) ?> × <?= htmlspecialchars($item['quantity']) ?></span>
@@ -486,7 +475,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php } ?>
                             <hr>
                             <div class="summary-item">
                                 <span>Subtotal</span>
@@ -518,24 +507,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 </div>
                             </div>
 
-                            <?php if ($is_logged_in): ?>
+                            <?php if ($is_logged_in) { ?>
                                 <button type="submit" class="btn btn-place-order" form="checkoutForm">PLACE ORDER</button>
-                            <?php else: ?>
+                            <?php } else { ?>
                                 <div class="login-required-message">
                                     <p>You must be logged in to place an order.</p>
                                     <a href="<?= htmlspecialchars($login_page_url) ?>" class="btn btn-login-redirect">Login or Sign Up</a>
                                 </div>
-                            <?php endif; ?>
+                            <?php } ?>
 
                         </div>
                     </div>
                 </div>
-            <?php else: ?>
+            <?php } else { ?>
                 <div class="empty-cart-message">
                     <p>Your cart is empty. Please add some items to proceed to checkout.</p>
                     <p><a href="products.php">Continue Shopping</a></p>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
         </div>
     </div>
 
@@ -551,31 +540,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
             $(document).on('click', '.remove-item-btn', function() {
                 var itemId = $(this).data('item-id');
-                var $itemRow = $(this).closest('.product-line-item');
-
+                
                 if (confirm('Are you sure you want to remove this item from your cart?')) {
                     $.ajax({
-                        url: 'update_cart.php',
+                        url: 'addtocart.php', 
                         method: 'POST',
                         data: {
                             action: 'remove',
-                            item_id: itemId
+                            product_id: itemId 
                         },
                         dataType: 'json',
                         success: function(response) {
                             console.log("Remove item AJAX success:", response);
                             if (response.status === 'success') {
-                                $itemRow.fadeOut(300, function() {
-                                    $(this).remove();
-                                    location.reload();
-                                });
+                                location.reload(); 
                             } else {
                                 alert("Error: " + response.message);
                             }
                         },
                         error: function(xhr, status, error) {
                             console.error("Remove item AJAX error:", status, error, xhr.responseText);
-                            alert("There was an error removing the item. Please try again. Check console for details.");
+                            alert("There was an error removing the item. Please try again.");
                         }
                     });
                 }

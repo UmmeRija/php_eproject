@@ -64,7 +64,6 @@ $cats = mysqli_query($conn, "SELECT * FROM categories");
                   <label>Category:</label>
                   <select name="category_id" class="form-select" required>
                     <option value=""> Select Category</option>
-                    <!-- Ya temporary options hain so ican select a feild in the form.-->
                     <option value="1">Conditioner</option>
                     <option value="2">Hair Care </option>
                     <option value="3">Mask</option>
