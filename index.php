@@ -1,20 +1,219 @@
 <?php
-include "connection.php"; 
 session_start();
+include "connection.php";
+
 $is_logged_in = isset($_SESSION['id']);
 $num_rows = 0; 
 $query = null; 
 
 if ($is_logged_in) {
-    $id = mysqli_real_escape_string($con, $_SESSION['id']);
+    $id = $_SESSION['id'];
     $sql = "SELECT * FROM appointment WHERE user_id = '$id'";
-    $query = mysqli_query($con, $sql);    
-    if (!$query) {   
-        echo "<!doctype html><html><head><title>Error</title><link rel='stylesheet' href='css/bootstrap.min.css'><style>body{background-color:#000;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;font-family:'Bellefair',serif;} .error-message{text-align:center;padding:20px;border:1px solid #e2b97f;border-radius:8px;} h1{color:#e2b97f;}</style></head><body><div class='error-message'><h1>Database Error!</h1><p>Failed to retrieve appointments. Please try again later or contact support.</p><p>Technical details: " . mysqli_error($con) . "</p></div></body></html>";
-        exit(); 
+    $query = mysqli_query($con, $sql); 
+    if (!$query) { 
+        // No explicit error message display for user
     } 
     $num_rows = mysqli_num_rows($query);
 }
+
+function parseServiceString($service_string) {
+    $name = $service_string;
+    $price = 0;
+    if (preg_match('/^(.*?)\s*\(Rs\.\s*(\d+)\)$/', $service_string, $matches)) {
+        $name = trim($matches[1]);
+        $price = (int)$matches[2];
+    }
+    return ['name' => $name, 'price' => $price];
+}
+
+$all_services_structured = [
+    'Female' => [
+        ['label' => 'Hair Styling', 'options' => [
+            parseServiceString("Hair Cut (Rs. 2000)"),
+            parseServiceString("Ironing (Rs. 1500)"),
+            parseServiceString("Global Colouring (Rs. 8000)"),
+            parseServiceString("Blow Dry (Rs. 1000)"),
+            parseServiceString("Root Touch Up (Rs. 3000)"),
+            parseServiceString("Shampoo & Conditioning (Rs. 800)"),
+            parseServiceString("Head Massage (Rs. 1200)"),
+            parseServiceString("Roller Setting (Rs. 1800)"),
+            parseServiceString("Oiling (Rs. 700)")
+        ]],
+        ['label' => 'Make Up', 'options' => [
+            parseServiceString("Party Make Up (Rs. 5000)"),
+            parseServiceString("Engagement Make Up (Rs. 15000)"),
+            parseServiceString("Bridal & Reception Make Up (Rs. 25000)"),
+            parseServiceString("Base Make Up (Rs. 3000)"),
+            parseServiceString("Eye Make Up (Rs. 2000)")
+        ]],
+        ['label' => 'Hair Texture', 'options' => [
+            parseServiceString("Rebonding (Rs. 10000)"),
+            parseServiceString("Perming (Rs. 9000)"),
+            parseServiceString("Keratin (Rs. 12000)"),
+            parseServiceString("Colour Protection (Rs. 4000)"),
+            parseServiceString("Smoothening (Rs. 11000)")
+        ]],
+        ['label' => 'Hair Treatments', 'options' => [
+            parseServiceString("Spa Treatments (Rs. 3500)"),
+            parseServiceString("Volumizing (Rs. 4500)"),
+            parseServiceString("Advanced Hair Moisturising (Rs. 3800)"),
+            parseServiceString("Scalp Treatments (Rs. 3000)")
+        ]],
+        ['label' => 'Facials & Rituals', 'options' => [
+            parseServiceString("Bleach (Rs. 1500)"),
+            parseServiceString("Luxury Facials/Rituals (Rs. 6000)"),
+            parseServiceString("Clean Ups (Rs. 2500)"),
+            parseServiceString("Body Polishing/Rejuvenation (Rs. 7000)"),
+            parseServiceString("Threading (Rs. 500)")
+        ]],
+        ['label' => 'Hand & Feet', 'options' => [
+            parseServiceString("Manicure (Rs. 1800)"),
+            parseServiceString("Spa Pedicure (Rs. 2500)"),
+            parseServiceString("Pedicure (Rs. 2000)"),
+            parseServiceString("Waxing (Rs. 1000)"), 
+            parseServiceString("Spa Manicure (Rs. 2200)")
+        ]],
+        ['label' => 'Nail Care', 'options' => [
+            parseServiceString("Nail Paint (Rs. 500)"),
+            parseServiceString("Nail Art (Rs. 1000)"),
+            parseServiceString("Nail Filling (Rs. 800)"),
+            parseServiceString("Other (Rs. 500)")
+        ]]
+    ],
+    'Male' => [
+        ['label' => 'Hair Cut & Finish', 'options' => [
+            parseServiceString("Cut and Hair Care (Rs. 1500)"),
+            parseServiceString("Shampoo & Conditioning (Rs. 600)"),
+            parseServiceString("Head Massage (Rs. 1000)"),
+            parseServiceString("Beard Styling (Rs. 800)"),
+            parseServiceString("Hair/Beard Colouring (Rs. 2500)")
+        ]],
+        ['label' => 'Hair Colour', 'options' => [
+            parseServiceString("Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)"),
+            parseServiceString("Hi - Lites (Rs. 3500)"),
+            parseServiceString("Beard Colour (Rs. 1500)")
+        ]],
+        ['label' => 'Hair Texture', 'options' => [
+            parseServiceString("Straightening (Rs. 8000)"),
+            parseServiceString("Smoothening (Rs. 7500)"),
+            parseServiceString("Rebonding (Rs. 9000)"),
+            parseServiceString("Perming (Rs. 8500)")
+        ]],
+        ['label' => 'Hair Treatments', 'options' => [
+            parseServiceString("Hair Spa (Rs. 2500)"),
+            parseServiceString("Advanced Moisturising (Rs. 3000)"),
+            parseServiceString("Scalp Treatments (Rs. 2200)"),
+            parseServiceString("Colour Protection (Rs. 2800)")
+        ]],
+        ['label' => 'Skin Care', 'options' => [
+            parseServiceString("Clean Ups (Rs. 2000)"),
+            parseServiceString("Facials (Rs. 3500)"),
+            parseServiceString("Organic Treatments (Rs. 4000)"),
+            parseServiceString("Manicure (Rs. 1500)"),
+            parseServiceString("Pedicure (Rs. 1800)")
+        ]],
+        ['label' => 'Beard Grooming', 'options' => [
+            parseServiceString("Beard Trim (Rs. 500)"),
+            parseServiceString("Beard Colour (Rs. 1500)"),
+            parseServiceString("Beard Styling (Rs. 800)"),
+            parseServiceString("Shave (Rs. 400)"),
+            parseServiceString("Luxury Shave & Beard Spa (Rs. 1200)"),
+            parseServiceString("Other (Rs. 400)")
+        ]]
+    ],
+    'Others/Undefined' => [
+        ['label' => 'Hair Styling', 'options' => [
+            parseServiceString("Hair Cut (Rs. 2000)"),
+            parseServiceString("Ironing (Rs. 1500)"),
+            parseServiceString("Global Colouring (Rs. 8000)"),
+            parseServiceString("Blow Dry (Rs. 1000)"),
+            parseServiceString("Root Touch Up (Rs. 3000)"),
+            parseServiceString("Shampoo & Conditioning (Rs. 800)"),
+            parseServiceString("Head Massage (Rs. 1200)"),
+            parseServiceString("Roller Setting (Rs. 1800)"),
+            parseServiceString("Oiling (Rs. 700)")
+        ]],
+        ['label' => 'Make Up', 'options' => [
+            parseServiceString("Party Make Up (Rs. 5000)"),
+            parseServiceString("Engagement Make Up (Rs. 15000)"),
+            parseServiceString("Bridal & Reception Make Up (Rs. 25000)"),
+            parseServiceString("Base Make Up (Rs. 3000)"),
+            parseServiceString("Eye Make Up (Rs. 2000)")
+        ]],
+        ['label' => 'Hair Texture', 'options' => [
+            parseServiceString("Rebonding (Rs. 10000)"),
+            parseServiceString("Perming (Rs. 9000)"),
+            parseServiceString("Keratin (Rs. 12000)"),
+            parseServiceString("Colour Protection (Rs. 4000)"),
+            parseServiceString("Smoothening (Rs. 11000)")
+        ]],
+        ['label' => 'Hair Treatments', 'options' => [
+            parseServiceString("Spa Treatments (Rs. 3500)"),
+            parseServiceString("Volumizing (Rs. 4500)"),
+            parseServiceString("Advanced Hair Moisturising (Rs. 3800)"),
+            parseServiceString("Scalp Treatments (Rs. 3000)")
+        ]],
+        ['label' => 'Facials & Rituals', 'options' => [
+            parseServiceString("Bleach (Rs. 1500)"),
+            parseServiceString("Luxury Facials/Rituals (Rs. 6000)"),
+            parseServiceString("Clean Ups (Rs. 2500)"),
+            parseServiceString("Body Polishing/Rejuvenation (Rs. 7000)"),
+            parseServiceString("Threading (Rs. 500)")
+        ]],
+        ['label' => 'Hand & Feet', 'options' => [
+            parseServiceString("Manicure (Rs. 1800)"),
+            parseServiceString("Spa Pedicure (Rs. 2500)"),
+            parseServiceString("Pedicure (Rs. 2000)"),
+            parseServiceString("Waxing (Rs. 1000)"),
+            parseServiceString("Spa Manicure (Rs. 2200)")
+        ]],
+        ['label' => 'Nail Care', 'options' => [
+            parseServiceString("Nail Paint (Rs. 500)"),
+            parseServiceString("Nail Art (Rs. 1000)"),
+            parseServiceString("Nail Filling (Rs. 800)"),
+            parseServiceString("Other (Rs. 500)")
+        ]],
+        ['label' => 'Hair Cut & Finish', 'options' => [
+            parseServiceString("Cut and Hair Care (Rs. 1500)"),
+            parseServiceString("Shampoo & Conditioning (Rs. 600)"),
+            parseServiceString("Head Massage (Rs. 1000)"),
+            parseServiceString("Beard Styling (Rs. 800)"),
+            parseServiceString("Hair/Beard Colouring (Rs. 2500)")
+        ]],
+        ['label' => 'Hair Colour', 'options' => [
+            parseServiceString("Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)"),
+            parseServiceString("Hi - Lites (Rs. 3500)"),
+            parseServiceString("Beard Colour (Rs. 1500)")
+        ]],
+        ['label' => 'Hair Texture', 'options' => [
+            parseServiceString("Straightening (Rs. 8000)"),
+            parseServiceString("Smoothening (Rs. 7500)"),
+            parseServiceString("Rebonding (Rs. 9000)"),
+            parseServiceString("Perming (Rs. 8500)")
+        ]],
+        ['label' => 'Hair Treatments', 'options' => [
+            parseServiceString("Hair Spa (Rs. 2500)"),
+            parseServiceString("Advanced Moisturising (Rs. 3000)"),
+            parseServiceString("Scalp Treatments (Rs. 2200)"),
+            parseServiceString("Colour Protection (Rs. 2800)")
+        ]],
+        ['label' => 'Skin Care', 'options' => [
+            parseServiceString("Clean Ups (Rs. 2000)"),
+            parseServiceString("Facials (Rs. 3500)"),
+            parseServiceString("Organic Treatments (Rs. 4000)"),
+            parseServiceString("Manicure (Rs. 1500)"),
+            parseServiceString("Pedicure (Rs. 1800)")
+        ]],
+        ['label' => 'Beard Grooming', 'options' => [
+            parseServiceString("Beard Trim (Rs. 500)"),
+            parseServiceString("Beard Colour (Rs. 1500)"),
+            parseServiceString("Beard Styling (Rs. 800)"),
+            parseServiceString("Shave (Rs. 400)"),
+            parseServiceString("Luxury Shave & Beard Spa (Rs. 1200)"),
+            parseServiceString("Other (Rs. 400)")
+        ]]
+    ]
+];
 ?>
 <!doctype html>
 
@@ -29,9 +228,9 @@ if ($is_logged_in) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" href="img/favicon.png">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
@@ -291,41 +490,41 @@ color: #d1a86e;
                                                 <option>Malir Cantt</option>
                                             </select>
                                         </div>
-                                       <div class="width-auto-100 mt-2 mb-2">
+                                        <div class="width-auto-100 mt-2 mb-2">
                                             <label><i class="fa-solid fa-list"></i> Service</label>
                                             <select name="service" class="selctbox" id="serviceSelect" required>
                                                 <option value="">Select Service</option>
-                                                </select>
+                                            </select>
                                             <span id="serviceErr" style="color: red;"></span>
                                         </div>
+                                        <div class="width-auto-100 mt-2 mb-2">
+                                            <label><i class="fa-solid fa-tag"></i> Price (PKR)</label>
+                                            <input type="text" id="servicePrice" name="price" class="form-control" readonly>
+                                        </div>
                                     </div>
-                                       <div class="width-auto-100 mt-2 mb-2">
+                                    <div class="width-auto-100 mt-2 mb-2">
                                         <label><i class="fa-solid fa-users"></i> Stylist</label>
-                                            <select class="selctbox" name="stylist">
+                                        <select class="selctbox" name="stylist">
                                             <option value="">Select Stylist</option>
                                             <option value="No Preferences">No Preferences</option>
-                                                <?php
-                                                include 'connection.php'; 
-if(htmlspecialchars($row['Status']) == "Accepted"){
-                                                $sql1 = "SELECT FullName FROM stylist";
-                                                $query1 = mysqli_query($con, $sql1);
+                                            <?php
+                                            include 'connection.php'; 
+                                            $sql1 = "SELECT FullName FROM stylist";
+                                            $query1 = mysqli_query($con, $sql1);
 
-                                                if ($query1 && mysqli_num_rows($query1) > 0) {
+                                            if ($query1 && mysqli_num_rows($query1) > 0) {
                                                 while ($row1 = mysqli_fetch_assoc($query1)) {
                                                     echo '<option value="' . htmlspecialchars($row1['FullName']) . '">' . htmlspecialchars($row1['FullName']) . '</option>';
-                                                    }
-                                                } else {
-                                                    echo '<option disabled>No Stylists Available</option>';
                                                 }
+                                            } else {
+                                                echo '<option disabled>No Stylists Available</option>';
                                             }
-                                                ?>
-                                               
-                                            </select>
-                                        </div>
+                                            ?>
+                                        </select>
+                                    </div>
 
-                                        <div class="width-auto-100 mt-3 mb-2 text-center ">
-                                            <input value="Book appointment" type="submit" class="sumbitbtn w-50">
-                                        </div>
+                                    <div class="width-auto-100 mt-3 mb-2 text-center ">
+                                        <input value="Book appointment" type="submit" class="sumbitbtn w-50">
                                     </div>
                                 </form>
                             </div>
@@ -341,68 +540,70 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
             </div>
         </div>
     </section>
-  <section class="appointments-table-section py-5">
-    <div class="container-fluid">
-        <?php if ($is_logged_in) { ?>
-            <?php if ($num_rows > 0) { ?>
-                <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Your Appointments</h2>
-                <div class="table-responsive">
-                    <table class="table table-dark table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Branch</th>
-                                <th>Service</th>
-                                <th>Status</th>
-                                <th>Stylist</th>
-                                <th>Options</th>
-                            </tr>
-                            </thead>
-                        <tbody>
-                            <?php while ($row = mysqli_fetch_assoc($query)) { ?>
+    <section class="appointments-table-section py-5">
+        <div class="container-fluid">
+            <?php if ($is_logged_in) { ?>
+                <?php if ($num_rows > 0) { ?>
+                    <h2 class="text-center" style="color: #e2b97f; font-family: 'Bellefair', serif; margin-bottom: 30px;">Your Appointments</h2>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped table-hover" id="apttable">
+                            <thead>
                                 <tr>
-                                   <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                   <td><?php echo htmlspecialchars($row['gender']); ?></td>
-                                   <td><?php echo htmlspecialchars($row['dates']); ?></td>
-                                   <td><?php echo htmlspecialchars($row['times']); ?></td>
-                                   <td><?php echo htmlspecialchars($row['branch']); ?></td>
-                                   <td><?php echo htmlspecialchars($row['service']); ?></td>
-                                   <td><?php echo htmlspecialchars($row['status']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['stylist']); ?></td>
-                                    <td>
-                                        <a href="edit.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-edit">
-                                            Edit Appointment
-                                        </a>
-
-                                        <a href="delete.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure you want to cancel this appointment?');">
-                                            Cancel
-                                        </a>
-                                    </td>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Branch</th>
+                                    <th>Service</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Stylist</th>
+                                    <th>Options</th>
                                 </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = mysqli_fetch_assoc($query)) { ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['gender']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['dates']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['times']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['branch']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['service']); ?></td>
+                                         <td><?php echo htmlspecialchars($row['price']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['status']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['stylist']); ?></td>
+                                        <td>
+                                            <a href="edit.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-edit">
+                                                Edit Appointment
+                                            </a>
+
+                                            <a href="delete.php?appointment_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure you want to cancel this appointment?');">
+                                                Cancel
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php } else { ?>
+                    <div class="text-center alert alert-info" role="alert" style="background-color: #1a1a1a; border-color: #333; color: #fff;">
+                        <h4 class="alert-heading" style="color: #e2b97f;">No Appointments Yet!</h4>
+                        <p>It looks like you haven't booked any appointments. Use the form above to schedule one!</p>
+                        <hr>
+                        <p class="mb-0">Your booked appointments will appear here.</p>
+                    </div>
+                <?php } ?>
             <?php } else { ?>
-                <div class="text-center alert alert-info" role="alert" style="background-color: #1a1a1a; border-color: #333; color: #fff;">
-                    <h4 class="alert-heading" style="color: #e2b97f;">No Appointments Yet!</h4>
-                    <p>It looks like you haven't booked any appointments. Use the form above to schedule one!</p>
-                    <hr>
-                    <p class="mb-0">Your booked appointments will appear here.</p>
+                <div class="text-center login-prompt-box">
+                    <h2>View Your Appointments</h2>
+                    <p>Log in to view your past and upcoming appointments.</p>
+                    <button type="button" class="btn btn-warning" onclick="promptLoginForBooking()">Login to View Appointments</button>
                 </div>
             <?php } ?>
-        <?php } else { ?>
-            <div class="text-center login-prompt-box">
-                <h2>View Your Appointments</h2>
-                <p>Log in to view your past and upcoming appointments.</p>
-                <button type="button" class="btn btn-warning" onclick="promptLoginForBooking()">Login to View Appointments</button>
-            </div>
-        <?php } ?>
-    </div>
-</section>
+        </div>
+    </section>
     <section class="">
         <div class="about-area py-5">
             <div class="container-fluid">
@@ -414,7 +615,7 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6  bg1 px-5 text-center d-flex align-items-center">
+                    <div class="col-md-6 bg1 px-5 text-center d-flex align-items-center">
                         <div class="about-content">
                             <div class="about-headline">
                                 <h3 class="text-dark">Feel Divine, Look Great</h3>
@@ -432,6 +633,7 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
                         <div class="about-images">
                             <div class="about-top-image">
                                 <img class="ab-image" src="img/img1.jpg" alt="">
+
                             </div>
                         </div>
                     </div>
@@ -441,12 +643,12 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
                         <div class="about-content">
                             <div class="about-headline">
                                 <h3 class="text-light">Discover Your Look</h3>
-                                 <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
+                                <span class="side-head top-head text-light">Hair / Beauty / Grooming</span>
                             </div>
                             <p class="text-light">
-                               Looking for some inspiration? Whether you're aiming for a bold new look or enhancing your everyday style, our professionals are here to create something tailored just for you.</p>
+                                Looking for some inspiration? Whether you're aiming for a bold new look or enhancing your everyday style, our professionals are here to create something tailored just for you.</p>
                             <a href="service.php" class="btn1">
-                              Meet our Stylists
+                                Meet our Stylists
                             </a>
                         </div>
                     </div>
@@ -459,7 +661,7 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
                         </div>
                     </div>
                 </div>
-    <div class="row g-0" style="display: none;">
+                <div class="row g-0" style="display: none;">
 
                     <div class="col-md-6 bg2 px-5 text-center d-flex align-items-center">
                         <div class="about-content">
@@ -614,7 +816,7 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
                             </div>
                             <div class="swiper-slide bg1">
                                 <div class="row g-0 py-5">
-                                    <div class="col-md-12  text-center px-3 d-flex align-items-center">
+                                    <div class="col-md-12 text-center px-3 d-flex align-items-center">
                                         <div class="">
                                             <div class="icon"><img src="img/testiicon.png"></div>
                                             <p class="text-dark">
@@ -638,507 +840,505 @@ if(htmlspecialchars($row['Status']) == "Accepted"){
     <?php
 include "footer.php";
 ?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
-<script src="js/jquery.meanmenu.js"></script>
-<script src="js/iscroll.js"></script>
-<script src="js/slidemenu.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/main.js"></script>
-<script>
-  
-    var swiper = new Swiper(".banner", {
-        slidesPerView: 1,
-        spaceBetween: 0,
-        autoplay: {
-            delay: 5000,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-
-    var mySwiper1 = new Swiper('.h__partners-swiper1', {
-        loop: true,
-        slidesPerView: 'auto',
-        shortSwipes: true,
-        longSwipes: true,
-        allowTouchMove: true,
-        autoplay: {
-            delay: 1,
-        },
-        freeMode: true,
-        speed: 5000,
-    });
-
-    var swiper = new Swiper(".testi", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-    });
-
-    $(".hide-btn").click(function() {
-        $("#slide-nav").css("display", "none");
-        $("body").removeClass("slide-open");
-    });
-    $(".show-btn").click(function() {
-        $("#slide-nav").css("display", "block");
-    });
-
-    jQuery(document).ready(function() {
-        jQuery('#datepicker').datepicker({
-            dateFormat: 'dd-mm-yy',
-            startDate: '+1d',
-            minDate: 0
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".banner", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            autoplay: {
+                delay: 5000,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
         });
-    });
 
-const ladiesServices = [
-    {
-        label: "Hair Styling",
-        options: [
-            "Hair Cut (Rs. 2000)",
-            "Ironing (Rs. 1500)",
-            "Global Colouring (Rs. 8000)",
-            "Blow Dry (Rs. 1000)",
-            "Root Touch Up (Rs. 3000)",
-            "Shampoo & Conditioning (Rs. 800)",
-            "Head Massage (Rs. 1200)",
-            "Roller Setting (Rs. 1800)",
-            "Oiling (Rs. 700)"
-        ]
-    },
-    {
-        label: "Make Up",
-        options: [
-            "Party Make Up (Rs. 5000)",
-            "Engagement Make Up (Rs. 15000)",
-            "Bridal & Reception Make Up (Rs. 25000)",
-            "Base Make Up (Rs. 3000)",
-            "Eye Make Up (Rs. 2000)"
-        ]
-    },
-    {
-        label: "Hair Texture",
-        options: [
-            "Rebonding (Rs. 10000)",
-            "Perming (Rs. 9000)",
-            "Keratin (Rs. 12000)",
-            "Colour Protection (Rs. 4000)",
-            "Smoothening (Rs. 11000)"
-        ]
-    },
-    {
-        label: "Hair Treatments",
-        options: [
-            "Spa Treatments (Rs. 3500)",
-            "Volumizing (Rs. 4500)",
-            "Advanced Hair Moisturising (Rs. 3800)",
-            "Scalp Treatments (Rs. 3000)"
-        ]
-    },
-    {
-        label: "Facials & Rituals",
-        options: [
-            "Bleach (Rs. 1500)",
-            "Luxury Facials/Rituals (Rs. 6000)",
-            "Clean Ups (Rs. 2500)",
-            "Body Polishing/Rejuvenation (Rs. 7000)",
-            "Threading (Rs. 500)"
-        ]
-    },
-    {
-        label: "Hand & Feet",
-        options: [
-            "Manicure (Rs. 1800)",
-            "Spa Pedicure (Rs. 2500)",
-            "Pedicure (Rs. 2000)",
-            "Waxing (Rs. 31000)", 
-            "Spa Manicure (Rs. 2200)"
-        ]
-    },
-    {
-        label: "Nail Care",
-        options: [
-            "Nail Paint (Rs. 500)",
-            "Nail Art (Rs. 1000)",
-            "Nail Filling (Rs. 800)",
-            "Other (Rs. 500)"
-        ]
-    }
-];
+        var mySwiper1 = new Swiper('.h__partners-swiper1', {
+            loop: true,
+            slidesPerView: 'auto',
+            shortSwipes: true,
+            longSwipes: true,
+            allowTouchMove: true,
+            autoplay: {
+                delay: 1,
+            },
+            freeMode: true,
+            speed: 5000,
+        });
 
+        var swiper = new Swiper(".testi", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
 
-const gentsServices = [
-    {
-        label: "Hair Cut & Finish",
-        options: [
-            "Cut and Hair Care (Rs. 1500)",
-            "Shampoo & Conditioning (Rs. 600)",
-            "Head Massage (Rs. 1000)",
-            "Beard Styling (Rs. 800)",
-            "Hair/Beard Colouring (Rs. 2500)"
-        ]
-    },
-    {
-        label: "Hair Colour",
-        options: [
-            "Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)",
-            "Hi - Lites (Rs. 3500)",
-            "Beard Colour (Rs. 1500)"
-        ]
-    },
-    {
-        label: "Hair Texture",
-        options: [
-            "Straightening (Rs. 8000)",
-            "Smoothening (Rs. 7500)",
-            "Rebonding (Rs. 9000)",
-            "Perming (Rs. 8500)"
-        ]
-    },
-    {
-        label: "Hair Treatments",
-        options: [
-            "Hair Spa (Rs. 2500)",
-            "Advanced Moisturising (Rs. 3000)",
-            "Scalp Treatments (Rs. 2200)",
-            "Colour Protection (Rs. 2800)"
-        ]
-    },
-    {
-        label: "Skin Care",
-        options: [
-            "Clean Ups (Rs. 2000)",
-            "Facials (Rs. 3500)",
-            "Organic Treatments (Rs. 4000)",
-            "Manicure (Rs. 1500)",
-            "Pedicure (Rs. 1800)"
-        ]
-    },
-    {
-        label: "Beard Grooming",
-        options: [
-            "Beard Trim (Rs. 500)",
-            "Beard Colour (Rs. 1500)",
-            "Beard Styling (Rs. 800)",
-            "Shave (Rs. 400)",
-            "Luxury Shave & Beard Spa (Rs. 1200)",
-            "Other (Rs. 400)"
-        ]
-    }
-];
-const combinedServices = [
-    {
-        label: "Hair Styling",
-        options: [
-            "Hair Cut (Rs. 2000)",
-            "Ironing (Rs. 1500)",
-            "Global Colouring (Rs. 8000)",
-            "Blow Dry (Rs. 1000)",
-            "Root Touch Up (Rs. 3000)",
-            "Shampoo & Conditioning (Rs. 800)",
-            "Head Massage (Rs. 1200)",
-            "Roller Setting (Rs. 1800)",
-            "Oiling (Rs. 700)"
-        ]
-    },
-    {
-        label: "Make Up",
-        options: [
-            "Party Make Up (Rs. 5000)",
-            "Engagement Make Up (Rs. 15000)",
-            "Bridal & Reception Make Up (Rs. 25000)",
-            "Base Make Up (Rs. 3000)",
-            "Eye Make Up (Rs. 2000)"
-        ]
-    },
-    {
-        label: "Hair Texture", 
-        options: [
-            "Rebonding (Rs. 10000)", 
-            "Perming (Rs. 9000)",   
-            "Keratin (Rs. 12000)",
-            "Colour Protection (Rs. 4000)",
-            "Smoothening (Rs. 11000)" 
-        ]
-    },
-    {
-        label: "Hair Treatments", 
-        options: [
-            "Spa Treatments (Rs. 3500)", 
-            "Volumizing (Rs. 4500)",
-            "Advanced Hair Moisturising (Rs. 3800)", 
-            "Scalp Treatments (Rs. 3000)" 
-        ]
-    },
-    {
-        label: "Facials & Rituals",
-        options: [
-            "Bleach (Rs. 1500)",
-            "Luxury Facials/Rituals (Rs. 6000)",
-            "Clean Ups (Rs. 2500)", 
-            "Body Polishing/Rejuvenation (Rs. 7000)",
-            "Threading (Rs. 500)"
-        ]
-    },
-    {
-        label: "Hand & Feet",
-        options: [
-            "Manicure (Rs. 1800)", 
-            "Spa Pedicure (Rs. 2500)",
-            "Pedicure (Rs. 2000)",
-            "Waxing (Rs. 1000)",
-            "Spa Manicure (Rs. 2200)"
-        ]
-    },
-    {
-        label: "Nail Care",
-        options: [
-            "Nail Paint (Rs. 500)",
-            "Nail Art (Rs. 1000)",
-            "Nail Filling (Rs. 800)",
-            "Other (Rs. 500)"
-        ]
-    },
-    
-    {
-        label: "Hair Cut & Finish",
-        options: [
-            "Cut and Hair Care (Rs. 1500)",
-            "Shampoo & Conditioning (Rs. 600)",
-            "Head Massage (Rs. 1000)",
-            "Beard Styling (Rs. 800)",
-            "Hair/Beard Colouring (Rs. 2500)"
-        ]
-    },
-    {
-        label: "Hair Colour",
-        options: [
-            "Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)",
-            "Hi - Lites (Rs. 3500)",
-            "Beard Colour (Rs. 1500)"
-        ]
-    },
-    {
-        label: "Hair Texture", 
-        options: [
-            "Straightening (Rs. 8000)",
-            "Smoothening (Rs. 7500)",
-            "Rebonding (Rs. 9000)",
-            "Perming (Rs. 8500)"
-        ]
-    },
-    {
-        label: "Hair Treatments", 
-        options: [
-            "Hair Spa (Rs. 2500)",
-            "Advanced Moisturising (Rs. 3000)",
-            "Scalp Treatments (Rs. 2200)",
-            "Colour Protection (Rs. 2800)"
-        ]
-    },
-    {
-        label: "Skin Care",
-        options: [
-            "Clean Ups (Rs. 2000)", 
-            "Facials (Rs. 3500)",
-            "Organic Treatments (Rs. 4000)",
-            "Manicure (Rs. 1500)", 
-            "Pedicure (Rs. 1800)" 
-        ]
-    },
-    {
-        label: "Beard Grooming",
-        options: [
-            "Beard Trim (Rs. 500)",
-            "Beard Colour (Rs. 1500)",
-            "Beard Styling (Rs. 800)",
-            "Shave (Rs. 400)",
-            "Luxury Shave & Beard Spa (Rs. 1200)",
-            "Other (Rs. 400)"
-        ]
-    }
-];
+        $(".hide-btn").click(function() {
+            $("#slide-nav").css("display", "none");
+            $("body").removeClass("slide-open");
+        });
+        $(".show-btn").click(function() {
+            $("#slide-nav").css("display", "block");
+        });
 
-    function updateServices() {
-        const gender = document.getElementById("genderSelect").value;
-        const serviceSelect = document.getElementById("serviceSelect");
-        serviceSelect.innerHTML = '<option value="">Select Service</option>';
-        if (gender) {
-            serviceSelect.disabled = false;
-            let servicesToDisplay;
-            if (gender === "Female") {
-                servicesToDisplay = ladiesServices;
-            } else if (gender === "Male") {
-                servicesToDisplay = gentsServices;
-            } else if (gender === "Others/Undefined") {
-                servicesToDisplay = combinedServices;
+        jQuery(document).ready(function() {
+            jQuery('#datepicker').datepicker({
+                dateFormat: 'dd-mm-yy',
+                minDate: 0
+            });
+        });
+
+        const ladiesServices = [
+            {
+                label: "Hair Styling",
+                options: [
+                    "Hair Cut (Rs. 2000)",
+                    "Ironing (Rs. 1500)",
+                    "Global Colouring (Rs. 8000)",
+                    "Blow Dry (Rs. 1000)",
+                    "Root Touch Up (Rs. 3000)",
+                    "Shampoo & Conditioning (Rs. 800)",
+                    "Head Massage (Rs. 1200)",
+                    "Roller Setting (Rs. 1800)",
+                    "Oiling (Rs. 700)"
+                ]
+            },
+            {
+                label: "Make Up",
+                options: [
+                    "Party Make Up (Rs. 5000)",
+                    "Engagement Make Up (Rs. 15000)",
+                    "Bridal & Reception Make Up (Rs. 25000)",
+                    "Base Make Up (Rs. 3000)",
+                    "Eye Make Up (Rs. 2000)"
+                ]
+            },
+            {
+                label: "Hair Texture",
+                options: [
+                    "Rebonding (Rs. 10000)",
+                    "Perming (Rs. 9000)",
+                    "Keratin (Rs. 12000)",
+                    "Colour Protection (Rs. 4000)",
+                    "Smoothening (Rs. 11000)"
+                ]
+            },
+            {
+                label: "Hair Treatments",
+                options: [
+                    "Spa Treatments (Rs. 3500)",
+                    "Volumizing (Rs. 4500)",
+                    "Advanced Hair Moisturising (Rs. 3800)",
+                    "Scalp Treatments (Rs. 3000)"
+                ]
+            },
+            {
+                label: "Facials & Rituals",
+                options: [
+                    "Bleach (Rs. 1500)",
+                    "Luxury Facials/Rituals (Rs. 6000)",
+                    "Clean Ups (Rs. 2500)",
+                    "Body Polishing/Rejuvenation (Rs. 7000)",
+                    "Threading (Rs. 500)"
+                ]
+            },
+            {
+                label: "Hand & Feet",
+                options: [
+                    "Manicure (Rs. 1800)",
+                    "Spa Pedicure (Rs. 2500)",
+                    "Pedicure (Rs. 2000)",
+                    "Waxing (Rs. 31000)", 
+                    "Spa Manicure (Rs. 2200)"
+                ]
+            },
+            {
+                label: "Nail Care",
+                options: [
+                    "Nail Paint (Rs. 500)",
+                    "Nail Art (Rs. 1000)",
+                    "Nail Filling (Rs. 800)",
+                    "Other (Rs. 500)"
+                ]
+            }
+        ];
+
+        const gentsServices = [
+            {
+                label: "Hair Cut & Finish",
+                options: [
+                    "Cut and Hair Care (Rs. 1500)",
+                    "Shampoo & Conditioning (Rs. 600)",
+                    "Head Massage (Rs. 1000)",
+                    "Beard Styling (Rs. 800)",
+                    "Hair/Beard Colouring (Rs. 2500)"
+                ]
+            },
+            {
+                label: "Hair Colour",
+                options: [
+                    "Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)",
+                    "Hi - Lites (Rs. 3500)",
+                    "Beard Colour (Rs. 1500)"
+                ]
+            },
+            {
+                label: "Hair Texture",
+                options: [
+                    "Straightening (Rs. 8000)",
+                    "Smoothening (Rs. 7500)",
+                    "Rebonding (Rs. 9000)",
+                    "Perming (Rs. 8500)"
+                ]
+            },
+            {
+                label: "Hair Treatments",
+                options: [
+                    "Hair Spa (Rs. 2500)",
+                    "Advanced Moisturising (Rs. 3000)",
+                    "Scalp Treatments (Rs. 2200)",
+                    "Colour Protection (Rs. 2800)"
+                ]
+            },
+            {
+                label: "Skin Care",
+                options: [
+                    "Clean Ups (Rs. 2000)",
+                    "Facials (Rs. 3500)",
+                    "Organic Treatments (Rs. 4000)",
+                    "Manicure (Rs. 1500)",
+                    "Pedicure (Rs. 1800)"
+                ]
+            },
+            {
+                label: "Beard Grooming",
+                options: [
+                    "Beard Trim (Rs. 500)",
+                    "Beard Colour (Rs. 1500)",
+                    "Beard Styling (Rs. 800)",
+                    "Shave (Rs. 400)",
+                    "Luxury Shave & Beard Spa (Rs. 1200)",
+                    "Other (Rs. 400)"
+                ]
+            }
+        ];
+
+        const combinedServices = [
+            {
+                label: "Hair Styling",
+                options: [
+                    "Hair Cut (Rs. 2000)",
+                    "Ironing (Rs. 1500)",
+                    "Global Colouring (Rs. 8000)",
+                    "Blow Dry (Rs. 1000)",
+                    "Root Touch Up (Rs. 3000)",
+                    "Shampoo & Conditioning (Rs. 800)",
+                    "Head Massage (Rs. 1200)",
+                    "Roller Setting (Rs. 1800)",
+                    "Oiling (Rs. 700)"
+                ]
+            },
+            {
+                label: "Make Up",
+                options: [
+                    "Party Make Up (Rs. 5000)",
+                    "Engagement Make Up (Rs. 15000)",
+                    "Bridal & Reception Make Up (Rs. 25000)",
+                    "Base Make Up (Rs. 3000)",
+                    "Eye Make Up (Rs. 2000)"
+                ]
+            },
+            {
+                label: "Hair Texture", 
+                options: [
+                    "Rebonding (Rs. 10000)", 
+                    "Perming (Rs. 9000)",   
+                    "Keratin (Rs. 12000)",
+                    "Colour Protection (Rs. 4000)",
+                    "Smoothening (Rs. 11000)" 
+                ]
+            },
+            {
+                label: "Hair Treatments", 
+                options: [
+                    "Spa Treatments (Rs. 3500)", 
+                    "Volumizing (Rs. 4500)",
+                    "Advanced Hair Moisturising (Rs. 3800)", 
+                    "Scalp Treatments (Rs. 3000)" 
+                ]
+            },
+            {
+                label: "Facials & Rituals",
+                options: [
+                    "Bleach (Rs. 1500)",
+                    "Luxury Facials/Rituals (Rs. 6000)",
+                    "Clean Ups (Rs. 2500)", 
+                    "Body Polishing/Rejuvenation (Rs. 7000)",
+                    "Threading (Rs. 500)"
+                ]
+            },
+            {
+                label: "Hand & Feet",
+                options: [
+                    "Manicure (Rs. 1800)", 
+                    "Spa Pedicure (Rs. 2500)",
+                    "Pedicure (Rs. 2000)",
+                    "Waxing (Rs. 1000)",
+                    "Spa Manicure (Rs. 2200)"
+                ]
+            },
+            {
+                label: "Nail Care",
+                options: [
+                    "Nail Paint (Rs. 500)",
+                    "Nail Art (Rs. 1000)",
+                    "Nail Filling (Rs. 800)",
+                    "Other (Rs. 500)"
+                ]
+            },
+            
+            {
+                label: "Hair Cut & Finish",
+                options: [
+                    "Cut and Hair Care (Rs. 1500)",
+                    "Shampoo & Conditioning (Rs. 600)",
+                    "Head Massage (Rs. 1000)",
+                    "Beard Styling (Rs. 800)",
+                    "Hair/Beard Colouring (Rs. 2500)"
+                ]
+            },
+            {
+                label: "Hair Colour",
+                options: [
+                    "Hair Colour(Ammonia & Ammonia Free) (Rs. 4000)",
+                    "Hi - Lites (Rs. 3500)",
+                    "Beard Colour (Rs. 1500)"
+                ]
+            },
+            {
+                label: "Hair Texture", 
+                options: [
+                    "Straightening (Rs. 8000)",
+                    "Smoothening (Rs. 7500)",
+                    "Rebonding (Rs. 9000)",
+                    "Perming (Rs. 8500)"
+                ]
+            },
+            {
+                label: "Hair Treatments", 
+                options: [
+                    "Hair Spa (Rs. 2500)",
+                    "Advanced Moisturising (Rs. 3000)",
+                    "Scalp Treatments (Rs. 2200)",
+                    "Colour Protection (Rs. 2800)"
+                ]
+            },
+            {
+                label: "Skin Care",
+                options: [
+                    "Clean Ups (Rs. 2000)", 
+                    "Facials (Rs. 3500)",
+                    "Organic Treatments (Rs. 4000)",
+                    "Manicure (Rs. 1500)", 
+                    "Pedicure (Rs. 1800)" 
+                ]
+            },
+            {
+                label: "Beard Grooming",
+                options: [
+                    "Beard Trim (Rs. 500)",
+                    "Beard Colour (Rs. 1500)",
+                    "Beard Styling (Rs. 800)",
+                    "Shave (Rs. 400)",
+                    "Luxury Shave & Beard Spa (Rs. 1200)",
+                    "Other (Rs. 400)"
+                ]
+            }
+        ];
+
+        function parseServiceString(service_string) {
+            const matches = service_string.match(/^(.*?)\s*\(Rs\.\s*(\d+)\)$/);
+            if (matches && matches.length === 3) {
+                return {
+                    name: matches[1].trim(),
+                    price: parseInt(matches[2])
+                };
+            }
+            return {
+                name: service_string,
+                price: 0
+            };
+        }
+
+        function updateServices() {
+            const gender = document.getElementById("genderSelect").value;
+            const serviceSelect = document.getElementById("serviceSelect");
+            const servicePriceInput = document.getElementById("servicePrice");
+            
+            serviceSelect.innerHTML = '<option value="">Select Service</option>';
+            servicePriceInput.value = '';
+
+            if (gender) {
+                serviceSelect.disabled = false;
+                let servicesToDisplay;
+
+                if (gender === "Female") {
+                    servicesToDisplay = ladiesServices;
+                } else if (gender === "Male") {
+                    servicesToDisplay = gentsServices;
+                } else if (gender === "Others/Undefined") {
+                    servicesToDisplay = combinedServices;
+                } else {
+                    serviceSelect.disabled = true;
+                    return;
+                }
+                
+                servicesToDisplay.forEach(group => {
+                    const optgroup = document.createElement("optgroup");
+                    optgroup.label = group.label;
+
+                    group.options.forEach(serviceString => {
+                        const service = parseServiceString(serviceString);
+                        const option = document.createElement("option");
+                        option.value = service.name;
+                        option.textContent = service.name;
+                        option.dataset.price = service.price; 
+                        optgroup.appendChild(option);
+                    });
+
+                    serviceSelect.appendChild(optgroup);
+                });
             } else {
                 serviceSelect.disabled = true;
-                return;
             }
-            servicesToDisplay.forEach(group => {
-                const optgroup = document.createElement("optgroup");
-                optgroup.label = group.label;
+        }
 
-                group.options.forEach(service => {
-                    const option = document.createElement("option");
-                    option.value = service;
-                    option.textContent = service;
-                    optgroup.appendChild(option);
-                });
+        $(document).ready(function() {
+            updateServices(); 
 
-                serviceSelect.appendChild(optgroup);
+            $('#genderSelect').on('change', function() {
+                updateServices();
             });
-        } else {
-            serviceSelect.disabled = true;
-        }
-    }
-    document.getElementById("genderSelect").addEventListener("change", updateServices);
-    document.addEventListener("DOMContentLoaded", updateServices);
-    // Email validation
-    function validateEmail(email) {
-        if (email.length <= 0) {
-            return true;
-        }
-        var splitted = email.match("^(.+)@(.+)$");
-        if (splitted == null) return false;
-        if (splitted[1] != null) {
-            var regexp_user = /^\"?[\w-_\.]*\"?$/;
-            if (splitted[1].match(regexp_user) == null) return false;
-        }
-        if (splitted[2] != null) {
-            var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
-            if (splitted[2].match(regexp_domain) == null) {
-                var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
-                if (splitted[2].match(regexp_ip) == null) return false;
-            }
-            return true;
-        }
-        return false;
-    }
 
-    function isInteger(s) {
-        for (var i = 0; i < s.length; i++) {
-            var c = s.charAt(i);
-            if (((c < "0") || (c > "9"))) return false;
-        }
-        return true;
-    }
-
-    // Form validation
-    function validateFrme() {
-        document.getElementById('nameErr').innerHTML = "";
-        document.getElementById('genderErr').innerHTML = "";
-        document.getElementById('phoneErr').innerHTML = "";
-        document.getElementById('serviceErr').innerHTML = "";
-        var nameElement = document.getElementById('cname');
-        var name = nameElement ? nameElement.value : '';
-
-        if (!name.trim()) {
-            document.getElementById('nameErr').innerHTML = "Please Enter Name";
-            if (nameElement) nameElement.focus();
-            return false;
-        }
-
-        var genderElement = document.getElementById('gender');
-        var gender = genderElement ? genderElement.value : '';
-
-        if (!gender.trim()) {
-            document.getElementById('genderErr').innerHTML = "Please Select Gender";
-            if (genderElement) genderElement.focus();
-            return false;
-        }
-
-        var phoneElement = document.getElementById('phone');
-        var phone = phoneElement ? phoneElement.value : '';
-
-        if (!phone.trim()) {
-            document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
-            if (phoneElement) phoneElement.focus();
-            return false;
-        }
-
-        if (isNaN(phone)) {
-            document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
-            if (phoneElement) phoneElement.focus();
-            return false;
-        }
-
-        var serviceElement = document.getElementById('service');
-        var service = serviceElement ? serviceElement.value : '';
-
-        if (!service.trim()) {
-            document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
-            if (serviceElement) serviceElement.focus();
-            return false;
-        }
-
-        var form = $("#frm");
-        $('#btn_apppointment').hide();
-        $.ajax({
-            type: "POST",
-            url: 'process.php',
-            data: form.serialize(),
-            success: function(response) {
-                if (response == 1) {
-                    window.location = "thanks.php";
-                } else {
-                    $('#alert_message').html(response);
-                    $('#btn_apppointment').show();
-                    $('#frm')[0].reset();
-                    window.setTimeout(function() {
-                        $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                            $(this).remove();
-                        });
-                    }, 4000);
-                }
-            }
+            $('#serviceSelect').on('change', function() {
+                const selectedOption = $(this).find('option:selected');
+                const price = selectedOption.data('price');
+                $('#servicePrice').val(price ? price : '');
+            });
         });
-        return true;
-    }
-    function promptLoginForBooking() {
-        window.location.href = 'login.php'; 
-    }
-</script>
+
+        function promptLoginForBooking() {
+            window.location.href = 'login.php'; 
+        }
+
+        function validateEmail(email) {
+            if (email.length <= 0) {
+                return true;
+            }
+            var splitted = email.match("^(.+)@(.+)$");
+            if (splitted == null) return false;
+            if (splitted[1] != null) {
+                var regexp_user = /^\"?[\w-_\.]*\"?$/;
+                if (splitted[1].match(regexp_user) == null) return false;
+            }
+            if (splitted[2] != null) {
+                var regexp_domain = /^[\w-\.]*\.[A-Za-z]{2,4}$/;
+                if (splitted[2].match(regexp_domain) == null) {
+                    var regexp_ip = /^\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\]$/;
+                    if (splitted[2].match(regexp_ip) == null) return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        function isInteger(s) {
+            for (var i = 0; i < s.length; i++) {
+                var c = s.charAt(i);
+                if (((c < "0") || (c > "9"))) return false;
+            }
+            return true;
+        }
+
+        function validateFrme() {
+            document.getElementById('nameErr').innerHTML = "";
+            document.getElementById('genderErr').innerHTML = "";
+            document.getElementById('phoneErr').innerHTML = "";
+            document.getElementById('serviceErr').innerHTML = "";
+            var nameElement = document.getElementById('cname');
+            var name = nameElement ? nameElement.value : '';
+
+            if (!name.trim()) {
+                document.getElementById('nameErr').innerHTML = "Please Enter Name";
+                if (nameElement) nameElement.focus();
+                return false;
+            }
+
+            var genderElement = document.getElementById('gender');
+            var gender = genderElement ? genderElement.value : '';
+
+            if (!gender.trim()) {
+                document.getElementById('genderErr').innerHTML = "Please Select Gender";
+                if (genderElement) genderElement.focus();
+                return false;
+            }
+
+            var phoneElement = document.getElementById('phone');
+            var phone = phoneElement ? phoneElement.value : '';
+
+            if (!phone.trim()) {
+                document.getElementById('phoneErr').innerHTML = "Please Enter Phone Number";
+                if (phoneElement) phoneElement.focus();
+                return false;
+            }
+
+            if (isNaN(phone)) {
+                document.getElementById('phoneErr').innerHTML = "Phone No. should be Numeric";
+                if (phoneElement) phoneElement.focus();
+                return false;
+            }
+
+            var serviceElement = document.getElementById('serviceSelect'); 
+            var service = serviceElement ? serviceElement.value : '';
+
+            if (!service.trim()) {
+                document.getElementById('serviceErr').innerHTML = "Kindly Select Atleast a Service";
+                if (serviceElement) serviceElement.focus();
+                return false;
+            }
+            var form = $("#appointment form"); 
+            $('#btn_apppointment').hide(); 
+
+            $.ajax({
+                type: "POST",
+                url: 'process.php', 
+                data: form.serialize(),
+                success: function(response) {
+                    if (response == 1) {
+                        window.location = "thanks.php";
+                    } else {
+                        $('#alert_message').html(response);
+                        $('#btn_apppointment').show();
+                        $('#appointment form')[0].reset(); 
+                        window.setTimeout(function() {
+                            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                                $(this).remove();
+                            });
+                        }, 4000);
+                    }
+                }
+            });
+            return false; 
+        }
+    </script>
 </body>
-
 </html>
-
-  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-     <script src="js/jquery.meanmenu.js"></script>
-    <script src="js/iscroll.js"></script>
-    <script src="js/slidemenu.js"></script>
-    <script src="js/main.js"></script>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJW4QH8K"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script type="text/javascript"></script>
-     <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>

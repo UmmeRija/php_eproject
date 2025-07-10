@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2025 at 04:38 PM
+-- Generation Time: Jul 10, 2025 at 06:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,15 +32,24 @@ CREATE TABLE `appointment` (
   `user_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` varchar(25) DEFAULT NULL,
   `gender` varchar(20) DEFAULT NULL,
   `dates` varchar(100) DEFAULT NULL,
   `times` varchar(255) DEFAULT NULL,
   `branch` varchar(255) DEFAULT NULL,
   `service` varchar(255) DEFAULT NULL,
+  `price` int(11) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'Pending',
-  `stylist` varchar(100) DEFAULT NULL
+  `stylist` varchar(100) DEFAULT 'No Preferances'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`id`, `user_id`, `name`, `email`, `phone`, `gender`, `dates`, `times`, `branch`, `service`, `price`, `status`, `stylist`) VALUES
+(7, 1, 'Yumna', 'yumna@gmail.com', '0321-3880737', 'Female', '22-07-2025', '10:00 AM', 'Saddar', 'Eye Make Up', 2000, 'Pending', 'Hala Khan'),
+(8, 1, 'Yumna', 'yumna@gmail.com', '0321-3880737', 'Female', '29-07-2025', '04:00 PM', 'Saddar', 'Party Make Up', 5000, 'Pending', 'No Preferences');
 
 -- --------------------------------------------------------
 
@@ -317,7 +326,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categories`

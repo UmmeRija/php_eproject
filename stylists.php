@@ -219,7 +219,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                 <th>Specilization</th>
                                 <th>Years of Experience</th>
                                 <th>Working Hours</th>
-                                <!-- <th>Branch</th> -->
+                                <th>Branch</th>
                             </tr>
                             </thead>
                         <tbody>
@@ -231,7 +231,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                    <td><?php echo htmlspecialchars($row['Specialization']); ?></td>
                                    <td><?php echo htmlspecialchars($row['YearsOfExperience']); ?></td>
                                    <td><?php echo htmlspecialchars($row['WorkingHours']); ?></td>
-                                   <!-- <td><?php echo htmlspecialchars($row['Branch']); ?></td> -->
+                                   <td><?php echo htmlspecialchars($row['Branch']); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
